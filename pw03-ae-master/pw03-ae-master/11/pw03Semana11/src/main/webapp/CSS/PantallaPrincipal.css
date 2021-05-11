@@ -1,0 +1,154 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/05/2021, 04:45:27 PM
+    Author     : monic
+*/
+
+body{
+    background: #dbdcbd;
+    display:flex;
+    height: 650px;
+    justify-content: center;
+    align-items: center;
+  margin-right: 120px;
+}
+/*------------NAVEGADOR-------------------*/
+.logo{
+
+position:absolute;
+
+}
+nav{
+    background:  #a4d7b8;
+    top: 0;
+    right: 0;
+    position: fixed;
+    width:100%;
+    height: 100px;
+    z-index: 100;
+}
+
+input{
+  margin-top: 20px;
+  position: absolute;
+  background: white;
+  font-size: 15px;
+ width: 40%;
+ height: 20px;
+ margin-left: 100px;
+top:20px
+ 
+}
+label{
+ 
+    font-size:16px;
+    color:silver; 
+    position: absolute;
+    bottom:0;/*Letras adentro del TextBox*/
+    left:280px;
+  margin-bottom: 35px;
+    transition: 0.5s ease-in-out;
+    pointer-events: none;/*Evento del mouse*/
+}
+input:focus~label,
+input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
+    top: 15px;/*Letras se mueven afuera del textbox*/
+    color:white;
+
+}
+button{
+  
+  font-family:Century Gothic;
+  background: #fedcb9;
+  border: none;
+ 
+  margin: 30px 20px;
+  height: 40px;
+}
+select{
+  font-family:Century Gothic;
+  background: #fedcb9;
+  border: none;
+
+  margin: 10px 20px;
+  height: 40px;
+}
+
+.botones{
+  position: absolute;
+  margin-left: 650px;
+}
+/*------------PUBLICAR PREGUNTA--------------------*/
+.Publicar{
+margin-bottom: 300px;
+width: 70%;
+margin-left: 250px;
+  position: absolute;
+}
+#publicar{
+  
+ 
+  margin-left: 395px;
+  
+}
+/*-------USUARIO------------*/
+.usuario{
+  height: 200px;
+  width: 200px;
+  background-color: white;
+  border-radius: 100px;
+  position: absolute;
+  margin-right: 900px;
+  margin-bottom: 100px;
+}
+#perfil{
+  margin-left: 80px;
+}
+
+/*PREGUNTAS--------------*/
+
+.preguntas{
+  background-color:#715760;
+  margin-top: 880px;
+  margin-left: 300px;
+  height: 1000px;
+  width: 800px;
+  position: absolute;
+}
+h1{
+  font-family: Palatino Linotype;
+  text-align: center;
+  font-weight: 700;
+  color: white;
+ 
+  align-items: center;
+}
+a{
+  font-family: Century Gothic;
+  text-align:justify;
+  font-weight: 700;
+  font-size: 15px;
+  color: white;
+  margin-left: 15px;
+  margin-right: 15px;
+ 
+}
+#user{
+  margin-top: 200px;
+  width: 80%;
+  position: relative;
+  margin-left: 20px;
+}
+/*------------FOOTER-------------------*/
+footer{
+  margin-top: 2000px;
+  width:100%;
+  background-color: #ff959f;
+  text-align: center;
+  position: absolute;
+  margin-left: 110px;
+}

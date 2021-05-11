@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/11/2020, 07:43:30 PM
+    Author     : magoc
+*/
+
+h1 {
+    color: #111;
+}
+
+.news-card a {
+    color: #111;
+    text-decoration: none;
+}
+
+.commentary img {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.comments-container {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #c3c3c3;
+    
+}

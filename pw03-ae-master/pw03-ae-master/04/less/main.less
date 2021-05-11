@@ -1,0 +1,28 @@
+@main-bg-color: rgb(53, 0, 0);
+@secondary-bg-color: rgb(0, 0, 39);
+
+@main-f-color: rgb(218, 218, 218);
+@secondary-f-color: #e6e92d;
+
+@main-font: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+
+div.container {
+  font-family: @main-font;
+  background-color: @main-bg-color;
+  &.black {
+    background-color: black;
+  }
+  & > article.new {
+    background-color: @secondary-bg-color;
+    padding: 10px;
+
+    & > h2 {
+      color: @main-f-color;
+    }
+
+    & > p {
+      color: @secondary-f-color;
+    }
+  }
+}

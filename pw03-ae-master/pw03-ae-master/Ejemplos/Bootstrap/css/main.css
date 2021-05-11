@@ -1,0 +1,26 @@
+.navbar {
+  background-color: rgb(133, 5, 5) !important;
+}
+
+.navbar .disabled {
+  color: white !important;
+}
+
+.carousel-caption {
+  padding-right: 20px;
+  background-color: red;
+  text-align: right;
+  right: 0%;
+  left: 60%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  bottom: 15%;
+}
+
+.navbar {
+    min-height: 100px;
+}
+div.parrafo {
+    display: inline-block;
+    width: 120px;
+}

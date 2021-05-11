@@ -1,0 +1,170 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*  
+    Created on : 4/10/2020, 02:38:56 PM
+    Author     : magoc
+*/
+body{
+  background: #dbdcbd;
+
+}
+.logo{
+
+  position:absolute;
+  
+}
+#page {
+  display: grid;
+  width: 100%;
+  height: 200px;
+ 
+  grid-template: [header-left] "head head" 100px [header-right]
+                 [main-left]   "user  form" 460px  [main-right]
+                 [footer-left] "foot  foot" 40px [footer-right]
+                 / 350px 1fr;
+}
+
+nav {
+  background:  #a4d7b8;
+  top: 0;
+  right: 0;
+  position: fixed;
+  width:100%;
+  height: 100px;
+  z-index: 100;
+  grid-area: head;
+  display: flex;
+}
+input{
+  margin-top: 20px;
+  position: absolute;
+  background: white;
+  font-size: 15px;
+ width: 40%;
+ height: 20px;
+ margin-left: 100px;
+top:20px
+ 
+}
+label{
+   
+  font-size:16px;
+  color:silver; 
+  position: absolute;
+  bottom:0;/*Letras adentro del TextBox*/
+  left:280px;
+margin-bottom: 35px;
+  transition: 0.5s ease-in-out;
+  pointer-events: none;/*Evento del mouse*/
+}
+input:focus~label,
+input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
+  top: 15px;/*Letras se mueven afuera del textbox*/
+  color:white;
+
+}
+button{
+
+font-family:Century Gothic;
+background: #fedcb9;
+border: none;
+
+margin: 30px 20px;
+height: 40px;
+}
+nav select{
+font-family:Century Gothic;
+background: #fedcb9;
+border: none;
+
+margin: 10px 20px;
+height: 40px;
+}
+
+.botones{
+position: absolute;
+margin-left: 650px;
+}
+       /*la imagen*/
+       .usuarioFoto{
+          height: 200px;
+          width: 200px;
+         position: absolute;
+        left: 50px;
+          background-color: white;
+         box-shadow: 0px 0px 6px 6px #a4d7b8;
+        }
+     
+.usuario {
+    align-self: center;
+    right: 0;
+  height: 300px;
+  width: 300px;
+  
+  grid-area: user;
+}
+.usuario button{
+     top:410px;
+     left: 100px;
+     position: absolute;
+}
+
+form {
+    align-self: center;
+    background:  #a4d7b8;
+    box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
+    height: 230px;
+    width: 880px;
+  grid-area: form;
+}
+form .Quest{
+    position: absolute;
+  left: 400px;
+}
+form input[type="text"]{
+  width: 500px;
+  height: 25px;
+}
+#pregunta{
+  position: absolute;
+top: 40px;
+}
+#descripcion{
+    position: absolute;
+  top: 75px;
+}
+.filtrocategoria{
+  font-family:Century Gothic;
+  background: #fedcb9;
+  border: none;
+ position: absolute;
+  left: 100px;
+  height: 30px;
+}
+form input[type="file"]{
+  background: #fedcb9;
+  border: none;
+  position: absolute;
+  top:150px;
+  width: 50%;
+}
+form input[type="submit"]{
+  background: #fedcb9;
+  border: none;
+  position: absolute;
+  top:250px;
+  height: 30px;
+  width: 40%;
+}
+
+footer {
+  right: 0;
+  left: 0;
+  width:100%;
+  background-color: #ff959f;
+  text-align: center;
+  grid-area: foot;
+}
