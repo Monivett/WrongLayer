@@ -78,7 +78,7 @@ public class SignInController extends HttpServlet {
         
      
      User user = new User (Nombre, Apellido,FechaNac,correo,username, pass, FileUtils.RUTE_USER_IMAGE + "/" + nameImage);
-      UserDAO.insertUser(user);
+     // UserDAO.insertUser(user);
     
        
         

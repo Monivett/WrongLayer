@@ -35,26 +35,26 @@
     <label for="">Barra de Búsqueda</label>
     </input>
     <div class="botones">
-        <button onclick="location.href='PantallaPrincipal.html';" type="submit">Pantalla Principal</button>
+       <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
         <jsp:include page= "navbar.jsp"/>
         <button onclick="location.href='PantallaInicio.html';" type="submit">Búsqueda Avanzada</button>
-        <button onclick="location.href='Registro.jsp';" type="submit">Registrarse</button>
+    <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
     </div>
 </nav>
      <div class="logoFORMS">
     <img src="IMG/LogoWrongLayer.png" alt="" height="150" width="150">
   </div>
-    <form action="" method="POST" id="form">  
+    <form action="LogInController" method="POST" id="form">  
  
     <div class="form">
       
         <h1>Iniciar Sesión</h1>
         <div class="grupo">
-            <input type="text" name="" id="nombre" required><span class="barra"></span>
+            <input type="text" name="usuario" id="nombre" required><span class="barra"></span>
             <label for="">Nombre de Usuario</label>
         </div>
         <div class="grupo">
-            <input type="password" name="" id="contra" required><span class="barra"></span>
+            <input type="password" name="password" id="contra" required><span class="barra"></span>
             <label for="">Contraseña</label>
         </div>
         <button type="submit" id ="Entrar">Entrar</button>

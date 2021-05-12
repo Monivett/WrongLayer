@@ -8,6 +8,8 @@ package com.wl.WrongLayer.dao;
 import com.pw.pw03semana11.models.News;
 import com.pw.pw03semana11.utils.DbConnection;
 import com.wl.WrongLayer.models.Categoria;
+import com.wl.WrongLayer.models.Pregunta;
+import com.wl.WrongLayer.models.User;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,19 +24,21 @@ import java.util.logging.Logger;
  * @author monic
  */
 public class PreguntaDAO {
-         public static int InsertarPregunta(News news) {
+       //  public static int InsertarPregunta(News news) {
+    public static int InsertarPregunta(Pregunta pregunta) {
         Connection con = null;
         try {
             con = DbConnection.getConnection();
+            
             String sql = "CALL Proc_Pregunta(?, ?, ?, ?,?,?,?);";
             CallableStatement statement = con.prepareCall(sql);
              statement.setString(1, "I");
-             statement.setInt(2, 0);
-             statement.setString(3, news.getTitle());
-             statement.setString(4, news.getDescription());
-             statement.setInt(5, news.getCategory().getId());
-             statement.setString(6, news.getImagePath());
-             statement.setInt(7, 34);
+             statement.setInt(2, 0); //ID
+             statement.setString(3, pregunta.getPregunta());
+             statement.setString(4, pregunta.getDescription());
+             statement.setInt(5, pregunta.getCategory().getId());
+             statement.setString(6, pregunta.getImagePath());
+             statement.setInt(7, pregunta.getUser().getId());
             return statement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -49,8 +53,8 @@ public class PreguntaDAO {
         }
         return 0;
     }
-          public static List<News> MostrarPreguntas() {
-        List<News> Preguntas = new ArrayList<>();
+          public static List<Pregunta> MostrarPreguntas() {
+        List<Pregunta> Preguntas = new ArrayList<>();
         Connection con = null;
         try {
             con = DbConnection.getConnection();
@@ -71,7 +75,7 @@ public class PreguntaDAO {
                 int idCategory = result.getInt(4);
                 Categoria category = CategoriaDAO.getCategory(idCategory);
                 String pathImage = result.getString(5);
-                Preguntas.add(new News(id, title, description, pathImage, category));
+                Preguntas.add(new Pregunta(id, title, description, pathImage, category));
             }
             return Preguntas;
         } catch (SQLException ex) {
@@ -88,5 +92,48 @@ public class PreguntaDAO {
         return Preguntas;
     }
 
-        
+         public static Pregunta  MostrarPreguntaID(int ID) {
+       
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+              String sql = "call Proc_Pregunta(?,?,?,?,?,?,?)";
+                  CallableStatement statement = con.prepareCall(sql);
+                  statement.setString(1, "P"); // Remplazamos el primer parametro por la opción del procedure
+                  statement.setInt(2, ID); // ID
+                  statement.setString(3, "0"); // Pregunta
+                  statement.setString(4, "0"); // Descripcion
+                  statement.setInt(5, 0); //Categoria
+                  statement.setString(6, "0"); // Foto
+                  statement.setString(7, "0"); // Usuario
+                  ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                int id = result.getInt(1); //ID
+                String title = result.getString(2); //PREGUNTA
+                String description = result.getString(3); //DESCRIPCIÓN
+                int idCategory = result.getInt(4); //CATEGORIA
+                Categoria category = CategoriaDAO.getCategoria(idCategory); 
+                String pathImage = result.getString(5); //FOTO
+                String Fecha = result.getString(6); //FECHA DE CREACIÓN
+                
+                int idUser = result.getInt(7); //USUARIO
+                User usuario = UserDAO.GetUser(idUser);
+                return new Pregunta(id, category, title,pathImage, usuario,description, Fecha);
+            }
+          
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+             return null;
+      
+    }
+
 }

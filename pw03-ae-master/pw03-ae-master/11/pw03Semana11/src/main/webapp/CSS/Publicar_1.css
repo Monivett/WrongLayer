@@ -12,9 +12,7 @@ body{
 
 }
 .logo{
-
   position:absolute;
-  
 }
 #page {
   display: grid;
@@ -98,18 +96,32 @@ margin-left: 650px;
          box-shadow: 0px 0px 6px 6px #a4d7b8;
         }
      
-.usuario {
-    align-self: center;
-    right: 0;
-  height: 300px;
-  width: 300px;
-  
-  grid-area: user;
+/*-------USUARIO------------*/
+.usuario{
+  height: 200px;
+  width: 200px;
+  margin-top: 200px;
+  background-color: white;
+
+  position: absolute;
+  margin-left: 50px;
+
+  align-self: center;
+}
+.usuario img{
+  position: absolute;
+
+}
+.usuario input{
+  margin-top: 200px;
+  text-align: center;
+  width: 100%;
+  margin-left: 0px;
 }
 .usuario button{
-     top:410px;
-     left: 100px;
-     position: absolute;
+  position: absolute;
+  margin-left: 70px;
+  margin-top: 220px;
 }
 
 form {

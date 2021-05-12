@@ -4,11 +4,12 @@
     Author     : magoc
 --%>
 
+<%@page import="com.wl.WrongLayer.models.User"%>
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
-<%@page import="com.pw.pw03semana11.models.News"%>
+
 
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <%/*
     List<Categorias> categorias = (List<Categorias>)request.getAttribute("Categorias");
@@ -21,6 +22,7 @@
 
 <%
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
+   
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,7 +32,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Wrong Layer</title>
         <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-        <link rel="stylesheet" href="CSS/Publicar.css">
+        <link rel="stylesheet" href="CSS/Publicar_1.css">
         <body>
             <section id="page">
                 <nav>
@@ -38,34 +40,29 @@
                         <img src="IMG/Logo.png" alt="" height="100" width="100">
                      </div>
                         <input type="text" name="" id="search" required><span class="barra"></span>
-                        <label for="">Barra de BÃºsqueda</label>
+                        <label for="">Barra de Búsqueda</label>
                         </input>
                         <div class="botones">
-                      
+                        <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
                         <jsp:include page= "navbar.jsp"/>
-                        <button onclick="location.href='PantallaInicio.jsp';" type="submit">Iniciar SesiÃ³n</button>
-                        <button onclick="location.href='Registro.jsp';" type="submit">Registrarse</button>
+                        <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
+                        <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
                    </div>
                 </nav>
-                <div class="usuario">
-    
-                    <input type="text" id="user" name="user" value="" readonly><br><br>
-                    <div class ="usuarioFoto">
-
-                    </div>
-                    <button id = "perfil" onclick="location.href='Perfil.html';" type="submit">Mi Perfil</button>
-                </div>
-            
-                   
-            
+              <div class="usuario">
+   
+     <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
+     <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>" value="<%= session.getAttribute("ID_Usuario")%>" readonly><br><br>
+    <button id = "perfil" onclick="location.href='Perfil.html';" type="submit">Mi Perfil</button>
+</div>
             
                 <form action="PreguntaController" method="POST" enctype="multipart/form-data" >
                   
                   <div class ="Quest">
-                        <h1>Â¿Tienes una pregunta a la que no le encuentras respuesta? Â¡Pregunta! </h1>
+                        <h1>¿Tienes una pregunta a la que no le encuentras respuesta? ¡Pregunta! </h1>
                         <p>Pregunta: </p>
                         <p>Descripcion: </p> 
-                        <p>CategorÃ­a
+                        <p>Categoría
                            
                             <select name ="Categorias" id="Categorias" class="filtrocategoria">
                             <%
@@ -92,7 +89,7 @@
                        
                 </form>
                 <footer>
-                    <h4>CategorÃ­as</h4>
+                    <h4>Categorías</h4>
           </footer>
               </section>
         </body>

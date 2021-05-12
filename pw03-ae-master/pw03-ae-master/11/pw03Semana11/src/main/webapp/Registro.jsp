@@ -6,7 +6,7 @@
 
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
 
 <%
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/Registro.css">
+    <link rel="stylesheet" href="CSS/Registro_1.css">
 
 </head>
 
@@ -35,24 +35,14 @@
         <input type="text" name="" id="search" required><span class="barra"></span>
         <label for="">Barra de Búsqueda</label>
         </input>
-      
-            <button onclick="location.href='PantallaPrincipal.jsp';" class = "BTN_PRINCIPAL"type="submit">Pantalla Principal</button>
-        <select>
-                              <%
-                                  
-                                if(categorias!=null)
-                                for(Categoria categoria: categorias){%>  
-                                <option name ="Categorias" value ="<%=categoria.getId()%>">
-                                             
-                                  <%= categoria.getName()%>
-                                   
-                                </option>
-                            <% } %> 
-                   
-                        </select>
-          
+         <div class="botones">
+           
+       <button onclick="location.href='PreguntasPrincipal';" class="BTN_PRINCIPAL"type="submit">PantallaPrincipal</button>
+             <jsp:include page= "navbar.jsp"/>  
             <button onclick="location.href='PantallaBusquedaAvanzada.html';" class ="BTN_BUSQEUDA"type="submit">Búsqueda Avanzada</button>
-            <button onclick="location.href='PantallaInicio.jsp';" type="submit">Iniciar Sesión</button>
+            <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
+        </div>
+           
     
     </nav>
     <h2>Foto de usuario</h2>

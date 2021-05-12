@@ -37,10 +37,25 @@ public class User {
         this.id = id;
         this.username = username;
     }
-         public User(int id, String username, String password) {
+            public User(int id) {
         this.id = id;
+
+    }
+  public User(String username, String password) {
         this.username = username;
         this.password = password;
+    
+    }
+    public User(String username, String password, String foto) {
+        this.username = username;
+        this.password = password;
+          this.urlImage = foto;
+    }
+            
+         public User(int id, String username, String foto) {
+        this.id = id;
+        this.username = username;
+        this.urlImage = foto;
     }
 
 

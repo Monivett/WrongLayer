@@ -59,6 +59,40 @@ public class CategoriaDAO {
         }
         return categories;
     }
+      public static Categoria getCategoria(int ID) {
+       
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+            String sql = "call Proc_Categoria(?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+            statement.setString(1, "P"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, ID); 
+            statement.setString(3, "0"); // El tercero por la nombres  
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                int id = result.getInt(1);
+                String name = result.getString(2);
+                int order = 1;
+                int parent = 1;
+                return new Categoria(id, name, order, parent);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+   
+    }
     
     
 //    USE `pw03`;

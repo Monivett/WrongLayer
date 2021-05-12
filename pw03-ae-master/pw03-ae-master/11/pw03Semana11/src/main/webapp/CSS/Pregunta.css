@@ -1,0 +1,207 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11/05/2021, 09:29:08 AM
+    Author     : monic
+*/
+
+body{
+  background: #dbdcbd;
+}
+
+body{
+    background: #dbdcbd;
+    display:flex;
+    height: 650px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 120px;
+    font-family:Century Gothic;
+    color: #ffff;
+  }
+  
+  .logo{
+  
+    position:absolute;
+  
+    }
+    nav{
+      background:  #a4d7b8;
+      top:0;
+      left:0;
+      position: fixed;
+      width:100%;
+      height: 100px;
+      z-index: 100;
+  }
+  
+ nav input{
+    margin-top: 20px;
+    position: absolute;
+    background: white;
+    font-size: 15px;
+   width: 40%;
+   height: 20px;
+   margin-left: 100px;
+  top:20px
+   
+  }
+ nav label{
+  
+      font-size:16px;
+      color:silver; 
+      position: absolute;
+      bottom:0;/*Letras adentro del TextBox*/
+      left:280px;
+    margin-bottom: 35px;
+      transition: 0.5s ease-in-out;
+      pointer-events: none;/*Evento del mouse*/
+  }
+  input:focus~label,
+  input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
+      top: 15px;/*Letras se mueven afuera del textbox*/
+      color:white;
+  
+  }
+  button{
+    
+    font-family:Century Gothic;
+    background: #fedcb9;
+    border: none;
+   
+    margin: 30px 10px;
+    height: 40px;
+  }
+  select{
+    font-family:Century Gothic;
+    background: #fedcb9;
+    border: none;
+  
+    margin: 10px 20px;
+    height: 40px;
+  }
+  
+  .botones{
+    position: absolute;
+    margin-left: 650px;
+  }
+    /*-------USUARIO------------*/
+ .usuario{
+  height: 200px;
+  width: 200px;
+  top: 200px;
+  background-color: white;
+  margin-right: 850px;
+  position: absolute;
+
+
+  align-self: center;
+}
+.usuario img{
+  position: absolute;
+
+}
+.usuario input{
+  margin-top: 240px;
+  text-align: center;
+  width: 100%;
+  margin-left: 0px;
+}
+
+#perfil{
+  margin-left: 80px;
+}
+.Pregunta{
+    position: absolute;
+    
+    background: #715760;
+    margin-left: 400px;
+    width: 900px;
+}
+.Pregunta img{
+    margin-left: 500px;
+    margin-top: 10px;
+  position: absolute;
+}
+.RespuestaC{
+    position: absolute;
+    margin-left: 400px;
+    width: 900px;
+    margin-top: 650px;
+    margin-left: 400px;
+    background:  #70466d;
+    box-shadow: 1px 1px 6px 1px rgba(255, 1, 191, 0.8);
+  
+}
+
+.RespuestaC img{
+    margin-left: 500px;
+    margin-top: 10px;
+  position: absolute;
+}
+.Respuestas{
+    background: #715760;
+  margin: 10px;
+  position: absolute;
+  margin-left: 400px;
+  margin-top: 6100px;
+}
+.Comentario{
+ 
+
+    width: 70%;
+    margin-left: 250px;
+    margin-top: 11500px;
+   background-color: #715760;
+  
+}
+
+
+.Respuestas img{
+    margin: 10px;
+    
+  
+}
+.Respuestas h3, .Respuestas p, .Respuestas h2,.Respuestas h5{
+    font-family: Palatino Linotype;
+      width: 100%;
+  margin-left: 10px;
+  color: white;
+  
+    }
+h1{
+    font-family: Palatino Linotype;
+    text-align: justify;
+    font-weight: 600;
+    color: white;
+    width: 50%;
+    margin-left: 10px;
+    align-items: center;
+    }
+    h4{
+        font-family: Palatino Linotype;
+        text-align: justify;
+        font-weight: 600;
+        color: white;
+        margin-left: 520px;
+        top: 0px;
+        position: absolute;
+        }
+         h3, p, h2,h5{
+          font-family: Palatino Linotype;
+            width: 50%;
+        margin-left: 10px;
+        color: white;
+        
+          }
+
+          i{
+            margin-left: 10px;
+           
+          }
+          i:hover{
+              color: chartreuse;
+          }

@@ -12,7 +12,6 @@ import com.pw.pw03semana11.models.Category;
 import com.pw.pw03semana11.models.News;
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.models.Categoria;
-import com.wl.WrongLayer.models.Pregunta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -26,33 +25,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author magoc
  */
-@WebServlet(name = "PreguntasPrincipal", urlPatterns = {"/PreguntasPrincipal"})
-public class PreguntasPrincipal extends HttpServlet {
+@WebServlet(name = "CategoriaRegistro", urlPatterns = {"/CategoriaRegistro"})
+public class CategoriaRegistro extends HttpServlet {
 
-
-   
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
-    
-        List<Pregunta> preguntas = null;
-        preguntas =PreguntaDAO.MostrarPreguntas();
-         List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
       
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
    
-         request.setAttribute("preguntas", preguntas);
-        
-        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+        request.getRequestDispatcher("Registro.jsp").forward(request, response); //Em que JSP está el comboBox
+       
+          
     }
 
 

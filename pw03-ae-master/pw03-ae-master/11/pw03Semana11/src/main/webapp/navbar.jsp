@@ -14,15 +14,7 @@
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
 %>
 
- <nav>
-                    <div class="logo">
-                        <img src="IMG/Logo.png" alt="" height="100" width="100">
-                     </div>
-                        <input type="text" name="" id="search" required><span class="barra"></span>
-                        <label for="">Barra de Búsqueda</label>
-                        </input>
-                        <div class="botones">
-                        <button onclick="location.href='navbar.jsp';" type="submit">Búsqueda Avanzada</button>
+
                         <select  name ="Categorias" id="Categorias">
                             
                               <%
@@ -37,8 +29,4 @@
                             <% } %> 
                    
                         </select>
-                        <button onclick="location.href='PantallaInicio.jsp';" type="submit">Iniciar Sesión</button>
-                        <button onclick="location.href='PreguntasPrincipal';" type="submit">Pantalla Principal</button>
-                        <button onclick="location.href='Registro.jsp';" type="submit">Registrarse</button>
-                   </div>
-                </nav>
+               

@@ -102,11 +102,28 @@ margin-left: 250px;
   background-color: white;
   border-radius: 100px;
   position: absolute;
-  margin-right: 900px;
+  margin-right: 890px;
   margin-bottom: 100px;
+  align-self: center;
 }
-#perfil{
-  margin-left: 80px;
+.usuario img{
+  position: absolute;
+  margin-bottom: 300px;
+}
+.usuario input{
+ 
+  text-align: center;
+}
+.usuario button{
+  position: absolute;
+  margin-left: 65px;
+}
+
+#user{
+  margin-top: 200px;
+  width: 100%;
+  position: relative;
+  margin-left: 0px;
 }
 
 /*PREGUNTAS--------------*/
@@ -137,12 +154,7 @@ a{
   margin-right: 15px;
  
 }
-#user{
-  margin-top: 200px;
-  width: 80%;
-  position: relative;
-  margin-left: 20px;
-}
+
 /*------------FOOTER-------------------*/
 footer{
   margin-top: 2000px;
