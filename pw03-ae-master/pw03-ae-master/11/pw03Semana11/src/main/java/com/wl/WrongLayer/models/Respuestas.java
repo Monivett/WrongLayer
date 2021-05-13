@@ -18,7 +18,7 @@ public class Respuestas {
     private User user; //Usuario que puso la respuesta
     private int Preguntas; //Pregunta  a la que pertence
     private int parent; //Respuesta al que pertencemos
-     private String imagePath;// private int category;
+     private String imagePath;// FOTO
     private List<Respuestas> answers; //Relación inversa de las respuestas
     private String Fecha;
 
@@ -36,21 +36,23 @@ public class Respuestas {
         this.Preguntas = Preguntas;
         this.answers = answers;
          this.Fecha = Fecha;
+         this.imagePath = imagePath;
     }
 
-    public Respuestas(int id, String respuesta, User user, int Preguntas, int parent, String imagePath,String Fecha) {
+    public Respuestas(int id, String respuesta, User user, int Preguntas, String imagePath,String Fecha) {
         this.id = id;
         this.respuesta = respuesta;
         this.user = user;
         this.Preguntas = Preguntas;
-        this.parent = parent;
          this.Fecha = Fecha;
+         this.imagePath = imagePath;
     }
         public Respuestas( String respuesta, User user, int Preguntas,String imagePath) {
        
         this.respuesta = respuesta;
         this.user = user;
         this.Preguntas = Preguntas;
+        this.imagePath = imagePath;
      
     }
 
@@ -111,6 +113,8 @@ public class Respuestas {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
+
+  
 
     public String getFecha() {
         return Fecha;

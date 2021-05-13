@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,50 +26,52 @@ import java.util.List;
  */
 public class RespuestaDAO {
     public static int InsertarRespuesta(Respuestas respuesta){
-           try{
-            Connection con = DbConnection.getConnection();
-             // Esta linea prepara la llamada a la base de datos para insertar
-             // Cada ? significa un valor a ser remplazado
-            String sql = "call Proc_Respuesta(?,?,?,?,?,?,?)";
+ Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+            
+            String sql = "CALL Proc_Respuesta(?, ?, ?, ?,?,?,?);";
             CallableStatement statement = con.prepareCall(sql);
-                
-            statement.setString(1, "I"); // Remplazamos el primer parametro por la opción del procedure
-            statement.setString(2, "0"); 
-             statement.setString(3, respuesta.getRespuesta()); 
-             statement.setInt(4, respuesta.getUser().getId()); 
-           
-          //  statement.setInt(5, respuesta.getNews().getId()); //Bit de eliminar
-             statement.setInt(5, 0);
-              //statement.setInt(6, respuesta.getNews().getId()); //Pregunta
-              statement.setInt(6, 5); //Pregunta
-              statement.setString(7, respuesta.getImagePath());
-       // con.close();
-         return statement.executeUpdate();//Retorna un entero
-        }
-        catch (SQLException ex) {
-         System.out.println(ex.getMessage());
+             statement.setString(1, "I");//OPCION
+             statement.setInt(2, 0); //ID
+             statement.setString(3, respuesta.getRespuesta());//RESPUESTA
+             statement.setInt(4, respuesta.getUser().getId());//USUARIO
+             statement.setInt(5, 0);//Eliminada
+             statement.setInt(6, respuesta.getPreguntas());//Eliminada
+             statement.setString(7, respuesta.getImagePath());
+            
+            return statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PreguntaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
         return 0;
     }
+    
         public static List<Respuestas> MostrarRespuestas(int ID){
               List<Respuestas> respuestas = new ArrayList<>();
            try{
             Connection con = DbConnection.getConnection();
              // Esta linea prepara la llamada a la base de datos para insertar
              // Cada ? significa un valor a ser remplazado
-            String sql = "call Proc_Respuesta(?,?,?,?,?,?)";
+            String sql = "CALL Proc_Respuesta(?, ?, ?, ?,?,?,?);";
             CallableStatement statement = con.prepareCall(sql);
                 
             statement.setString(1, "S"); // Remplazamos el primer parametro por la opción del procedure
-            statement.setInt(2, ID); 
+            statement.setInt(2, 0); 
              statement.setString(3, "0"); 
-             //statement.setString(4, respuesta.getUser().getId()); 
-            statement.setInt(4, 0); // El cuatro por la usuario  
-          //  statement.setInt(5, respuesta.getNews().getId()); //Bit de eliminar
-             statement.setInt(5, 0);
-              //statement.setInt(6, respuesta.getNews().getId()); //Pregunta
-              statement.setInt(6, 1); //Pregunta
-              statement.setString(7, "");
+            statement.setString(3, "");//RESPUESTA
+             statement.setInt(4, 0);//USUARIO
+             statement.setInt(5, 0);//Eliminada
+             statement.setInt(6, ID);//Pregunta
+             statement.setString(7, "");
         ResultSet result = statement.executeQuery();
             while(result.next()) {
                 int id = result.getInt(1);
@@ -77,16 +81,16 @@ public class RespuestaDAO {
                 User user =UserDAO.GetUser(idUsuario);
                 String imagePath = result.getString(6);
                   int pregunta = result.getInt(7);
-                  int parent =1;
-               
-                respuestas.add(new Respuestas(id,Respuesta,user,pregunta, parent,imagePath,Fecha));
+                 
+         
+                respuestas.add(new Respuestas(id,Respuesta,user,pregunta,imagePath,Fecha));
             }
         
         }
         catch (SQLException ex) {
          System.out.println(ex.getMessage());
         }
-        return null;
+        return respuestas;
      
     }
 }

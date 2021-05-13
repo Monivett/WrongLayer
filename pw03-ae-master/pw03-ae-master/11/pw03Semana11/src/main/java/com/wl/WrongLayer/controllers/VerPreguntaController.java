@@ -38,10 +38,16 @@ public class VerPreguntaController extends HttpServlet {
       
         int ID = Integer.parseInt(request.getParameter("id"), 10);
         Pregunta pregunta = PreguntaDAO.MostrarPreguntaID(ID);
-        
+       
          request.setAttribute("preguntas", pregunta);
-           List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestas(ID); 
+         List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestas(ID); 
+
         request.setAttribute("respuestas", respuestas);
+        
+          List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+      
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+   
         
         request.getRequestDispatcher("Pregunta.jsp").forward(request, response);
     }
@@ -56,10 +62,11 @@ public class VerPreguntaController extends HttpServlet {
          request.setAttribute("preguntas", pregunta);
            
         List<Category> categories =null;
-       
-        
+        List<Respuestas> respuestas =null;
         categories = CategoryDAO.getCategories();
-      
+        respuestas =RespuestaDAO.MostrarRespuestas(ID); 
+
+        request.setAttribute("respuestas", respuestas);
         
         request.setAttribute("Categories", categories);
        

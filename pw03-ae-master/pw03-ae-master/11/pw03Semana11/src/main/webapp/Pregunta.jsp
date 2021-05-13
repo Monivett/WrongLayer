@@ -4,6 +4,7 @@
     Author     : monic
 --%>
 
+<%@page import="com.wl.WrongLayer.models.Categoria"%>
 <%@page import="com.wl.WrongLayer.models.Pregunta"%>
 <%@page import="com.wl.WrongLayer.models.User"%>
 <%@page import="com.wl.WrongLayer.models.Respuestas"%>
@@ -13,6 +14,7 @@
 <% 
     Pregunta preguntas = (Pregunta)request.getAttribute("preguntas");
     User user =(User)request.getAttribute("usuario");
+      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
      List<Respuestas> respuestas = (List<Respuestas>)request.getAttribute("respuestas");
 %>
 <!DOCTYPE html>
@@ -47,15 +49,19 @@
     <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>" value="<%= session.getAttribute("ID_Usuario")%>" readonly><br><br>
     <button id = "perfil" onclick="location.href='Perfil.html';" type="submit">Mi Perfil</button>
 </div>
-    <div class=" Pregunta card" style="width: 950px;">
-        <img src="<%= preguntas.getImagePath()%>" class="card-img-top" width="400" height="200">
-        <div class="card-body">
-          <h5 class="card-title">Pregunta:<%= preguntas.getPregunta()%> </h5>
+    <div class="Cartas">
+ <div class=" Pregunta card" style="width: 950px;">
+        
+        <div class="card-body">  
+        
+          <h5 class="card-title"><b>Pregunta: </b> <%= preguntas.getPregunta()%>
+          <img src="<%= preguntas.getImagePath()%>" class="card-img-top" width="400" height="200">
           <p class="card-text">Descripción: <%= preguntas.getDescription()%></p>
           <p class="card-text">Categoría: <%= preguntas.getCategory().getName()%> </p>
           <p class="card-text">Fecha:  <%= preguntas.getFecha()%></p>
-          <p class="card-text">Usuario: <%= preguntas.getUser().getUsername()%> </p>
-          <img src="<%= preguntas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50">
+         
+          <p class="card-text"><img src="<%= preguntas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntas.getUser().getUsername()%> </p>
+        
           <div class="puntuacion">
             <p>
             <b> Puntuación:</b>  
@@ -66,246 +72,82 @@
                 <i class="Like fas fa-thumbs-up"></i>
                 <i class="Unlike fas fa-thumbs-down"></i>
                 <i class="FAV fas fa-star"></i>
+                <br>
+                <br>
                  </div>
         </div>
       </div>
+      <br>
+
       <div class=" RespuestaC card" style="width: 950px;">
-        <img src="..." class="card-img-top" width="400" height="200">
-        <div class="card-body">
-          <h5 class="card-title">Respuesta Correcta: </h5>
         
-          <p class="card-text">Fecha: </p>
-          <p class="card-text">Usuario: </p>
-          <img src="..." class="fotouser" width="50" height="50">
+        <div class="card-body">  
+        
+          <h5 class="card-title"><b>Respuesta Correcta: </b> <img src="" class="card-img-top" width="400" height="200"></h5>
+       
+          <p class="card-text">Fecha:  </p>
+          <p class="card-text"><img src="..." class="fotouser" width="50" height="50"> Usuario: </p>
+        
           <div class="puntuacion">
             <p>
             <b> Puntuación:</b>  
             <b> Útil:</b> 
             <b> No útil:</b>
-            
+          
             </p>
                 <i class="Like fas fa-thumbs-up"></i>
                 <i class="Unlike fas fa-thumbs-down"></i>
+        
+                <br>
+                <br>
                  </div>
-                 
         </div>
-    </div>
-          <% //for(Respuestas respuesta: respuestas){%>
-        <div class=" Respuestas card" style="width: 950px;">
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-      
+      </div>
+      <br>
+         
+          <%    if(respuestas!=null)
+              for(Respuestas respuesta: respuestas){%>
             
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-              <%//}%>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-             
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-           
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-            
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-             
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-            
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-             
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-             
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-             
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            <img src="..." class="card-img-top" width="400" height="200">
-            <div class="card-body">
-              <h5 class="card-title">Respuestas: </h5>
-             
-              <p class="card-text">Fecha: </p>
-              <p class="card-text">Usuario: </p>
-              <img src="..." class="fotouser" width="50" height="50">
-              <div class="puntuacion">
-                <p>
-                <b> Puntuación:</b>  
-                <b> Útil:</b> 
-                <b> No útil:</b>
-              
-                </p>
-                    <i class="Like fas fa-thumbs-up"></i>
-                    <i class="Unlike fas fa-thumbs-down"></i>
-                  
-                     </div>
-                     <p>----------------------------------------------------------------------------------------</p>
-            </div>
-            
+      <div class=" Respuestas card" style="width: 950px;">
+        
+        <div class="card-body">  
+        
+          <h5 class="card-title"><b>Respuesta: </b><%= respuesta.getRespuesta()%> <img src="<%= respuesta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
+       
+          <p class="card-text">Fecha:  <%= respuesta.getFecha()%></p>
+          <p class="card-text"><img src="<%= respuesta.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuesta.getUser().getUsername()%></p>
+        
+          <div class="puntuacion">
+            <p>
+            <b> Puntuación:</b>  
+            <b> Útil:</b> 
+            <b> No útil:</b>
+          
+            </p>
+                <i class="Like fas fa-thumbs-up"></i>
+                <i class="Unlike fas fa-thumbs-down"></i>
+        
+                <br>
+                <br>
+                 </div>
+        </div>
+      </div>
+      <br>
+        <%}%>     
+</div>
+     
       </div>
           <form method="POST" action="RespuestasController" enctype="multipart/form-data">
                 <div class="Comentario mb-3">
-                    <input type="hide" name="IdPregunta" value="<%=preguntas.getId()%>">
+                    <input type="hidden" name="IdPregunta" value="<%=preguntas.getId()%>">
                        
         <label for="exampleFormControlTextarea1" class="txt form-label">Tu Respuesta</label>
         <textarea name="Respuesta"class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <input type="file" name="archivo"id="archivo">
-          <input type="submit" >Responder
+                   <input type="submit" value="Responder">
       </div>
                 </form>  
+
     
 </body>
 <script src="Boostrap/js/bootstrap.min.js"></script>

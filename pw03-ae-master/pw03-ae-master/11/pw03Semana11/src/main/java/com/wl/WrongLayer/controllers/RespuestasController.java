@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -35,32 +36,29 @@ public class RespuestasController extends HttpServlet {
        
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        String Respuesta = request.getParameter("Respuesta");
        String ID = request.getParameter("IdPregunta");
        int IDPregunta =Integer.parseInt(ID,10);
-        //FOTO
+          //FOTO
         Part file = request.getPart("archivo");
-        
         String path = request.getServletContext().getRealPath("");
         String contentType = file.getContentType();
         String nameImage = file.getName() + System.currentTimeMillis() + FileUtils.GetExtension(contentType);
         String fullPath = path  + FileUtils.RUTE_USER_IMAGE + "/" + nameImage;
         file.write(fullPath);
-        
+        HttpSession  session = request.getSession();
+        User user = (User)session.getAttribute("usuarioID");
        ServletContext context= getServletContext();
      
-       RespuestaDAO.InsertarRespuesta(new Respuestas(Respuesta,new User(1),IDPregunta,FileUtils.RUTE_USER_IMAGE + "/" + nameImage));
+   
+           Respuestas respuesta = new Respuestas(Respuesta,user,IDPregunta,FileUtils.RUTE_USER_IMAGE + "/" + nameImage);
+        
+        RespuestaDAO.InsertarRespuesta(respuesta);
+       
        request.getRequestDispatcher("/VerPreguntaController?id="+IDPregunta).forward(request, response);
     }
 
