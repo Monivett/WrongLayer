@@ -43,11 +43,16 @@
            <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
         </div>
     </nav>
-  <div class="usuario">
+<div class="usuario">
+    <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
+        <%  if (session.getAttribute("username") != null) {%>
+      <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>"  readonly><br><br>
+          <button id = "perfil" onclick="location.href='Perfil.jsp';" type="submit">Mi Perfil</button>
+    <% }else{%>
+ <input type="text" id="user" name="user" value="Invitado" readonly><br><br>
+<%}%>
+     
    
-     <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
-    <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>" value="<%= session.getAttribute("ID_Usuario")%>" readonly><br><br>
-    <button id = "perfil" onclick="location.href='Perfil.html';" type="submit">Mi Perfil</button>
 </div>
     <div class="Cartas">
  <div class=" Pregunta card" style="width: 950px;">
@@ -137,6 +142,8 @@
 </div>
      
       </div>
+      <%  if (session.getAttribute("username") != null) {%> 
+        
           <form method="POST" action="RespuestasController" enctype="multipart/form-data">
                 <div class="Comentario mb-3">
                     <input type="hidden" name="IdPregunta" value="<%=preguntas.getId()%>">
@@ -147,8 +154,10 @@
                    <input type="submit" value="Responder">
       </div>
                 </form>  
-
-    
+<% }else{%>
+      <h1> Inicia Sesión y responde la pregunta</h1>
+       <button id = "publicar" onclick="location.href='CategoriaInicio';" type="submit">Registrate</button>
+     <%}%>
 </body>
 <script src="Boostrap/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>

@@ -18,9 +18,61 @@ public class User {
     private String username;
     private String password;
     private String urlImage;
+    private int Edad;
+    private int Estado;
 
     public User() {
     }
+
+    public User(int id, String name, String ap, String date, String mail, String password, String urlImage) {
+        this.id = id;
+        this.name = name;
+        this.ap = ap;
+        this.date = date;
+        this.mail = mail;
+        this.password = password;
+        this.urlImage = urlImage;
+    }
+    
+
+    public User(int id, String name, String ap, String date, String mail, String username, String password, String urlImage, int Edad, int Estado) {
+        this.id = id;
+        this.name = name;
+        this.ap = ap;
+        this.date = date;
+        this.mail = mail;
+        this.username = username;
+        this.password = password;
+        this.urlImage = urlImage;
+        this.Edad = Edad;
+        this.Estado = Estado;
+    }
+
+    
+
+    public User(int id, String name, String ap, String date, String mail, String username, String password, String urlImage) {
+        this.id = id;
+        this.name = name;
+        this.ap = ap;
+        this.date = date;
+        this.mail = mail;
+        this.username = username;
+        this.password = password;
+        this.urlImage = urlImage;
+        
+    }
+        public User(int id, String name, String ap, String date, String mail, String username, String password, String urlImage, String user) {
+        this.id = id;
+        this.name = name;
+        this.ap = ap;
+        this.date = date;
+        this.mail = mail;
+        this.username = username;
+        this.password = password;
+        this.urlImage = urlImage;
+         this.username = user;
+    }
+    
 
     public User(String Nombre,String Apellido, String date,String email, String username, String password, String urlImage) {
          
@@ -67,14 +119,16 @@ public class User {
     public void setNombre(String Nombre) {
         this.name = Nombre;
     }
-    //Apellido----------------
-   public String getApellido() {
+       //Apellido----------------
+    public String getAp() {
         return ap;
     }
 
-    public void setApellido(String Apellido) {
-        this.ap = Apellido;
+
+    public void setAp(String ap) {
+        this.ap = ap;
     }
+
     //FECHA DE NACIMIENTO
        public String getDate() {
         return date;
@@ -128,4 +182,22 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getEdad() {
+        return Edad;
+    }
+
+    public void setEdad(int Edad) {
+        this.Edad = Edad;
+    }
+
+    public int getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(int Estado) {
+        this.Estado = Estado;
+    }
+    
+    
 }

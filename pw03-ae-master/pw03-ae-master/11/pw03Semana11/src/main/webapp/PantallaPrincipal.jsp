@@ -41,10 +41,15 @@
     </nav>
    
 <div class="usuario">
+    <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
+        <%  if (session.getAttribute("username") != null) {%>
+      <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>"  readonly><br><br>
+          <button id = "perfil" onclick="location.href='Perfil.jsp';" type="submit">Mi Perfil</button>
+    <% }else{%>
+ <input type="text" id="user" name="user" value="Invitado" readonly><br><br>
+<%}%>
+     
    
-     <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
-    <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>" value="<%= session.getAttribute("ID_Usuario")%>" readonly><br><br>
-    <button id = "perfil" onclick="location.href='Perfil.html';" type="submit">Mi Perfil</button>
 </div>
 <div class="preguntas">
    <h1>Preguntas Recientes</h1>
@@ -59,8 +64,14 @@
 
 </div>
 <div class="Publicar">
-    <h1>¿Tienes una duda? Publica tu pregunta</h1>
+     <%  if (session.getAttribute("username") != null) {%> 
+     <h1>¿Tienes una duda? Publica tu pregunta</h1>
     <button id = "publicar" onclick="location.href='CategoriaController';" type="submit">Publicar Pregunta</button>
+     <% }else{%>
+      <h1>¿Tienes una duda? Inicia Sesión y publica tu pregunta</h1>
+       <button id = "publicar" onclick="location.href='CategoriaInicio';" type="submit">Registrate</button>
+     <%}%>
+   
  
 </div>
     <footer>

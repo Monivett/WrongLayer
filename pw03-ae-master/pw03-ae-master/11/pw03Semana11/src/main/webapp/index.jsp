@@ -4,6 +4,7 @@
     Author     : magoc
 --%>
 
+<%@page import="com.wl.WrongLayer.models.Pregunta"%>
 <%@page import="com.wl.WrongLayer.models.User"%>
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
 
@@ -22,7 +23,7 @@
 
 <%
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
-   
+    List<Pregunta> preguntas = (List<Pregunta>)request.getAttribute("preguntas");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -52,8 +53,10 @@
               <div class="usuario">
    
      <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
+     
      <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>" value="<%= session.getAttribute("ID_Usuario")%>" readonly><br><br>
-    <button id = "perfil" onclick="location.href='Perfil.html';" type="submit">Mi Perfil</button>
+             <button id = "perfil" onclick="location.href='VerUsuarioPreguntaController?id=<%= session.getAttribute("ID_Usuario")%>';" type="submit">Mi perfil</button>                
+   
 </div>
             
                 <form action="PreguntaController" method="POST" enctype="multipart/form-data" >

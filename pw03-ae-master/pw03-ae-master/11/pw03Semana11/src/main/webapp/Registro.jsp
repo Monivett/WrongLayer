@@ -102,10 +102,10 @@
             <p class="ErrorContra2" id="ErrorContra2">Ambas contraseñas tienen que ser iguales</p>
         </div>
         <!--SUBIR FOTO-->
-        <input type="file" id="foto" name="image">
+        <input type="file" id="foto" name="image" required>
 
         <div class="BTN_REGISTRAR">
-            <input type="submit" id="BTN_REGISTRAR" value="Registrarse" />
+            <input  type="submit" id="BTN_REGISTRAR" value="Registrarse" />
 
         </div>
 

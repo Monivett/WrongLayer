@@ -42,19 +42,23 @@ public class LogInController extends HttpServlet {
         User result =  UserDAO.LogInUser(user);//Guardamos la información en result (objeto de usuario)
         
       
-      
-     
-        
-        
         if (result!=null){
             HttpSession session =  request.getSession();
+            
+            session.setAttribute("Nombre",result.getNombre());
+            session.setAttribute("Apellido",result.getAp());
+            session.setAttribute("Correo",result.getEmail());
+            session.setAttribute("Edad",result.getEdad());
+            session.setAttribute("FechaNac",result.getDate());
+            session.setAttribute("Estado",result.getEstado());
             session.setAttribute("username",result.getUsername());
             session.setAttribute("ID_Usuario", result.getId());
             session.setAttribute("Foto", result.getUrlImage());
+              session.setAttribute("Contraseña", result.getPassword());
             session.setAttribute("usuarioID", result);  //Guardamos la información del usuario en usuarioID
             
             response.sendRedirect("PreguntasPrincipal");
-        //   request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+    
     
         }
         else{
