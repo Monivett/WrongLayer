@@ -42,8 +42,8 @@
                 <option>Categoría 4</option>
                 <option>Categoría 5</option>
             </select>
-            <button onclick="location.href='PantallaInicio.html';" type="submit">Iniciar Sesión</button>
-            <button onclick="location.href='Registro.html';" type="submit">Registrarse</button>
+            <button onclick="location.href='PantallaInicio.html';" type="submit">Búsqueda Avanzada</button>
+       
         </div>
     </nav>
     <!--PREGUNTAS Y RESPUESTAS-->
@@ -53,18 +53,29 @@
                                   
                                 if(preguntas!=null)
                                 for(Pregunta pregunta: preguntas){%> 
+                                    <% if(pregunta.isEliminada()== true){%>
+                          <h8>Esta pregunta fue Eliminada</h8>
+                          <br>
+                                <%}else{%>
+                  <br>            
         <div class=" Pregunta card" style="width: 790px;">
                
                <div class="card-body">  
+                  
                 <h1>Preguntas hechas</h1>
                  <h5 class="card-title"><b>Pregunta: </b> 
+                     <p hidden>
+                         
+                         <%= pregunta.getId()%>
+                     </p>
+                    
                     <input type="text" value=" <%= pregunta.getPregunta()%>"name="Pregunta" id="Pregunta" disabled >   
                  <img src="<%= pregunta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
                  <p class="card-text"> Descripción:
                     <input type="text" value=" <%= pregunta.getDescription()%>" name="Descripcion" id="Descripcion" disabled >   
                   </p>
                  <p class="card-text">Categoría:  
-                     <select disabled>
+                     <select id="Categoría"disabled>
                          <option>
                              <%= pregunta.getCategory().getName()%>
                          </option>
@@ -86,12 +97,32 @@
                        <i class="FAV fas fa-star"></i>
                        <br>
                        <br>
-                       <button  id="BTN_EDITARPREG">Editar</button>
+                       <input type="file" id ="FOTOPREG" style="display: none;" >
+                     
+                          <% if(pregunta.isModificada()== true){%>
+                          <p>Esta pregunta fue editada</p>
+                                <%}%>
+                                  <br>
+                            <button onclick="location.href='EditarPreguntaController?id=<%= pregunta.getId()%>';" type="submit">Editar</button>
+                            <script>
+                                    
+                            function alerta() { //Alerta para el botón de borrar
+   
+                             var opcion = confirm("¿Está seguro de que quiere borrar la pregunta?");
+                             if (opcion === true) {
+        
+                             window.location='EliminarPregunta?id=<%= pregunta.getId()%>'; 
+                            } 	
+                           };
+                            </script>
+                            <button onclick="alerta()">Borrar</button>
+                            
                         </div>
                </div>
                
              </div>
              <br>
+                <%}%>
              <%}%>
        
                 <%

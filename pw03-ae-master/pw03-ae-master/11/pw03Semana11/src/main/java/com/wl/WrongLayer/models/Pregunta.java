@@ -11,7 +11,8 @@ package com.wl.WrongLayer.models;
  */
 public class Pregunta {
  
-
+    private boolean Modificada;
+     private boolean Eliminada;
     private int id; 
     private Categoria category;
     private String pregunta;
@@ -31,7 +32,7 @@ public class Pregunta {
         this.description = description;
     }
 
-    public Pregunta(int id, Categoria category, String pregunta, String imagePath, User user, String description, String Fecha) {
+    public Pregunta(int id, Categoria category, String pregunta, String imagePath, User user, String description, String Fecha, boolean Edito,boolean Elimino) { //CONSTRUCTOR PARA MOSTRAR PREGUNTAS DETALLE Y DEL USUARIO
         this.id = id;
         this.category = category;
         this.pregunta = pregunta;
@@ -39,22 +40,24 @@ public class Pregunta {
         this.user = user;
         this.description = description;
         this.Fecha = Fecha;
+         this.Modificada = Edito;
+         this.Eliminada = Elimino;
     }
 
   
 
  
-    public Pregunta(int id, String title) {
+    public Pregunta(int id) {
         this.id = id;
-        this.pregunta = title;
+   
     }
 
-    public Pregunta(int id, String title, String description, String pathImage, Categoria category) {
+    public Pregunta(int id, String title, String description, String pathImage, Categoria category) { //CONSTRUCTOR PARA MOSTRAR TODAS LAS PREGUNTAS
        this.id = id;
         this.category = category;
         this.pregunta = title;
         this.imagePath = pathImage;
-       
+     
         this.description = description;
     }
 
@@ -113,6 +116,23 @@ public class Pregunta {
     public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
+
+    public boolean isModificada() {
+        return Modificada;
+    }
+
+    public void setModificada(boolean Modificada) {
+        this.Modificada = Modificada;
+    }
+
+    public boolean isEliminada() {
+        return Eliminada;
+    }
+
+    public void setEliminada(boolean Eliminada) {
+        this.Eliminada = Eliminada;
+    }
+
 
 
   

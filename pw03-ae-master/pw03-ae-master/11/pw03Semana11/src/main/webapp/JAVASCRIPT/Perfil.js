@@ -1,3 +1,4 @@
+
 const formularioEditar = document.getElementById('FormEditar'); //ACCEDEMOS AL FORMULARIO
 let BTNEditar = document.querySelector('#BTN_EDITAR'); //ACCEDEMOS AL BOTÓN SUBMIT
 let Nombre = document.getElementById('#Nombre'); //ACCEDEMOS AL FORMULARIO
@@ -9,10 +10,10 @@ var dd = today.getDate();
 var mm = today.getMonth() + 1; //Enero es 0 
 var yyyy = today.getFullYear();
 if (dd < 10) {
-    dd = '0' + dd
+    dd = '0' + dd;
 }
 if (mm < 10) {
-    mm = '0' + mm
+    mm = '0' + mm;
 }
 
 today = yyyy + '-' + mm + '-' + dd;
@@ -45,15 +46,15 @@ function SoloLetras(e) { //FUNCIÓN PARA VALIDAR SÓLO LETRAS (NOMBRE Y APELLIDO
     letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚabcdefghijklmnopqrstuvwxyzáéíóúñÑ";
 
     especiales = [8, 13, 32, 164, 165];
-    tecla_especial = false
+    tecla_especial = false;
     for (var i in especiales) {
-        if (key == especiales[i]) {
+        if (key === especiales[i]) {
             tecla_especial = true;
             break;
         }
     }
 
-    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+    if (letras.indexOf(tecla) === -1 && !tecla_especial) {
 
         alert("Ingresar solo letras");
 
@@ -113,7 +114,7 @@ function validarContraseña1(password){
             caracter_raro = true;
         }
     }
-    if(mayuscula == true && minuscula == true && caracter_raro == true && numero == true){
+    if(mayuscula === true && minuscula === true && caracter_raro === true && numero === true){
         document.getElementById('ErrorContra').style.display = 'none';
         ERRORCONTRA = true;
         return true;
@@ -171,7 +172,7 @@ formularioEditar.addEventListener("submit", e=>{
    e.preventDefault();
     const password = document.getElementById('Contraseña').value; //ACCEDEMOS AL INPUT CONTRASEÑA
     validarContraseña1(password);
-    if (ERRORFECHA == true && ERRORCONTRA == true && ERRORCONTRA2 == true) {
+    if (ERRORFECHA === true && ERRORCONTRA === true && ERRORCONTRA2 === true) {
       // Agregas la validación del «ReCaptcha».
       formularioEditar.submit();
       alert("Se ha modificado tu cuenta correctamente");

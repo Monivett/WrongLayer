@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wrong Layer</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/PantallaPrincipal_1.css">
+    <link rel="stylesheet" href="CSS/PantallaPrincipal.css">
 </head>
 
 <body>
@@ -35,17 +35,23 @@
             <div class="botones">
             <button onclick="location.href='PantallaBusquedaAvanzada.html';" type="submit">Búsqueda Avanzada</button>
              <jsp:include page= "navbar.jsp"/>
+              <%  if (session.getAttribute("username") == null) {%>
             <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
            <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
+             <% }else{%>
+              <button onclick="location.href='';" type="submit">Cerrar Sesión</button>
+             <%}%>
        </div>
     </nav>
    
 <div class="usuario">
-    <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
+   
         <%  if (session.getAttribute("username") != null) {%>
+         <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
       <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>"  readonly><br><br>
-          <button id = "perfil" onclick="location.href='Perfil.jsp';" type="submit">Mi Perfil</button>
+         <button id = "perfil" onclick="location.href='VerUsuarioPreguntaController?id=<%= session.getAttribute("ID_Usuario")%>';" type="submit">Mi perfil</button>   
     <% }else{%>
+    <img src="IMG/default.png" width="200" height="200">
  <input type="text" id="user" name="user" value="Invitado" readonly><br><br>
 <%}%>
      
@@ -57,6 +63,7 @@
                                   
                                 if(preguntas!=null)
                                 for(Pregunta pregunta: preguntas){%> 
+                                
                                 <a name = "pregunta" href="VerPreguntaController?id=<%= pregunta.getId()%>"> <%= pregunta.getPregunta()%></a>
                                 <br></br>
 

@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detalle de Pregunta</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="CSS/Pregunta.css">
@@ -38,9 +38,13 @@
         </input>
         <div class="botones">
              <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
-            <jsp:include page= "navbar.jsp"/>
+                 <jsp:include page= "navbar.jsp"/>
+              <%  if (session.getAttribute("username") == null) {%>
             <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
            <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
+             <% }else{%>
+              <button onclick="location.href='';" type="submit">Cerrar Sesión</button>
+             <%}%>
         </div>
     </nav>
 <div class="usuario">
@@ -77,6 +81,11 @@
                 <i class="Like fas fa-thumbs-up"></i>
                 <i class="Unlike fas fa-thumbs-down"></i>
                 <i class="FAV fas fa-star"></i>
+                <br>
+                <br>
+                     <% if(preguntas.isModificada()== true){%>
+                          <p>Esta pregunta fue editada</p>
+                                <%}%>           
                 <br>
                 <br>
                  </div>

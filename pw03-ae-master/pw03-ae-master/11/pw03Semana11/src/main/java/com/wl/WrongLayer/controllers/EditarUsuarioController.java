@@ -9,8 +9,12 @@ import com.pw.pw03semana11.DAO.CategoryDAO;
 import com.pw.pw03semana11.models.Category;
 import com.pw.pw03semana11.utils.FileUtils;
 import com.wl.WrongLayer.dao.CategoriaDAO;
+import com.wl.WrongLayer.dao.PreguntaDAO;
+import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.dao.UserDAO;
 import com.wl.WrongLayer.models.Categoria;
+import com.wl.WrongLayer.models.Pregunta;
+import com.wl.WrongLayer.models.Respuestas;
 import com.wl.WrongLayer.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,20 +37,15 @@ import javax.servlet.http.Part;
 public class EditarUsuarioController extends HttpServlet {
 
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Category> categories = CategoryDAO.getCategories();
-        request.setAttribute("Categories", categories);
+               int ID = Integer.parseInt(request.getParameter("id"), 10);
+            List<Respuestas> respuesta =RespuestaDAO.MostrarRespuestasUsuario(ID);
+     request.setAttribute("respuestas", respuesta);
+       List<Pregunta> pregunta =PreguntaDAO.MostrarPreguntaUsuario(ID);
+        request.setAttribute("preguntas", pregunta);
+      
         request.getRequestDispatcher("Perfil.jsp").forward(request, response);
     }
 
@@ -107,9 +106,9 @@ public class EditarUsuarioController extends HttpServlet {
           
        List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
-      //  List<News> news = PreguntaDAO.getNews();
+      // List<Pregunta> Pregunta = PreguntaDAO.MostrarPreguntaUsuario(ID);
       
-       // request.setAttribute("News", news);*/
+       // request.setAttribute("preguntas", Pregunta);
         
         request.getRequestDispatcher("Perfil.jsp").forward(request, response);
     }

@@ -53,6 +53,7 @@ public class PreguntaDAO {
         }
         return 0;
     }
+    
           public static List<Pregunta> MostrarPreguntas() {
         List<Pregunta> Preguntas = new ArrayList<>();
         Connection con = null;
@@ -75,6 +76,7 @@ public class PreguntaDAO {
                 int idCategory = result.getInt(4);
                 Categoria category = CategoriaDAO.getCategory(idCategory);
                 String pathImage = result.getString(5);
+         
                 Preguntas.add(new Pregunta(id, title, description, pathImage, category));
             }
             return Preguntas;
@@ -92,7 +94,7 @@ public class PreguntaDAO {
         return Preguntas;
     }
 
-         public static Pregunta  MostrarPreguntaID(int ID) {
+           public static Pregunta  MostrarPreguntaID(int ID) {
        
         Connection con = null;
         try {
@@ -117,8 +119,10 @@ public class PreguntaDAO {
                 String Fecha = result.getString(6); //FECHA DE CREACIÓN
                 
                 int idUser = result.getInt(7); //USUARIO
+                  boolean Edito = result.getBoolean(8);
+                   boolean Elimino = result.getBoolean(9);
                 User usuario = UserDAO.GetUser(idUser);
-                return new Pregunta(id, category, title,pathImage, usuario,description, Fecha);
+                return new Pregunta(id, category, title,pathImage, usuario,description, Fecha,Edito,Elimino);
             }
           
         } catch (SQLException ex) {
@@ -159,10 +163,12 @@ public class PreguntaDAO {
                 Categoria category = CategoriaDAO.getCategoria(idCategory); 
                 String pathImage = result.getString(5); //FOTO
                 String Fecha = result.getString(6); //FECHA DE CREACIÓN
-                
+          
                 int idUser = result.getInt(7); //USUARIO
+                   boolean Edito = result.getBoolean(8);
+                     boolean Eliminada = result.getBoolean(9);
                 User usuario = UserDAO.GetUser(idUser);
-                 Preguntas.add(new Pregunta(id, category, title,pathImage, usuario,description, Fecha));
+                 Preguntas.add(new Pregunta(id, category, title,pathImage, usuario,description, Fecha,Edito,Eliminada));
                
             }
           
@@ -178,6 +184,62 @@ public class PreguntaDAO {
             }
         }
               return Preguntas;
+      
+    }
+           
+           public static int  EditarPregunta(Pregunta pregunta) {
+       
+       try{
+            Connection con = DbConnection.getConnection();
+             // Esta linea prepara la llamada a la base de datos para insertar
+             // Cada ? significa un valor a ser remplazado
+               String sql = "CALL Proc_Pregunta(?, ?, ?, ?,?,?,?);";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "U"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, pregunta.getId()); 
+            statement.setString(3, pregunta.getPregunta());
+            statement.setString(4, pregunta.getDescription());
+            statement.setInt(5, pregunta.getCategory().getId());
+            statement.setString(6, pregunta.getImagePath());
+            statement.setInt(7, 5);        
+           
+ 
+       // con.close();
+         return statement.executeUpdate();//Retorna un entero
+        }
+        catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+        return 0;
+      
+    }
+             
+           public static int  EliminarPregunta(Pregunta pregunta) {
+       
+       try{
+            Connection con = DbConnection.getConnection();
+             // Esta linea prepara la llamada a la base de datos para insertar
+             // Cada ? significa un valor a ser remplazado
+               String sql = "CALL Proc_Pregunta(?, ?, ?, ?,?,?,?);";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "E"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, pregunta.getId()); 
+            statement.setString(3, pregunta.getPregunta());
+            statement.setString(4, pregunta.getDescription());
+            statement.setInt(5, 0);
+            statement.setString(6, pregunta.getImagePath());
+            statement.setInt(7, 5);        
+           
+ 
+       // con.close();
+         return statement.executeUpdate();//Retorna un entero
+        }
+        catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+        return 0;
       
     }
 
