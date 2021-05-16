@@ -29,18 +29,19 @@ import javax.servlet.http.Part;
  *
  * @author monic
  */
-@WebServlet(name = "EditarPreguntaController", urlPatterns = {"/EditarPreguntaController"})
+@WebServlet(name = "EditarRespuestaController", urlPatterns = {"/EditarRespuestaController"})
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 25)
-public class EditarPreguntaController extends HttpServlet {
-
+public class EditarRespuestaController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-              int ID = Integer.parseInt(request.getParameter("id"), 10);
-        Pregunta pregunta = PreguntaDAO.MostrarPreguntaID(ID);
+        
+          int ID = Integer.parseInt(request.getParameter("id"), 10);
+          
+       Respuestas respuestas = RespuestaDAO.MostrarRespuestasEditar(ID);
        
-         request.setAttribute("preguntas", pregunta);
+         request.setAttribute("respuestas", respuestas);
 
         
           List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
@@ -51,30 +52,27 @@ public class EditarPreguntaController extends HttpServlet {
         request.getRequestDispatcher("EditarPreg.jsp").forward(request, response);
     }
 
-
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String stringID = request.getParameter("ID");
+         String stringID = request.getParameter("ID");
         int ID = Integer.parseInt(stringID, 10);
-        String title = request.getParameter("Pregunta");
-        String description = request.getParameter("Descripcion");
-        String stringCategory = request.getParameter("Categorias");
-        int idCategory = Integer.parseInt(stringCategory, 10);
-        //FOTO
+        String title = request.getParameter("Respuesta");
+       
         Part file = request.getPart("image");
         String path = request.getServletContext().getRealPath("");
         String contentType = file.getContentType();
         String nameImage = file.getName() + System.currentTimeMillis() + FileUtils.GetExtension(contentType);
         String fullPath = path  + FileUtils.RUTE_USER_IMAGE + "/" + nameImage;
         file.write(fullPath);
-       
-         
+       boolean Mod = true;
+       boolean Correct = false;
+       boolean Eliminada = false;
+         Respuestas respuesta = new Respuestas(ID,title,FileUtils.RUTE_USER_IMAGE + "/" + nameImage,Mod,Eliminada,Correct);
         
-        Pregunta pregunta = new Pregunta(ID,title,description,FileUtils.RUTE_USER_IMAGE + "/" + nameImage,new Categoria(idCategory));
-
-        PreguntaDAO.EditarPregunta(pregunta);
+            RespuestaDAO.EditarRespuesta(respuesta);
+  
         //USUARIO (sesion actual)
         HttpSession  session = request.getSession();
         User user = (User)session.getAttribute("usuarioID");

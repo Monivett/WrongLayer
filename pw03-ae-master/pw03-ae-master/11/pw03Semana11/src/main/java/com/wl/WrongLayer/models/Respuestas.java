@@ -13,13 +13,15 @@ import javax.enterprise.inject.New;
  * @author monic
  */
 public class Respuestas {
+    
     private int id;
     private String respuesta;
     private User user; //Usuario que puso la respuesta
     private int Preguntas; //Pregunta  a la que pertence
-    private int parent; //Respuesta al que pertencemos
      private String imagePath;// FOTO
-    private List<Respuestas> answers; //Relación inversa de las respuestas
+       private boolean Modificada;
+     private boolean Eliminada;
+     private boolean Correcta;
     private String Fecha;
 
     public Respuestas() {
@@ -29,16 +31,35 @@ public class Respuestas {
         this.id = id;
     }
 
-    public Respuestas(int id, String respuesta, User user, int Preguntas, List<Respuestas> answers, String imagePath,String Fecha) {
+    public Respuestas(int id, int Preguntas) {
+        this.id = id;
+        this.Preguntas = Preguntas;
+    }
+
+    public Respuestas(int id, String respuesta, String imagePath, boolean Modificada, boolean Eliminada, boolean Correcta) {
+        this.id = id;
+        this.respuesta = respuesta;
+        this.imagePath = imagePath;
+        this.Modificada = Modificada;
+        this.Eliminada = Eliminada;
+        this.Correcta = Correcta;
+    }
+
+    public Respuestas(int id, String respuesta, User user, int Preguntas, String imagePath,String Fecha, boolean Modificada, boolean Eliminada, boolean Correcta) {
         this.id = id;
         this.respuesta = respuesta;
         this.user = user;
         this.Preguntas = Preguntas;
-        this.answers = answers;
-         this.Fecha = Fecha;
-         this.imagePath = imagePath;
+        this.imagePath = imagePath;
+        this.Modificada = Modificada;
+        this.Eliminada = Eliminada;
+        this.Correcta = Correcta;
+        this.Fecha = Fecha;
     }
+    
 
+
+  
     public Respuestas(int id, String respuesta, User user, int Preguntas, String imagePath,String Fecha) {
         this.id = id;
         this.respuesta = respuesta;
@@ -90,21 +111,6 @@ public class Respuestas {
 
    
 
-    public int getParent() {
-        return parent;
-    }
-
-    public void setParent(int parent) {
-        this.parent = parent;
-    }
-
-    public List<Respuestas> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(List<Respuestas> answers) {
-        this.answers = answers;
-    }
 
     public String getImagePath() {
         return imagePath;
@@ -122,6 +128,30 @@ public class Respuestas {
 
     public void setFecha(String Fecha) {
         this.Fecha = Fecha;
+    }
+
+    public boolean isModificada() {
+        return Modificada;
+    }
+
+    public void setModificada(boolean Modificada) {
+        this.Modificada = Modificada;
+    }
+
+    public boolean isEliminada() {
+        return Eliminada;
+    }
+
+    public void setEliminada(boolean Eliminada) {
+        this.Eliminada = Eliminada;
+    }
+
+    public boolean isCorrecta() {
+        return Correcta;
+    }
+
+    public void setCorrecta(boolean Correcta) {
+        this.Correcta = Correcta;
     }
     
     

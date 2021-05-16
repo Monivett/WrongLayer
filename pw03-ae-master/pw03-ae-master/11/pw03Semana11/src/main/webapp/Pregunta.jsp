@@ -26,7 +26,7 @@
     <title>Detalle de Pregunta</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="CSS/Pregunta.css">
+    <link rel="stylesheet" href="CSS/Pregunta_1_1.css">
 </head>
 <body>
     <nav>
@@ -48,11 +48,13 @@
         </div>
     </nav>
 <div class="usuario">
-    <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
+  
         <%  if (session.getAttribute("username") != null) {%>
+          <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
       <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>"  readonly><br><br>
           <button id = "perfil" onclick="location.href='Perfil.jsp';" type="submit">Mi Perfil</button>
     <% }else{%>
+      <img src="IMG/default.png" width="200" height="200">
  <input type="text" id="user" name="user" value="Invitado" readonly><br><br>
 <%}%>
      
@@ -92,17 +94,20 @@
         </div>
       </div>
       <br>
-
+         
+<% for(Respuestas resp: respuestas){
+    if(resp.isCorrecta()== true){%>
       <div class=" RespuestaC card" style="width: 950px;">
         
         <div class="card-body">  
         
-          <h5 class="card-title"><b>Respuesta Correcta: </b> <img src="" class="card-img-top" width="400" height="200"></h5>
+          <h5 class="card-title"><b>Respuesta Correcta: </b><%= resp.getRespuesta()%> <img src="<%= resp.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
        
-          <p class="card-text">Fecha:  </p>
-          <p class="card-text"><img src="..." class="fotouser" width="50" height="50"> Usuario: </p>
+          <p class="card-text">Fecha:   <%= resp.getFecha()%></p> 
+          <p class="card-text"><img src="<%= resp.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= resp.getUser().getUsername()%></p>
         
           <div class="puntuacion">
+                     <h1 class="fas fa-check" ></h1>
             <p>
             <b> Puntuación:</b>  
             <b> Útil:</b> 
@@ -114,20 +119,27 @@
         
                 <br>
                 <br>
+        
                  </div>
         </div>
       </div>
+            <%}%>
+                  <%}%>
       <br>
          
           <%    if(respuestas!=null)
               for(Respuestas respuesta: respuestas){%>
-            
+              <% if(respuesta.isEliminada()== true){%>
+                          <h8>Esta respuesta fue Eliminada</h8>
+                          <br>
+                                <%}else{%>
+                                  <br>
       <div class=" Respuestas card" style="width: 950px;">
         
         <div class="card-body">  
         
           <h5 class="card-title"><b>Respuesta: </b><%= respuesta.getRespuesta()%> <img src="<%= respuesta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
-       
+         
           <p class="card-text">Fecha:  <%= respuesta.getFecha()%></p>
           <p class="card-text"><img src="<%= respuesta.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuesta.getUser().getUsername()%></p>
         
@@ -136,20 +148,43 @@
             <b> Puntuación:</b>  
             <b> Útil:</b> 
             <b> No útil:</b>
-          
+             
+         
             </p>
                 <i class="Like fas fa-thumbs-up"></i>
                 <i class="Unlike fas fa-thumbs-down"></i>
-        
+           <%    
+                Object ID = Integer.valueOf(preguntas.getUser().getId());
+                  
+      if(ID.equals(session.getAttribute("ID_Usuario"))){%>
+     
+                 <form action="RespuestaCorrectaController" method="POST" " >
+                        <input type="text" name="IDR" id="ID" value="<%= respuesta.getId()%>" style="display: none;" >   
+                        <input type="text" name="ID_P" value="<%= respuesta.getPreguntas()%>" style="display: none">
+                        <button onclick="location.href='RespuestaCorrectaController?id=<%= respuesta.getId()%>" type="submit">
+                           Marca como correcta
+                        </button>
+                         
+                              </form> 
+                  
+         <%}%>
+     
+             
                 <br>
                 <br>
+                <% if(respuesta.isModificada()== true){%>
+                          <p>Esta respuesta fue editada</p>
+                                <%}%>
                  </div>
         </div>
       </div>
       <br>
-        <%}%>     
+            <%}%>
+                <%}%> 
+                <br>
+                
 </div>
-     
+                <br>
       </div>
       <%  if (session.getAttribute("username") != null) {%> 
         
@@ -165,7 +200,7 @@
                 </form>  
 <% }else{%>
       <h1> Inicia Sesión y responde la pregunta</h1>
-       <button id = "publicar" onclick="location.href='CategoriaInicio';" type="submit">Registrate</button>
+       <button id = "publicar" onclick="location.href='CategoriaInicio';" type="submit">Inicia Sesión</button>
      <%}%>
 </body>
 <script src="Boostrap/js/bootstrap.min.js"></script>

@@ -188,9 +188,9 @@ public class PreguntaDAO {
     }
            
            public static int  EditarPregunta(Pregunta pregunta) {
-       
+        Connection con = null;
        try{
-            Connection con = DbConnection.getConnection();
+             con = DbConnection.getConnection();
              // Esta linea prepara la llamada a la base de datos para insertar
              // Cada ? significa un valor a ser remplazado
                String sql = "CALL Proc_Pregunta(?, ?, ?, ?,?,?,?);";
@@ -211,14 +211,23 @@ public class PreguntaDAO {
         catch (SQLException ex) {
          System.out.println(ex.getMessage());
         }
+        finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
         return 0;
       
     }
              
            public static int  EliminarPregunta(Pregunta pregunta) {
-       
+         Connection con = null;
        try{
-            Connection con = DbConnection.getConnection();
+             con = DbConnection.getConnection();
              // Esta linea prepara la llamada a la base de datos para insertar
              // Cada ? significa un valor a ser remplazado
                String sql = "CALL Proc_Pregunta(?, ?, ?, ?,?,?,?);";
@@ -238,6 +247,15 @@ public class PreguntaDAO {
         }
         catch (SQLException ex) {
          System.out.println(ex.getMessage());
+        }
+            finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
         }
         return 0;
       

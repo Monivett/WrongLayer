@@ -4,14 +4,15 @@
     Author     : monic
 --%>
 
+<%@page import="com.wl.WrongLayer.models.Respuestas"%>
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
 <%@page import="java.util.List"%>
 <%@page import="com.wl.WrongLayer.models.Pregunta"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
     Pregunta preguntas = (Pregunta)request.getAttribute("preguntas");
-  
-      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
+    Respuestas respuestas = (Respuestas)request.getAttribute("respuestas");
+    List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
      
 %>
 <!DOCTYPE html>
@@ -39,7 +40,8 @@
             <button onclick="location.href='PantallaPrincipal.html';" type="submit">Busqueda Avanzada</button>
         </div>
     </nav>
-    <!--PREGUNTAS Y RESPUESTAS-->
+    <!--PREGUNTAS -->
+    <%  if(preguntas!=null){%>
     <form action="EditarPreguntaController" method="POST"  enctype="multipart/form-data" id="Pregunta" >
        <div class="Cartas">
         <div class=" Pregunta card" style="width: 790px;">
@@ -84,9 +86,53 @@
                        <i class="FAV fas fa-star"></i>
                        <br>
                        <br>
-                       <input type="file" name="image" required>
+                       <input type="file" name="image" >
                        <button  id="BTN_EDITARPREG" type="submit">Editar</button>
-                       <button  id="BTN_ELIMINAR">Eliminar</button>
+              
+                        </div>
+               </div>
+               
+             </div>
+
+     
+    </form>         
+           
+                      </div>   
+  
+    <%}%>
+        <!--RESPUESTAS -->
+    <%  if(respuestas!=null){%>
+    
+    <form action="EditarRespuestaController" method="POST"  enctype="multipart/form-data" id="Pregunta" >
+       <div class="Cartas">
+        <div class=" Pregunta card" style="width: 790px;">
+               
+               <div class="card-body">  
+                <h1>Pregunta</h1>
+                 <h5 class="card-title"><b>Respuesta: </b>
+                    <input type="text" name="Respuesta" id="Respuesta" value="<%= respuestas.getRespuesta()%> "  >   
+                 <img src="<%= respuestas.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
+               
+                    <input type="hidden" name="ID" id="ID" value="<%= respuestas.getId()%>" >   
+        
+                 <p class="card-text">Fecha:  <%= respuestas.getFecha()%></p>
+                  <p class="card-text"><img src="<%= respuestas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuestas.getUser().getUsername()%> </p>
+                 
+                 <div class="puntuacion">
+                   <p>
+                   <b> Puntuación:</b>  
+                   <b> Útil:</b> 
+                   <b> No útil:</b>
+                   <b> Favorito:</b>  
+                   </p>
+                       <i class="Like fas fa-thumbs-up"></i>
+                       <i class="Unlike fas fa-thumbs-down"></i>
+                       <i class="FAV fas fa-star"></i>
+                       <br>
+                       <br>
+                       <input type="file" name="image" >
+                       <button  id="BTN_EDITARRESP" type="submit">Editar</button>
+                       
                         </div>
                </div>
                
@@ -95,7 +141,7 @@
        </div>   
     </form>
   
-
+    <%}%>
        
 
     <div id="usuarioFoto" class="usuario">

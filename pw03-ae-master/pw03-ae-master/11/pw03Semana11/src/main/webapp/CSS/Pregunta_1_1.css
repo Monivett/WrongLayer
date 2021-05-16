@@ -89,13 +89,11 @@ height: 40px;
 position: absolute;
 margin-left: 650px;
 }
+
 /*-------USUARIO------------*/
 .usuario{
   height: 200px;
-  width: 200px;
-
-  background-color: white;
-  
+  width: 200px;  
   position: absolute;
   margin-left: 50px;
 
@@ -153,3 +151,23 @@ form{
   margin-left: 300px;
 }
    
+h1,h4{
+  font-family: Palatino Linotype;
+  text-align: center;
+  font-weight: 700;
+  color: white;
+ 
+  align-items: center;
+}
+
+#publicar{
+    margin-left: 600px;
+}
+.RespuestaC{
+ 
+  box-shadow: 0px 0px 6px 6px rgba(31, 255, 117, 0.8);
+}
+
+.RespuestaC h1{
+  margin-left: 850px;
+}

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
- *
+ *CONTROLLER PARA INSERTAR RESPUESTAS
  * @author monic
  */
 @WebServlet(name = "RespuestasController", urlPatterns = {"/RespuestasController"})

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *CONTROLLER PARA VER LA PREGUNTA A DETALLE Y SUS RESPUESTAS
  * @author magoc
  */
 @WebServlet(name = "VerPreguntaController", urlPatterns = {"/VerPreguntaController"})
@@ -38,17 +38,14 @@ public class VerPreguntaController extends HttpServlet {
       
         int ID = Integer.parseInt(request.getParameter("id"), 10);
         Pregunta pregunta = PreguntaDAO.MostrarPreguntaID(ID);
-       
          request.setAttribute("preguntas", pregunta);
+         
          List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestas(ID); 
-
         request.setAttribute("respuestas", respuestas);
         
           List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
-      
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
-   
-        
+    
         request.getRequestDispatcher("Pregunta.jsp").forward(request, response);
     }
 

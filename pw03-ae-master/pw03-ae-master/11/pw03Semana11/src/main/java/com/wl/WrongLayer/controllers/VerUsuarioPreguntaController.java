@@ -36,11 +36,11 @@ public class VerUsuarioPreguntaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-        int ID = Integer.parseInt(request.getParameter("id"), 10);
+            int ID = Integer.parseInt(request.getParameter("id"), 10);
             List<Respuestas> respuesta =RespuestaDAO.MostrarRespuestasUsuario(ID);
-     request.setAttribute("respuestas", respuesta);
-       List<Pregunta> pregunta =PreguntaDAO.MostrarPreguntaUsuario(ID);
-        request.setAttribute("preguntas", pregunta);
+            request.setAttribute("respuestas", respuesta);
+            List<Pregunta> pregunta =PreguntaDAO.MostrarPreguntaUsuario(ID);
+            request.setAttribute("preguntas", pregunta);
       
         request.getRequestDispatcher("Perfil.jsp").forward(request, response);
     }
@@ -68,11 +68,7 @@ public class VerUsuarioPreguntaController extends HttpServlet {
         
     }
     
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";

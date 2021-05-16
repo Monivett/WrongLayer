@@ -20,9 +20,9 @@ import java.sql.SQLException;
 public class UserDAO {
         
     public static int insertUser(User user){
-       
+       Connection con = null;
         try{
-            Connection con = DbConnection.getConnection();
+             con = DbConnection.getConnection();
              // Esta linea prepara la llamada a la base de datos para insertar
              // Cada ? significa un valor a ser remplazado
             String sql = "call Proc_Usuario(?,?,?,?,?,?,?,?,?,?)";
@@ -45,14 +45,25 @@ public class UserDAO {
         catch (SQLException ex) {
          System.out.println(ex.getMessage());
         }
+              finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
         return 0;
        
+    
     }
     
-    public static User LogInUser (User user){
-     
+    
+public static User LogInUser (User user){
+     Connection con = null;
             try{
-            Connection con = DbConnection.getConnection();
+             con = DbConnection.getConnection();
              // Esta linea prepara la llamada a la base de datos para insertar
              // Cada ? significa un valor a ser remplazado
             String sql = "call Proc_Login(?,?)";
@@ -79,15 +90,24 @@ public class UserDAO {
              catch (SQLException ex) {
          System.out.println(ex.getMessage());
         }
+                  finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            }
         return null;
         
-    }
     
+}
     
       public static User GetUser (int ID){
-     
+     Connection con = null;
             try{
-            Connection con = DbConnection.getConnection();
+             con = DbConnection.getConnection();
              // Esta linea prepara la llamada a la base de datos para insertar
              // Cada ? significa un valor a ser remplazado
             String sql = "call Proc_Usuario(?,?,?,?,?,?,?,?,?,?)";
@@ -122,14 +142,24 @@ public class UserDAO {
              catch (SQLException ex) {
          System.out.println(ex.getMessage());
         }
+                  finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            }
         return null;
-        
+            
     }
       
-       public static int ModificarUser(User user){
        
+public static int ModificarUser(User user){
+       Connection con = null;
         try{
-            Connection con = DbConnection.getConnection();
+             con = DbConnection.getConnection();
              // Esta linea prepara la llamada a la base de datos para insertar
              // Cada ? significa un valor a ser remplazado
             String sql = "call Proc_Usuario(?,?,?,?,?,?,?,?,?,?)";
@@ -152,40 +182,21 @@ public class UserDAO {
         catch (SQLException ex) {
          System.out.println(ex.getMessage());
         }
+              finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
         return 0;
        
     }
 
-    private static void executeQuery() {
+private static void executeQuery() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
-/*public class UserDAO implements ValidarLogIn{
-
-    @Override
-    public int ValidarLogIn(User user) {
-       
-            try{
-            Connection con = DbConnection.getConnection();
-             // Esta linea prepara la llamada a la base de datos para insertar
-             // Cada ? significa un valor a ser remplazado
-            String sql = "call Proc_Login(?,?)";
-            CallableStatement statement = con.prepareCall(sql);
-            
-            statement.setString(1, user.getUsername());          
-            statement.setString(2, user.getPassword());
-            ResultSet resultset = statement.executeQuery();
-            while(resultset.next()) { //Mientras el resultSet tenga algo
-                int id = resultset.getInt(1);
-                String username = resultset.getString(2);
-               
-            }
-        }
-             catch (SQLException ex) {
-         System.out.println(ex.getMessage());
-        }
-        return 0;
-       
-    }
-}*/

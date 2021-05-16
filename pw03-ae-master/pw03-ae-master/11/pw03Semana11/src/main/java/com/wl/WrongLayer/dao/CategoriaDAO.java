@@ -94,27 +94,7 @@ public class CategoriaDAO {
    
     }
     
-    
-//    USE `pw03`;
-//DROP procedure IF EXISTS `GetCategory`;
-//
-//DELIMITER $$
-//USE `pw03`$$
-//CREATE PROCEDURE `GetCategory` (
-//IN `pIdcategory` int
-//)
-//BEGIN
-//
-//SELECT `category`.`idcategory`,
-//    `category`.`name`,
-//    `category`.`order`,
-//    `category`.`parent`
-//FROM `pw03`.`category`
-//WHERE `category`.`idcategory` = pIdcategory;
-//
-//END$$
-//
-//DELIMITER ;
+
 
     public static Categoria getCategory(int idCategory) {
         Connection con = null;

@@ -26,6 +26,7 @@ public class DbConnection {
         // el nombre de la base de datos que es pwDB
         // lo demas son parametros para que no tengan problemas con zonas horarias
         dataSource.setUrl("jdbc:mysql://localhost:3306/wronglayer?useUnicode=true&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        //  dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/wronglayer?useUnicode=true&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         // El nombre de usuario de su conexion
         dataSource.setUsername("root");
         // La contraseña del usuario de su conexion

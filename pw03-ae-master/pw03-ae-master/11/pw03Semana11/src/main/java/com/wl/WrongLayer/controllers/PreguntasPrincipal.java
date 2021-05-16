@@ -36,11 +36,12 @@ public class PreguntasPrincipal extends HttpServlet {
     
         List<Pregunta> preguntas = null;
         preguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("preguntas", preguntas);
+         
          List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
-      
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
    
-         request.setAttribute("preguntas", preguntas);
+        
         
         request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
     }

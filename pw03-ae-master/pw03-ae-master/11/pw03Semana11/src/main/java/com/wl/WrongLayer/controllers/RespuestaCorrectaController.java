@@ -5,10 +5,8 @@
  */
 package com.wl.WrongLayer.controllers;
 
-import com.pw.pw03semana11.utils.FileUtils;
 import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
-import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.Respuestas;
 import java.io.IOException;
@@ -24,33 +22,38 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author monic
  */
-@WebServlet(name = "EliminarPregunta", urlPatterns = {"/EliminarPregunta"})
-public class EliminarPregunta extends HttpServlet {
+@WebServlet(name = "RespuestaCorrectaController", urlPatterns = {"/RespuestaCorrectaController"})
+public class RespuestaCorrectaController extends HttpServlet {
 
-  
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+      
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-      
-        
-           String stringID = request.getParameter("IDO");
+         String stringID = request.getParameter("IDR");
         int ID = Integer.parseInt(stringID, 10);
-           Pregunta pregunta = new Pregunta(ID);
+                String stringP = request.getParameter("ID_P");
+        int Preg = Integer.parseInt(stringP, 10);   
+       
+           Respuestas resp = new Respuestas(ID,Preg);
 
-        PreguntaDAO.EliminarPregunta(pregunta);
+        RespuestaDAO.RespuestaCorrecta(resp);
                  List<Respuestas> respuesta =RespuestaDAO.MostrarRespuestasUsuario(ID);
      request.setAttribute("respuestas", respuesta);
        List<Pregunta> preg =PreguntaDAO.MostrarPreguntaUsuario(ID);
         request.setAttribute("preguntas", preg);
-      
-        request.getRequestDispatcher("Perfil.jsp").forward(request, response);
+        
+         response.sendRedirect("PreguntasPrincipal");
     }
-
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

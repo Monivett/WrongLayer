@@ -103,7 +103,10 @@
                           <p>Esta pregunta fue editada</p>
                                 <%}%>
                                   <br>
+                               
                             <button onclick="location.href='EditarPreguntaController?id=<%= pregunta.getId()%>';" type="submit">Editar</button>
+                <form action="EliminarPregunta" method="POST" " >
+                        <input type="text" name="IDO" id="ID" value="<%= pregunta.getId()%>" style="display: none;" >   
                             <script>
                                     
                             function alerta() { //Alerta para el botón de borrar
@@ -115,26 +118,38 @@
                             } 	
                            };
                             </script>
-                            <button onclick="alerta()">Borrar</button>
-                            
+                            <button id="BTNBORRARPREG"onclick="alerta()" type="submit">Borrar</button>
+                       </form> 
+   
+                                <button onclick="location.href='VerPreguntaController?id=<%= pregunta.getId()%>';" type="submit">Ver</button>
                         </div>
                </div>
                
              </div>
              <br>
                 <%}%>
-             <%}%>
-       
+                 <%}%>
+          
+        
                 <%
                                   
                                 if(respuestas!=null)
                                 for(Respuestas respuesta: respuestas){%> 
+                                    <% if(respuesta.isEliminada()== true){%>
+                                      <h8>Esta respuesta fue Eliminada</h8>
+                          <br>
+                                <%}else{%>
+                                <br>
              <div class=" Respuestas card" style="width: 790px;">
                
                <div class="card-body">  
-                <h1>Respuestas hechas</h1>
+               <h1>Respuestas hechas</h1>
                 <h5 class="card-title"><b>Respuesta: </b> 
-                    <input value="<%= respuesta.getRespuesta()%>" type="text" name="Respuesta" id="Respuesta" disabled >   
+                      <p name="IDR"hidden>
+                         
+                         <%= respuesta.getId()%>
+                     </p>
+                    <p> <%= respuesta.getRespuesta()%>" </p>
                  <img src="<%= respuesta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
               
                  <p class="card-text"><b>Fecha:</b>  <%= respuesta.getFecha()%> </p>
@@ -149,15 +164,38 @@
                    </p>
                        <i class="Like fas fa-thumbs-up"></i>
                        <i class="Unlike fas fa-thumbs-down"></i>
-               
+                       <br>
+                <% if(respuesta.isModificada()== true){%>
+                          <p>Esta respuesta fue editada</p>
+                                <%}%>
                        <br>
                        <br>
-                       <button  id="BTN_EDITARRESP">Editar</button>
+                      
+                         <input type="hidden" name="Respuesta" id="ID" value="<%= respuesta.getRespuesta()%>" >   
+                        <button onclick="location.href='EditarRespuestaController?id=<%= respuesta.getId()%>';" type="submit">Editar</button>
+                            <form action="EliminarRespuesta" method="POST" " >
+                        <input type="text" name="IDR" id="ID" value="<%= respuesta.getId()%>" style="display: none;" >   
+                            <script>
+                                    
+                            function alerta2() { //Alerta para el botón de borrar
+   
+                             var opcion = confirm("¿Está seguro de que quiere borrar la respuesta?");
+                             if (opcion === true) {
+        
+                             window.location='EliminarRespuesta?id=<%= respuesta.getId()%>'; 
+                            } 	
+                           };
+                            </script>
+                            <button onclick="alerta2()" type="submit">Borrar</button>
+                       </form> 
                         </div>
                </div>
              </div>
+                            
              <br>
                  <%}%>
+                <%}%>
+                <br>
              <div class=" PreguntasUtil card" style="width: 790px;">
                
                <div class="card-body">  
