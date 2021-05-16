@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
- *
+ * CONTROLLER PARA EDITAR LA PREGUNTA
  * @author monic
  */
 @WebServlet(name = "EditarPreguntaController", urlPatterns = {"/EditarPreguntaController"})

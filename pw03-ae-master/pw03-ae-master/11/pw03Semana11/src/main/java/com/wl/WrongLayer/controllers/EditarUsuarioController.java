@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
- *
+ * CONTROLLER PARA EDITAR EL USUARIO
  * @author monic
  */
 @WebServlet(name = "EditarUsuarioController", urlPatterns = {"/EditarUsuarioController"})

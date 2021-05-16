@@ -11,10 +11,16 @@ import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.pw.pw03semana11.models.Category;
 
 import com.wl.WrongLayer.dao.CategoriaDAO;
+import com.wl.WrongLayer.dao.FavoritoDAO;
+import com.wl.WrongLayer.dao.NOutilDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
+import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
+import com.wl.WrongLayer.models.Favorito;
+import com.wl.WrongLayer.models.NOutil;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.Respuestas;
+import com.wl.WrongLayer.models.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -37,8 +43,27 @@ public class VerPreguntaController extends HttpServlet {
             throws ServletException, IOException {
       
         int ID = Integer.parseInt(request.getParameter("id"), 10);
+        
         Pregunta pregunta = PreguntaDAO.MostrarPreguntaID(ID);
-         request.setAttribute("preguntas", pregunta);
+        request.setAttribute("preguntas", pregunta);
+        
+         Util utilC = UtilDAO.MostrarUtilCantidadPregunta(ID);
+         request.setAttribute("utilc", utilC);
+         
+         List<Util> util =UtilDAO.MostrarUtilPregunta(ID);
+         request.setAttribute("Util", util);
+         
+         Favorito FavC = FavoritoDAO.MostrarFAVCantidadPregunta(ID);
+         request.setAttribute("FAVC", FavC);
+         
+           List<Favorito> FAV =FavoritoDAO.MostrarFavoritoPregunta(ID);
+         request.setAttribute("FAV", FAV);
+         
+          NOutil NOutilC = NOutilDAO.MostrarNOUtilCantidadPregunta(ID);
+         request.setAttribute("NOutilC", NOutilC);
+         
+         List<NOutil> NOutil =NOutilDAO.MostrarNOUtilPregunta(ID);
+         request.setAttribute("NOUtil", NOutil);
          
          List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestas(ID); 
         request.setAttribute("respuestas", respuestas);

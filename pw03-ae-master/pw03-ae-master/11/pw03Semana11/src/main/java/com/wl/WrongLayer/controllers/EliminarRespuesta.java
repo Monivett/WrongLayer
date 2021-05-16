@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * CONTROLLER PARA ELIMINAR LA RESPUESTA
  * @author monic
  */
 @WebServlet(name = "EliminarRespuesta", urlPatterns = {"/EliminarRespuesta"})

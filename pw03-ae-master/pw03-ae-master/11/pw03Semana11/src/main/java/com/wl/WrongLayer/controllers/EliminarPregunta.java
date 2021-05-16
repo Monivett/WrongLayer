@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * CONTROLLER PARA ELIMINAR LA PREGUNTA
  * @author monic
  */
 @WebServlet(name = "EliminarPregunta", urlPatterns = {"/EliminarPregunta"})

@@ -4,6 +4,9 @@
     Author     : monic
 --%>
 
+<%@page import="com.wl.WrongLayer.models.Favorito"%>
+<%@page import="com.wl.WrongLayer.models.NOutil"%>
+<%@page import="com.wl.WrongLayer.models.Util"%>
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
 <%@page import="com.wl.WrongLayer.models.Pregunta"%>
 <%@page import="com.wl.WrongLayer.models.User"%>
@@ -14,8 +17,22 @@
 <% 
     Pregunta preguntas = (Pregunta)request.getAttribute("preguntas");
     User user =(User)request.getAttribute("usuario");
+    
+    Util utilC =(Util)request.getAttribute("utilc");
+     NOutil NOutilC =(NOutil)request.getAttribute("NOutilC");
+     Favorito favC =(Favorito)request.getAttribute("FAVC");
+      
       List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
      List<Respuestas> respuestas = (List<Respuestas>)request.getAttribute("respuestas");
+     
+       List<Util> Util = (List<Util>)request.getAttribute("Util");
+       List<NOutil> NOuUtil = (List<NOutil>)request.getAttribute("NOUtil");
+       List<Favorito> fav = (List<Favorito>)request.getAttribute("FAV");
+       
+         boolean MarcadoUtil = false;
+         boolean MarcadoNOUtil = false;
+         boolean MarcadoFAV = false;
+   
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,15 +91,97 @@
           <p class="card-text"><img src="<%= preguntas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntas.getUser().getUsername()%> </p>
         
           <div class="puntuacion">
-            <p>
-            <b> Puntuación:</b>  
-            <b> Útil:</b> 
-            <b> No útil:</b>
-            <b> Favorito:</b>  
+        
+            <br>
+            <% for(Util ut: Util){
+           
+                Object User = Integer.valueOf(ut.getUser().getId());
+                if( User == (session.getAttribute("ID_Usuario")) &&  preguntas.getId() == ut.getPregunta() ){
+               MarcadoUtil = true;
+            %>
+                <p>Ya marcaste como útil</p>
+                 <form action = "DesmarcarUtilPregunta" method="POST">
+                <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+               <button id="BTN_UTIL"onclick="location.href='DesmarcarUtilPregunta';">
+                Desmarcar Útil
+                </button>  
+            </form>
+            <%}%>
+                  <%}%>
+                  
+                   <% for(NOutil nout: NOuUtil){
+           
+                Object User = Integer.valueOf(nout.getUser().getId());
+                if( User == (session.getAttribute("ID_Usuario")) &&  preguntas.getId() == nout.getPregunta() ){
+               MarcadoNOUtil = true;
+            %>
+              <p>Ya marcaste como NO útil</p>
+                   <form action = "DesmarcarNOUtilPregunta" method="POST">
+                <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+               <button id="BTN_DNOUTIL"onclick="location.href='DesmarcarNOUtilPregunta';">
+                Desmarcar NO Útil
+                </button>  
+            </form>
+            <%}%>
+                  <%}%>
+                  
+                              <% for(Favorito FAV: fav){
+           
+                Object User = Integer.valueOf(FAV.getUser().getId());
+                if( User == (session.getAttribute("ID_Usuario")) &&  preguntas.getId() == FAV.getPregunta() ){
+               MarcadoFAV = true;
+            %>
+              <p>Ya marcaste como NO útil</p>
+                   <form action = "DesmarcarFav" method="POST">
+                <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+               <button id="BTN_NOUTIL"onclick="location.href='DesmarcarFav';">
+                Desmarcar Favorito 
+                </button>  
+            </form>
+            <%}%>
+                  <%}%>
+             
+               
+                 <p> <b> Puntuación:</b>  </p>
+                 <b>   <i class="Like fas fa-thumbs-up"></i> Útil:</b> <%= utilC.getContador()%> 
+                 <br>
+                 <b>    <i class="Unlike fas fa-thumbs-down"></i> No útil:</b> <%= NOutilC.getContador()%>
+                 <br>
+                  <b>  <i class="FAV fas fa-star"></i> Favorito:</b>  <%= favC.getContador()%>
             </p>
+              <%  if (session.getAttribute("username") != null) {%>
+            <% if (MarcadoUtil == false){%>
+            <form action = "UtilController" method="POST">
+                <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+               <button id="BTN_UTIL"onclick="location.href='UtilController';">
+                Marcar como útil
                 <i class="Like fas fa-thumbs-up"></i>
-                <i class="Unlike fas fa-thumbs-down"></i>
-                <i class="FAV fas fa-star"></i>
+                </button>  
+            </form>
+             <%}%>
+             
+              <% if (MarcadoNOUtil == false){%>
+             
+                  <form action = "NOutilController" method="POST">
+                <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+               <button id="BTN_UTIL"onclick="location.href='NOutilController';">
+                   Marcar como NO Útil 
+                   <i class="Unlike fas fa-thumbs-down"></i>
+                </button>  
+                </form>
+               
+                 <%}%>
+                   <% if (MarcadoFAV == false){%> 
+                    <form action = "FavoritoController" method="POST">
+                <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+               <button id="BTN_UTIL"onclick="location.href='UtilController';">
+                Marcar Favorito
+                 <i class="FAV fas fa-star"></i>
+                </button>  
+            </form>
+                <%}%>
+             <%}%>
+         
                 <br>
                 <br>
                      <% if(preguntas.isModificada()== true){%>

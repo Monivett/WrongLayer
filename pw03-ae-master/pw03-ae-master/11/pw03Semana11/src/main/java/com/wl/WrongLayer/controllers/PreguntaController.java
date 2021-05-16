@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
- *
+ * CONTROLLER PARA PUBLICAR UNA PREGUNTA
  * @author magoc
  */
 @WebServlet(name = "PreguntaController", urlPatterns = {"/PreguntaController"})

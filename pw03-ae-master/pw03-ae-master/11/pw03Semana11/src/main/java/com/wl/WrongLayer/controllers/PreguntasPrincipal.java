@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * CONTROLLER PARA VER LAS PREGUNTAS EN LA PAGINA PRINCIPAL
  * @author magoc
  */
 @WebServlet(name = "PreguntasPrincipal", urlPatterns = {"/PreguntasPrincipal"})

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * CONTROLLER PARA MOSTRAR LAS CATEGORIAS EN LA PAGINA DE PUBLICAR
  * @author magoc
  */
 @WebServlet(name = "CategoriaController", urlPatterns = {"/CategoriaController"})
@@ -40,12 +40,6 @@ public class CategoriaController extends HttpServlet {
           
     }
 
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

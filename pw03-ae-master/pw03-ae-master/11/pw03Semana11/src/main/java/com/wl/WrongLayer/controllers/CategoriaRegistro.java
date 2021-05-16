@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *CONTROLLER PARA MOSTRAR LAS CATEGORIAS EN LA PAGINA DE REGISTRO
  * @author magoc
  */
 @WebServlet(name = "CategoriaRegistro", urlPatterns = {"/CategoriaRegistro"})

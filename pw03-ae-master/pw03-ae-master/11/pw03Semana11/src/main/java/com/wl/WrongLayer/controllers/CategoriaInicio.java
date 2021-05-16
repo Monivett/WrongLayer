@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * CONTROLLER PARA MOSTRAR LAS CATEGORIAS EN LA PAGINA DE INICIO DE SESIÓN
  * @author monic
  */
 @WebServlet(name = "CategoriaInicio", urlPatterns = {"/CategoriaInicio"})

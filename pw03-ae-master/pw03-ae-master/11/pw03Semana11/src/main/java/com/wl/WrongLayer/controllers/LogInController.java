@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
- *
+ * CONTROLLER PARA HACER UN LOG IN
  * @author monic
  */
 @WebServlet(name = "LogInController", urlPatterns = {"/LogInController"})
