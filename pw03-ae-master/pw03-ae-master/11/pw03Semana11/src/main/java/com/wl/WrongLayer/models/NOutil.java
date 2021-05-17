@@ -24,6 +24,20 @@ public class NOutil {
         this.Contador = Contador;
         this.Pregunta = Pregunta;
     }
+
+    public NOutil(int Contador, boolean NOutil, int Pregunta, User user) {
+        this.Contador = Contador;
+        this.NOutil = NOutil;
+        this.Pregunta = Pregunta;
+        this.user = user;
+    }
+
+    public NOutil(boolean NOutil, int Pregunta, int Respuesta, User user) {
+        this.NOutil = NOutil;
+        this.Pregunta = Pregunta;
+        this.Respuesta = Respuesta;
+        this.user = user;
+    }
     
 
     public NOutil(boolean NOutil, int Pregunta, User user) {

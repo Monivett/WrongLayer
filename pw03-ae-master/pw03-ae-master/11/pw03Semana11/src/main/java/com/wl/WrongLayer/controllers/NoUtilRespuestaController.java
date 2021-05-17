@@ -8,6 +8,7 @@ package com.wl.WrongLayer.controllers;
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.NOutilDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
+import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.NOutil;
 import com.wl.WrongLayer.models.Pregunta;
@@ -27,8 +28,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author monic
  */
-@WebServlet(name = "DesmarcarNOUtilPregunta", urlPatterns = {"/DesmarcarNOUtilPregunta"})
-public class DesmarcarNOUtilPregunta extends HttpServlet {
+@WebServlet(name = "NoUtilRespuestaController", urlPatterns = {"/NoUtilRespuestaController"})
+public class NoUtilRespuestaController extends HttpServlet {
 
 
     @Override
@@ -37,24 +38,32 @@ public class DesmarcarNOUtilPregunta extends HttpServlet {
        
     }
 
-  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
+        int contador=1;
         boolean utilB= true;
         String stringP = request.getParameter("PreguntaID");
         int pregunta = Integer.parseInt(stringP, 10);
-
+       
+       // String stringR = request.getParameter("PreguntaID");
+     //   int respuesta = Integer.parseInt(stringR, 10);
+     
         //USUARIO (sesion actual)
         HttpSession  session = request.getSession();
         User user = (User)session.getAttribute("usuarioID");
-      
-    
-        NOutil NOutil = new NOutil(utilB,pregunta,user);
         
-        NOutilDAO.DesmarcarNOUtil(NOutil);
-
+     String stringR = request.getParameter("RespuestaID");
+        int respuesta = Integer.parseInt(stringR, 10);
+        
+        NOutil NOutil = new NOutil(utilB,pregunta,respuesta,user);
+        
+        NOutilDAO.insertNOUtilRespuestas(NOutil); 
+        
+         Util util = new Util(contador,utilB,pregunta,respuesta,user);
+        
+        UtilDAO.DesmarcarUtilRespuesta(util);
+        
         List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
         List<Pregunta> preguntas = PreguntaDAO.MostrarPreguntas();;  
@@ -63,11 +72,7 @@ public class DesmarcarNOUtilPregunta extends HttpServlet {
         request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";

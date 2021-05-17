@@ -15,7 +15,9 @@
 
 
 <% 
+    //MUESTRA LA PREGUNTA SELECCIONADA
     Pregunta preguntas = (Pregunta)request.getAttribute("preguntas");
+    //MUESTRA LOS USUARIOS
     User user =(User)request.getAttribute("usuario");
     
     Util utilC =(Util)request.getAttribute("utilc");
@@ -32,7 +34,15 @@
          boolean MarcadoUtil = false;
          boolean MarcadoNOUtil = false;
          boolean MarcadoFAV = false;
-   
+         
+         //UTIL Y NO UTIL DE RESPUESTAS
+         List<Util> Utilr = (List<Util>)request.getAttribute("UtilR");
+         Util utilCR =(Util)request.getAttribute("utilcR");
+         List<NOutil> NoutilR = (List<NOutil>)request.getAttribute("NUtilR");
+         NOutil NoUtilR =(NOutil)request.getAttribute("NoUtilR");
+         boolean MarcadoUtilR = false;
+         boolean MarcadonoUtilR = false;
+  
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -205,22 +215,11 @@
           <p class="card-text">Fecha:   <%= resp.getFecha()%></p> 
           <p class="card-text"><img src="<%= resp.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= resp.getUser().getUsername()%></p>
         
-          <div class="puntuacion">
-                     <h1 class="fas fa-check" ></h1>
-            <p>
-            <b> Puntuación:</b>  
-            <b> Útil:</b> 
-            <b> No útil:</b>
-          
-            </p>
-                <i class="Like fas fa-thumbs-up"></i>
-                <i class="Unlike fas fa-thumbs-down"></i>
+    
         
-                <br>
-                <br>
-        
-                 </div>
+     
         </div>
+          
       </div>
             <%}%>
                   <%}%>
@@ -243,19 +242,13 @@
           <p class="card-text"><img src="<%= respuesta.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuesta.getUser().getUsername()%></p>
         
           <div class="puntuacion">
-            <p>
-            <b> Puntuación:</b>  
-            <b> Útil:</b> 
-            <b> No útil:</b>
-             
-         
-            </p>
+        
                 <i class="Like fas fa-thumbs-up"></i>
                 <i class="Unlike fas fa-thumbs-down"></i>
            <%    
                 Object ID = Integer.valueOf(preguntas.getUser().getId());
                   
-      if(ID.equals(session.getAttribute("ID_Usuario"))){%>
+                 if(ID.equals(session.getAttribute("ID_Usuario"))){%>
      
                  <form action="RespuestaCorrectaController" method="POST" " >
                         <input type="text" name="IDR" id="ID" value="<%= respuesta.getId()%>" style="display: none;" >   
@@ -265,8 +258,8 @@
                         </button>
                          
                               </form> 
-                  
-         <%}%>
+                           
+          <%}%>
      
              
                 <br>
@@ -275,6 +268,87 @@
                           <p>Esta respuesta fue editada</p>
                                 <%}%>
                  </div>
+                           
+                  <%       int i = 0;
+                 
+                      for(Util utR: Utilr){
+           int Contador = utR.getContador();
+        if(respuesta.getId()==utR.getRespuesta()){
+           i = Contador+i;
+        }
+                Object User = Integer.valueOf(utR.getUser().getId());
+                if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == utR.getRespuesta()){
+               MarcadoUtilR = true;
+            %>
+             <p>Ya marcaste como útil</p>
+                   <form action = "DesmarcarUtilRespuesta" method="POST">
+                            <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+                <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
+               <button id="BTN_NOUTIL"onclick="location.href='DesmarcarUtilRespuesta';">
+                Desmarcar Util 
+                </button>  
+            </form>
+                   <%}%>
+             <%}%>
+                 <p>
+            <b> Puntuación:</b>  
+              <br>
+             <b>   <i class="Like fas fa-thumbs-up"></i> Útil:</b> <%= i%> 
+               <br>
+          
+         
+            </p>
+                 <%  if (session.getAttribute("username") != null) {%>
+                 <% if (MarcadoUtilR == false){%> 
+                 <form action = "UtilControllerRespuestas" method="POST">
+                    <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+                <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
+               <button id="BTN_UTILR"onclick="location.href='UtilControllerRespuestas';">
+                Marcar como útil
+                <i class="Like fas fa-thumbs-up"></i>
+                </button>  
+                </form>
+               <%}%>
+                 <% MarcadoUtilR = false; %> 
+                 <%}%>
+                                <%       int u = 0;
+                      for(NOutil RNO: NoutilR){
+           int Contador = RNO.getContador();
+        if(respuesta.getId()==RNO.getRespuesta()){
+           u = Contador+u;
+        }
+                Object User = Integer.valueOf(RNO.getUser().getId());
+                if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == RNO.getRespuesta()){
+               MarcadonoUtilR = true;
+            %>
+             <p>Ya marcaste como NO útil</p>
+                   <form action = "DesmarcarNoUtilRespuesta" method="POST">
+                            <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+                <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
+               <button id="BTN_NOUTIL"onclick="location.href='DesmarcarUtilRespuesta';">
+                Desmarcar NO Util  
+                </button>  
+            </form>
+                   <%}%>
+             <%}%>
+             <p>
+                 <b> <i class="Unlike fas fa-thumbs-down"></i> No útil:</b> <%= u%> 
+             </p>
+              
+              
+                    <%  if (session.getAttribute("username") != null) {%>
+                    <% if (MarcadonoUtilR == false){%> 
+                       <form action = "NoUtilRespuestaController" method="POST">
+                    <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
+                <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
+               <button id="BTN_UTILR"onclick="location.href='UtilControllerRespuestas';">
+                Marcar como NO útil
+                <i class="Like fas fa-thumbs-up"></i>
+                </button>  
+            </form>
+                <%}%>
+                    <% MarcadonoUtilR = false; %> 
+                 <%}%>
         </div>
       </div>
       <br>

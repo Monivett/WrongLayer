@@ -6,10 +6,9 @@
 package com.wl.WrongLayer.controllers;
 
 import com.wl.WrongLayer.dao.CategoriaDAO;
-import com.wl.WrongLayer.dao.NOutilDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
+import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
-import com.wl.WrongLayer.models.NOutil;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.User;
 import com.wl.WrongLayer.models.Util;
@@ -24,36 +23,40 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * CONTROLLER PARA DESMARCAR RESPUESTAS UTILES
  * @author monic
  */
-@WebServlet(name = "DesmarcarNOUtilPregunta", urlPatterns = {"/DesmarcarNOUtilPregunta"})
-public class DesmarcarNOUtilPregunta extends HttpServlet {
+@WebServlet(name = "DesmarcarUtilRespuesta", urlPatterns = {"/DesmarcarUtilRespuesta"})
+public class DesmarcarUtilRespuesta extends HttpServlet {
 
-
+  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
     }
 
-  
+ 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
+           int contador=1;
         boolean utilB= true;
-        String stringP = request.getParameter("PreguntaID");
-        int pregunta = Integer.parseInt(stringP, 10);
-
+        
+        String stringP = request.getParameter("RespuestaID");
+        int respuestaID = Integer.parseInt(stringP, 10);
+       
+       String stringR = request.getParameter("PreguntaID");
+        int pregunta = Integer.parseInt(stringR, 10);
+    
         //USUARIO (sesion actual)
         HttpSession  session = request.getSession();
         User user = (User)session.getAttribute("usuarioID");
       
     
-        NOutil NOutil = new NOutil(utilB,pregunta,user);
+        Util util = new Util(contador,utilB,pregunta,respuestaID,user);
         
-        NOutilDAO.DesmarcarNOUtil(NOutil);
+        UtilDAO.DesmarcarUtilRespuesta(util);
 
         List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);

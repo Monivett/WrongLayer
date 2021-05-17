@@ -12,7 +12,8 @@
 <%
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
      List<Pregunta> preguntas = (List<Pregunta>)request.getAttribute("preguntas");
-       List<Respuestas> respuestas = (List<Respuestas>)request.getAttribute("respuestas");
+     List<Respuestas> respuestas = (List<Respuestas>)request.getAttribute("respuestas");
+     
 %>
 <!DOCTYPE html>
 <html lang="es">

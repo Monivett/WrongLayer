@@ -20,7 +20,8 @@ import java.util.List;
  * @author monic
  */
 public class UtilDAO {
-      public static int insertUtil(Util util){
+    //FUNCIONES PARA PONER UTIL EN LA PREGUNTA
+        public static int insertUtil(Util util){
        Connection con = null;
         try{
              con = DbConnection.getConnection();
@@ -32,7 +33,7 @@ public class UtilDAO {
             statement.setString(1, "I"); // Remplazamos el primer parametro por la opción del procedure
             statement.setInt(2, 1); //Contador
             statement.setBoolean(3, true); // El tercero por el bool  
-            statement.setInt(4, util.getRespuesta());//Respuesta
+            statement.setInt(4, 0);//Respuesta
             statement.setInt(5, util.getPregunta());//Pregunta
             statement.setInt(6, util.getUser().getId());//Usuario
 
@@ -55,7 +56,7 @@ public class UtilDAO {
     
     }
       
-            public static Util  MostrarUtilCantidadPregunta(int ID) {
+        public static Util  MostrarUtilCantidadPregunta(int ID) {
        
         Connection con = null;
         try {
@@ -91,7 +92,7 @@ public class UtilDAO {
       
     }
             
-          public static List<Util>  MostrarUtilPregunta(int ID) {
+        public static List<Util>  MostrarUtilPregunta(int ID) {
         List<Util> util = new ArrayList<>();
         Connection con = null;
         try {
@@ -133,7 +134,7 @@ public class UtilDAO {
       
     }
           
-               public static int DesmarcarUtil(Util util){
+        public static int DesmarcarUtil(Util util){
        Connection con = null;
         try{
              con = DbConnection.getConnection();
@@ -167,5 +168,158 @@ public class UtilDAO {
        
     
     }
+     //FUNCIONES PARA PONER UTIL EN LA RESPUESTA
+        
+          public static int insertUtilR(Util util){
+       Connection con = null;
+        try{
+             con = DbConnection.getConnection();
+             // Esta linea prepara la llamada a la base de datos para insertar
+             // Cada ? significa un valor a ser remplazado
+            String sql = "call Proc_Util(?,?,?,?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "B"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, 1); //Contador
+            statement.setBoolean(3, true); // El tercero por el bool  
+            statement.setInt(4, util.getRespuesta());//Respuesta
+            statement.setInt(5, util.getPregunta());//Pregunta
+            statement.setInt(6, util.getUser().getId());//Usuario
+
+         return statement.executeUpdate();//Retorna un entero
+        }
+        catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+              finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        return 0;
+       
+    
+    }
+          
+           public static Util  MostrarUtilCantidadRespuesta(int ID) {
+       
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+              String sql = "call Proc_Util(?,?,?,?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "Z"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, 1); //Contador
+            statement.setBoolean(3, true); // El tercero por el bool  
+            statement.setInt(4,0);//Respuesta
+            statement.setInt(5, ID);//Pregunta
+            statement.setInt(6, 0);//Usuario
+                  ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                int contador = result.getInt(1); //Cantidad
+                int Preg = result.getInt(2); //Pregunta
+                //int Resp = result.getInt(2); //Respuesta
+                
+                return new Util(contador,Preg);
+            }
+          
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+             return null;
       
+    }
+        
+         public static List<Util>  MostrarUtilRespuesta(int ID) {
+        List<Util> util = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+             
+              String sql = "call Proc_Util(?,?,?,?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "C"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, 1); //Contador
+            statement.setBoolean(3, true); // El tercero por el bool  
+            statement.setInt(4, 0);//Respuesta
+            statement.setInt(5, ID);//Pregunta
+            statement.setInt(6, 0);//Usuario
+                  ResultSet result = statement.executeQuery();
+            while(result.next()) {
+            
+                int resp = result.getInt(1); //Respuesta
+                int preg = result.getInt(2); //Pregunta
+                boolean isUtil = result.getBoolean(3);
+                 int idUser = result.getInt(4); //Usuario
+                User usuario = UserDAO.GetUser(idUser);
+           int cont = result.getInt(5); //contador
+                 util.add(new Util(cont,isUtil, preg,resp,usuario));
+               
+            }
+          
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+              return util;
+      
+    }
+         
+           public static int DesmarcarUtilRespuesta(Util util){
+       Connection con = null;
+        try{
+             con = DbConnection.getConnection();
+             // Esta linea prepara la llamada a la base de datos para insertar
+             // Cada ? significa un valor a ser remplazado
+            String sql = "call Proc_Util(?,?,?,?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "Y"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, 0); //Contador
+            statement.setBoolean(3, false); // El tercero por el bool  
+            statement.setInt(4, util.getRespuesta());//Respuesta
+            statement.setInt(5, util.getPregunta());//Pregunta
+            statement.setInt(6, util.getUser().getId());//Usuario
+
+         return statement.executeUpdate();//Retorna un entero
+        }
+        catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+              finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        return 0;
+       
+    
+    }
+        
+        
 }

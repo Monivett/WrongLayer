@@ -12,7 +12,6 @@ import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.NOutil;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.User;
-import com.wl.WrongLayer.models.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -27,33 +26,36 @@ import javax.servlet.http.HttpSession;
  *
  * @author monic
  */
-@WebServlet(name = "DesmarcarNOUtilPregunta", urlPatterns = {"/DesmarcarNOUtilPregunta"})
-public class DesmarcarNOUtilPregunta extends HttpServlet {
-
+@WebServlet(name = "DesmarcarNoUtilRespuesta", urlPatterns = {"/DesmarcarNoUtilRespuesta"})
+public class DesmarcarNoUtilRespuesta extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+      
     }
 
-  
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
+          int contador=1;
         boolean utilB= true;
-        String stringP = request.getParameter("PreguntaID");
-        int pregunta = Integer.parseInt(stringP, 10);
-
+        
+        String stringP = request.getParameter("RespuestaID");
+        int respuestaID = Integer.parseInt(stringP, 10);
+       
+       String stringR = request.getParameter("PreguntaID");
+        int pregunta = Integer.parseInt(stringR, 10);
+    
         //USUARIO (sesion actual)
         HttpSession  session = request.getSession();
         User user = (User)session.getAttribute("usuarioID");
       
     
-        NOutil NOutil = new NOutil(utilB,pregunta,user);
+        NOutil util = new NOutil(contador,utilB,pregunta,respuestaID,user);
         
-        NOutilDAO.DesmarcarNOUtil(NOutil);
+        NOutilDAO.DesmarcarNOUtilRespuesta(util);
 
         List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
@@ -63,14 +65,9 @@ public class DesmarcarNOUtilPregunta extends HttpServlet {
         request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

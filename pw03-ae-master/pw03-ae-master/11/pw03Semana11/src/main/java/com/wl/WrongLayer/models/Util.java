@@ -42,8 +42,12 @@ public class Util {
        
     }
 
+    public Util(int Contador, int Pregunta, int Respuesta) {
+        this.Contador = Contador;
+        this.Pregunta = Pregunta;
+        this.Respuesta = Respuesta;
+    }
 
-    
     public Util(int Contador, boolean Util, int Pregunta, int Respuesta, User user) {
         this.Contador = Contador;
         this.Util = Util;
