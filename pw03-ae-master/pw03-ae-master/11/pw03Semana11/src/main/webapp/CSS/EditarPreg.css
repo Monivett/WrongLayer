@@ -39,6 +39,14 @@ html{
   top:20px
    
   }
+  #BTN_CerrarSession{
+  position: absolute;
+  top: 10px;
+  left: 490px;
+  width: 50%;
+  
+  text-align: left;
+}
   nav label{
      
     font-size:16px;
@@ -89,7 +97,7 @@ html{
   .botones{
       margin-top: 20px;
   position: absolute;
-  margin-left: 650px;
+  margin-left: 610px;
   }
     /*-------USUARIO------------*/
     .usuario{
@@ -157,5 +165,22 @@ html{
     footer{
         text-align: center;
       background-color: #ff959f;
-     height: 50px;
+     height: 90px;
+     display: flex;
+     font-family:Century Gothic;
     }
+  select{
+  font-family:Century Gothic;
+  background: #fedcb9;
+  border: none;
+
+  height: 40px;
+  }
+  input[type="file"]{
+        font-family:Century Gothic;
+ 
+  border: none;
+
+  height: 40px;
+  }
+    

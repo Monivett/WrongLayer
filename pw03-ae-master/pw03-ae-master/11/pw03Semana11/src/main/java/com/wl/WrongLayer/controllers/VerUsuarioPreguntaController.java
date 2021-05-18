@@ -5,14 +5,14 @@
  */
 package com.wl.WrongLayer.controllers;
 
-import com.pw.pw03semana11.controllers.*;
-import com.pw.pw03semana11.DAO.CategoryDAO;
-import com.wl.WrongLayer.dao.PreguntaDAO;
-import com.pw.pw03semana11.models.Category;
+
+
+
 
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.FavoritoDAO;
 import com.wl.WrongLayer.dao.NOutilDAO;
+import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
@@ -62,6 +62,10 @@ public class VerUsuarioPreguntaController extends HttpServlet {
               List<Favorito> fav =FavoritoDAO.MostrarFavoritosUsuario(ID);
             request.setAttribute("fav", fav);
             
+                  List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+    
+            
         request.getRequestDispatcher("Perfil.jsp").forward(request, response);
     }
 
@@ -74,9 +78,9 @@ public class VerUsuarioPreguntaController extends HttpServlet {
         
          request.setAttribute("preguntas", pregunta);
            
-        List<Category> categories =null;
+        List<Categoria> categories =null;
         List<Respuestas> respuestas =null;
-        categories = CategoryDAO.getCategories();
+        categories = CategoriaDAO.getCategories();
         respuestas =RespuestaDAO.MostrarRespuestas(ID); 
 
         request.setAttribute("respuestas", respuestas);

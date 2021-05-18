@@ -53,7 +53,7 @@
     <title>Detalle de Pregunta</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="CSS/Pregunta_1_1_1.css">
+    <link rel="stylesheet" href="CSS/Pregunta.css">
 </head>
 <body>
     <nav>
@@ -73,7 +73,10 @@
             <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
            <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
              <% }else{%>
-              <button onclick="location.href='';" type="submit">Cerrar Sesión</button>
+               <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
+                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
+             </form>
+           
              <%}%>
         </div>
     </nav>
@@ -223,6 +226,7 @@
         </div>
       </div>
       <br>
+      
          
 <% for(Respuestas resp: respuestas){
     if(resp.isCorrecta()== true){%>
@@ -386,6 +390,7 @@
                 
 </div>
                 <br>
+
       </div>
       <%  if (session.getAttribute("username") != null && estado == session.getAttribute("Estado")) {%> 
         
@@ -405,6 +410,27 @@
      <%}else{%>
       <h1> Tu cuenta está suspendida comunicate con los administradores de la página</h1>
       <%}%>
+                           <section class="paginacion">
+			<ul>
+				<li><a href="pagina1.html" class="active">1</a></li>
+				<li><a href="pagina2.html"><</a></li>
+				<li><a href="pagina3.html">></a></li>
+		
+			</ul>
+		</section>
+    <footer>
+        <h4> <b>Categorias: </b></h4>
+           <h4>
+        <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                          
+                           °      <%= categoria.getName()%> &nbsp
+
+                            <% } %> 
+   </h4>
+    </footer>
 </body>
 <script src="Boostrap/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>

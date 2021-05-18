@@ -14,9 +14,8 @@
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
 %>
 
-
                         <select  name ="Categorias" id="Categorias">
-                            
+                            <option> Categoria</option>
                               <%
                                   
                                 if(categorias!=null)

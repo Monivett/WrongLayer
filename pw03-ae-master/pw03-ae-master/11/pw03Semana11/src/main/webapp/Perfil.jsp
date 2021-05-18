@@ -32,7 +32,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/Perfil.css">
+    <link rel="stylesheet" href="CSS/Perfil_1.css">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
 </head>
 <body>
@@ -50,7 +50,9 @@
             <button onclick="location.href='PreguntasPrincipal';" type="submit">Pantalla Principal</button>
            <jsp:include page= "navbar.jsp"/>
             <button onclick="location.href='PantallaInicio.html';" type="submit">Búsqueda Avanzada</button>
-       
+       <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
+                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
+             </form>
         </div>
     </nav>
     <!--PREGUNTAS Y RESPUESTAS-->
@@ -70,40 +72,28 @@
                <div class="card-body">  
                   
                 <h1>Preguntas hechas</h1>
-                 <h5 class="card-title"><b>Pregunta: </b> 
+                <br>
+                 <h5 class="card-title"><b>Pregunta: </b>  <%= pregunta.getPregunta()%> 
                      <p hidden>
                          
                          <%= pregunta.getId()%>
                      </p>
                     
-                    <input type="text" value=" <%= pregunta.getPregunta()%>"name="Pregunta" id="Pregunta" disabled >   
+                   
                  <img src="<%= pregunta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
-                 <p class="card-text"> Descripción:
-                    <input type="text" value=" <%= pregunta.getDescription()%>" name="Descripcion" id="Descripcion" disabled >   
+                 <p class="card-text"> <b>Descripción: </b><%= pregunta.getDescription()%>
+                  
                   </p>
-                 <p class="card-text">Categoría:  
-                     <select id="Categoría"disabled>
-                         <option>
-                             <%= pregunta.getCategory().getName()%>
-                         </option>
-                     </select>
+                  <p class="card-text"><b>Categoría: </b> <%= pregunta.getCategory().getName()%> 
+                   
                   
                  </p>
-                 <p class="card-text">Fecha:     <%= pregunta.getFecha()%></p>
-                 <p class="card-text"><img src="<%= session.getAttribute("Foto")%>" class="fotouser" width="50" height="50"> Usuario: </p>
+                 <p class="card-text"><b>Fecha: </b>     <%= pregunta.getFecha()%></p>
+                 <p class="card-text"><img src="<%= session.getAttribute("Foto")%>" class="fotouser" width="50" height="50"> <b>Usuario: </b><%= session.getAttribute("username")%></p>
                  
                  <div class="puntuacion">
-                   <p>
-                   <b> Puntuación:</b>  
-                   <b> Útil:</b> 
-                   <b> No útil:</b>
-                   <b> Favorito:</b>  
-                   </p>
-                       <i class="Like fas fa-thumbs-up"></i>
-                       <i class="Unlike fas fa-thumbs-down"></i>
-                       <i class="FAV fas fa-star"></i>
-                       <br>
-                       <br>
+              
+           
                        <input type="file" id ="FOTOPREG" style="display: none;" >
                      
                           <% if(pregunta.isModificada()== true){%>
@@ -112,6 +102,7 @@
                                   <br>
                                
                             <button onclick="location.href='EditarPreguntaController?id=<%= pregunta.getId()%>';" type="submit">Editar</button>
+                            <br>
                 <form action="EliminarPregunta" method="POST" " >
                         <input type="text" name="IDO" id="ID" value="<%= pregunta.getId()%>" style="display: none;" >   
                             <script>
@@ -127,9 +118,10 @@
                             </script>
                             <button id="BTNBORRARPREG"onclick="alerta()" type="submit">Borrar</button>
                        </form> 
-   
+                            <br>
                                 <button onclick="location.href='VerPreguntaController?id=<%= pregunta.getId()%>';" type="submit">Ver</button>
                         </div>
+                        <br>
                </div>
                
              </div>
@@ -163,15 +155,7 @@
                  <p class="card-text"><img src="<%= session.getAttribute("Foto")%>" class="fotouser" width="50" height="50"> Usuario: </p>
                
                  <div class="puntuacion">
-                   <p>
-                   <b> Puntuación:</b>  
-                   <b> Útil:</b> 
-                   <b> No útil:</b>
-                 
-                   </p>
-                       <i class="Like fas fa-thumbs-up"></i>
-                       <i class="Unlike fas fa-thumbs-down"></i>
-                       <br>
+              
                 <% if(respuesta.isModificada()== true){%>
                           <p>Esta respuesta fue editada</p>
                                 <%}%>
@@ -202,12 +186,10 @@
              <br>
                  <%}%>
                 <%}%>
-                <br>
+             
                           <%      
                                 if(util!=null)                      
-                                for(Util utilidad: util){                                 
-                 %>  
-            
+                                for(Util utilidad: util){   %>                                 
                     <%  for(Pregunta preguntat: preguntaT){
                         if(utilidad.getPregunta() ==preguntat.getId()) {%>
                          <div class=" PreguntasUtil card" style="width: 790px;">
@@ -225,17 +207,17 @@
                <p class="card-text"><img src="<%= preguntat.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntat.getUser().getUsername()%> </p>
           </a>
                
-                 <br>
+           
                </div>
          
-                       <%}%>
-                 <%}%>
+                  
            
              </div>
-             <br>
-          
+     <%}%>
+                 <%}%>
               <%}%>
-             <br> 
+          
+                  <br> 
                                       <%      
                                 if(NOutil!=null)                      
                                 for(NOutil noutilidad: NOutil){                                 
@@ -260,12 +242,12 @@
                  <br>
                </div>
          
-                       <%}%>
-                 <%}%>
+                 
            
              </div>
              <br>
-          
+                <%}%>
+                 <%}%>
               <%}%>
               <br>
                      <%
@@ -293,17 +275,18 @@
           </a>
                 
      
-                    <br>     
+                 
                 </div>
               </div>
+            <br>
                  <%}%>
                
                     <%}%>
-                       <br>  
+                    
                     <%}%>
-              <br>
+                    <br>
        </div>
-     
+      
     <div id="usuarioFoto" class="usuario">
         <img src="<%= session.getAttribute("Foto")%>"  name="image" width="300" height="300">
     </div> 
@@ -361,10 +344,27 @@
        <button type="submit" id="BTN_MODIFICAR">Editar Información</button>
     </form> 
     <button  id="BTN_EDITAR">Editar</button>
+  <section class="paginacion">
+			<ul>
+				<li><a href="pagina1.html" class="active">1</a></li>
+				<li><a href="pagina2.html"><</a></li>
+				<li><a href="pagina3.html">></a></li>
+		
+			</ul>
+		</section>
+    <footer>
+        <h4> <b>Categorias: </b></h4>
+           <h4>
+        <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                          
+                           °      <%= categoria.getName()%> &nbsp
 
-<footer>
-    Categorias
-</footer>
+                            <% } %> 
+   </h4>
+    </footer>
   
 
 </body>

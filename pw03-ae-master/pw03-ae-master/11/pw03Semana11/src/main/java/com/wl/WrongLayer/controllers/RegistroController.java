@@ -72,15 +72,10 @@ public class RegistroController extends HttpServlet {
      
      User user = new User (Nombre, Apellido,FechaNac,correo,username, pass, FileUtils.RUTE_USER_IMAGE + "/" + nameImage);
       UserDAO.insertUser(user); 
-       
-        
-          
+  
        List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
-      //  List<News> news = PreguntaDAO.getNews();
-      
-       // request.setAttribute("News", news);*/
-        
+
         request.getRequestDispatcher("PantallaInicio.jsp").forward(request, response);
     }
 

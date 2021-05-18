@@ -30,7 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario ajeno</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/PerfilAjeno.css">
+    <link rel="stylesheet" href="CSS/PerfilAjeno_1.css">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
 </head>
 <body>
@@ -46,15 +46,13 @@
                     </form>
         <div class="botones">
             <button onclick="location.href='PreguntasPrincipal';" type="submit">Pantalla Principal</button>
-            <select>
-                <option>Categoría 1</option>
-                <option>Categoría 2</option>
-                <option>Categoría 3</option>
-                <option>Categoría 4</option>
-                <option>Categoría 5</option>
-            </select>
+             <jsp:include page= "navbar.jsp"/>
             <button onclick="location.href='PantallaInicio.html';" type="submit">Búsqueda Avanzada</button>
-       
+            <%  if (session.getAttribute("username") != null) {%>
+         <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
+                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
+             </form>
+         <%  }%>
         </div>
     </nav>
     <!--PREGUNTAS Y RESPUESTAS-->
@@ -158,12 +156,12 @@
                  <br>
                </div>
          
-                       <%}%>
-                 <%}%>
+                 
          
              </div>
              <br>
-          
+                <%}%>
+                 <%}%>
               <%}%>
               <br>
                    <%
@@ -194,10 +192,10 @@
                     <br>     
                 </div>
               </div>
-                 <%}%>
+                 
+                       <br>  <%}%>
                
                     <%}%>
-                       <br>  
                     <%}%>
               <br>
        </div>
@@ -226,10 +224,27 @@
       </div> 
    
 
-<footer>
-    Categorias
-</footer>
-  
+<section class="paginacion">
+			<ul>
+				<li><a href="pagina1.html" class="active">1</a></li>
+				<li><a href="pagina2.html"><</a></li>
+				<li><a href="pagina3.html">></a></li>
+		
+			</ul>
+		</section>
+    <footer>
+        <h4> <b>Categorias: </b></h4>
+           <h4>
+        <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                          
+                           °      <%= categoria.getName()%> &nbsp
+
+                            <% } %> 
+   </h4>
+    </footer>
 
 </body>
 <script src="JAVASCRIPT/Perfil.js"></script>

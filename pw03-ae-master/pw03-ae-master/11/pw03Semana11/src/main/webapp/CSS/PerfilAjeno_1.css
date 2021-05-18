@@ -75,7 +75,7 @@ html{
   background: #fedcb9;
   border: none;
   font-family: century Gothic;
-  margin: 30px 20px;
+  margin: 30px 10px;
   height: 40px;
   }
   nav select{
@@ -90,8 +90,16 @@ html{
   .botones{
   
   position: absolute;
-  margin-left: 650px;
+  margin-left: 610px;
   }
+  #BTN_CerrarSession{
+  position: absolute;
+  top: 0px;
+  left: 510px;
+  width: 50%;
+  
+  text-align: left;
+}
     /*-------USUARIO------------*/
     .usuario{
      
@@ -139,6 +147,7 @@ html{
     position: absolute;
     padding-bottom: 20px;
   }
+  
 
     /*PREGUNTAS Y RESPUESTAS................*/
   .Cartas{
@@ -177,11 +186,44 @@ html{
     i:hover{
       color: #a4d7b8;
     }
-   
+   /*------------PAGINACIÓN-------------------*/
+.paginacion {
+	margin:20px 0;
+     
+        margin-left: 130px;
+}
+
+.paginacion ul {
+	list-style:none;
+	text-align: center;
+}
+
+.paginacion ul li {
+	display:inline-block;
+	margin-right:10px;
+        
+}
+
+.paginacion ul li a {
+	display:block;
+	padding:10px 20px;
+	color:#fff;
+	background:#ff959f;
+	text-decoration: none;
+}
+
+.paginacion ul li a:hover {
+	background:#ffc1c7;
+}
+
+.paginacion ul li .active {
+	background:#ff959f;
+	font-weight:bold;
+}
     footer{
       background-color: #ff959f;
      text-align: center;
-     height: 50px;
+     height: 80px;
     }
     
    .Cartas a{

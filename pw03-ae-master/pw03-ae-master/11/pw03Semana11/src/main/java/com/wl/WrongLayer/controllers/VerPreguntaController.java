@@ -5,14 +5,10 @@
  */
 package com.wl.WrongLayer.controllers;
 
-import com.pw.pw03semana11.controllers.*;
-import com.pw.pw03semana11.DAO.CategoryDAO;
-import com.wl.WrongLayer.dao.PreguntaDAO;
-import com.pw.pw03semana11.models.Category;
-
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.FavoritoDAO;
 import com.wl.WrongLayer.dao.NOutilDAO;
+import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
@@ -22,7 +18,6 @@ import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.Respuestas;
 import com.wl.WrongLayer.models.Util;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -144,11 +139,7 @@ public class VerPreguntaController extends HttpServlet {
         
     }
     
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/PantallaInicio_1_1.css">
+    <link rel="stylesheet" href="CSS/PantallaInicio_1_1_1.css">
 </head>
 
 <body>
@@ -68,14 +68,18 @@
 </form>
  
 </body>
- <footer>
-        <div class="contenedor-footer">
-          <div class="content-foo">
-            <h4>Categorías</h4>
-         
-          </div>
-        </div>
-      
-      </footer>
+    <footer>
+        <h4> <b>Categorias: </b></h4>
+           <h4>
+        <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                          
+                           °      <%= categoria.getName()%> &nbsp
+
+                            <% } %> 
+   </h4>
+    </footer>
 
 </html>

@@ -4,6 +4,7 @@
     Author     : monic
 --%>
 
+<%@page import="com.wl.WrongLayer.models.Categoria"%>
 <%@page import="com.wl.WrongLayer.models.Pregunta"%>
 <%@page import="com.pw.pw03semana11.models.News"%>
 <%@page import="java.util.List"%>
@@ -11,6 +12,7 @@
 <%
      List<Pregunta> preguntas = (List<Pregunta>)request.getAttribute("preguntas");
      session =request.getSession();
+       List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wrong Layer</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/PantallaPrincipal.css">
+    <link rel="stylesheet" href="CSS/PantallaPrincipal_1_1.css">
 </head>
 
 <body>
@@ -42,7 +44,10 @@
             <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
            <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
              <% }else{%>
-              <button onclick="location.href='';" type="submit">Cerrar Sesión</button>
+             <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
+                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
+             </form>
+           
              <%}%>
        </div>
     </nav>
@@ -84,11 +89,26 @@
    
  
 </div>
+     <section class="paginacion">
+			<ul>
+				<li><a href="pagina1.html" class="active">1</a></li>
+				<li><a href="pagina2.html"><</a></li>
+				<li><a href="pagina3.html">></a></li>
+		
+			</ul>
+		</section>
     <footer>
-       
-              <h4>Categorías</h4>
-           
-        
+        <h4> <b>Categorias: </b></h4>
+           <h4>
+        <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                          
+                           °      <%= categoria.getName()%> &nbsp
+
+                            <% } %> 
+   </h4>
     </footer>
 </body>
 

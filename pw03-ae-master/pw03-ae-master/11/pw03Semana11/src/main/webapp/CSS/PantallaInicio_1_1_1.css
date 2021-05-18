@@ -163,26 +163,15 @@ margin-left: 140px;
 position: absolute;
 }
 /*-----------------FOOTER-------------------*/
-footer {
+footer{
+    
+margin-top: 700px;
+width:100%;
+background-color: #ff959f;
+text-align: center;
+position: absolute;
+margin-left: 110px;
 
-    height:20px;
-    line-height:50px;
-    background: #ff959f;
-  margin-top: 500px;
-    text-align:center;
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-   
+
 }
-.contenedor-footer {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin: auto;
-    padding-bottom: 2px;
-    border-bottom: 1px solid #ccc;
-    background: #ff959f;
-    text-align:center;
-}
+

@@ -79,6 +79,14 @@ height: 40px;
 position: absolute;
 margin-left: 650px;
 }
+#BTN_CerrarSession{
+  position: absolute;
+  top: 0px;
+  left: 320px;
+  width: 50%;
+  
+  text-align: left;
+}
 
 /*-------USUARIO------------*/
 .usuario{
@@ -199,8 +207,8 @@ footer{
 width:100%;
 background-color: #ff959f;
 text-align: center;
-position: absolute;
-margin-left: 110px;
-display: flex;
+
+height: 80px;
+
 }
 

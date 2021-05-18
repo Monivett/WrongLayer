@@ -5,11 +5,13 @@
  */
 package com.wl.WrongLayer.controllers;
 
+import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.FavoritoDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.dao.UserDAO;
 import com.wl.WrongLayer.dao.UtilDAO;
+import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.Favorito;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.Respuestas;
@@ -52,6 +54,10 @@ public class VerUsuarioAjeno extends HttpServlet {
             
                List<Pregunta> preguntas =PreguntaDAO.MostrarPreguntas();
             request.setAttribute("preguntas", preguntas);
+            
+                  List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+    
         
         request.getRequestDispatcher("PerfilAjeno.jsp").forward(request, response);
     }

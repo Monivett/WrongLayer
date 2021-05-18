@@ -42,7 +42,7 @@
            
       
                   <select  name ="Categorias" id="Categorias">
-                            
+                      <option>Categoria</option>
                               <%
                                   
                                 if(categorias!=null)
@@ -130,11 +130,19 @@
 
 </body>
 
-<footer>
+   <footer>
+        <h4> <b>Categorias: </b></h4>
+           <h4>
+        <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                          
+                           °      <%= categoria.getName()%> &nbsp
 
-    <h4>Categorías</h4>
-
-</footer>
+                            <% } %> 
+   </h4>
+    </footer>
 <script src="JAVASCRIPT/Registro.js"></script>
 
 

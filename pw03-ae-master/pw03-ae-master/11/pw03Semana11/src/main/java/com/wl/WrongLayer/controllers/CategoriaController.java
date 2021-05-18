@@ -5,15 +5,12 @@
  */
 package com.wl.WrongLayer.controllers;
 
-import com.pw.pw03semana11.controllers.*;
-import com.pw.pw03semana11.DAO.CategoryDAO;
-import com.wl.WrongLayer.dao.PreguntaDAO;
-import com.pw.pw03semana11.models.Category;
-import com.pw.pw03semana11.models.News;
+
+
+
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.models.Categoria;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +32,7 @@ public class CategoriaController extends HttpServlet {
       
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
    
-        request.getRequestDispatcher("index.jsp").forward(request, response); //Em que JSP está el comboBox
+        request.getRequestDispatcher("Publicar.jsp").forward(request, response); //Em que JSP está el comboBox
        
           
     }

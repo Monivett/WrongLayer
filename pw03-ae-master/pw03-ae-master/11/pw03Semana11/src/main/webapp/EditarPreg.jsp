@@ -29,7 +29,7 @@
 <body>
     <nav>
         <div class="logo">
-            <img src="IMG/logo.png" alt="" height="100" width="100">
+            <img src="IMG/Logo.png" alt="" height="100" width="100">
         </div>
                     <form action = "NavegacionController" method = "POST" id = Nav>
                          <input type="text" name="navegacion" id="search" required><span class="barra"></span>
@@ -38,9 +38,12 @@
                         <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
                     </form>
         <div class="botones">
-            <button onclick="location.href='PantallaPrincipal.html';" type="submit">Pantalla Principal</button>
+             <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
             <jsp:include page= "navbar.jsp"/>
             <button onclick="location.href='PantallaPrincipal.html';" type="submit">Busqueda Avanzada</button>
+               <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
+                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
+             </form>
         </div>
     </nav>
     <!--PREGUNTAS -->
@@ -52,7 +55,7 @@
                <div class="card-body">  
                 <h1>Pregunta</h1>
                  <h5 class="card-title"><b>Pregunta: </b>
-                    <input type="text" name="Pregunta" id="Pregunta" value="<%= preguntas.getPregunta()%> "  >   
+                    <input type="text" name="Pregunta" id="Pregunta" value="<%= preguntas.getPregunta()%> "required  >   
                  <img src="<%= preguntas.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
                  <p class="card-text"> Descripción:
                     <input type="text" name="Descripcion" id="Descripcion" value="<%= preguntas.getDescription()%>" >   
@@ -77,22 +80,12 @@
                  <p class="card-text">Fecha:  <%= preguntas.getFecha()%></p>
                   <p class="card-text"><img src="<%= preguntas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntas.getUser().getUsername()%> </p>
                  
-                 <div class="puntuacion">
-                   <p>
-                   <b> Puntuación:</b>  
-                   <b> Útil:</b> 
-                   <b> No útil:</b>
-                   <b> Favorito:</b>  
-                   </p>
-                       <i class="Like fas fa-thumbs-up"></i>
-                       <i class="Unlike fas fa-thumbs-down"></i>
-                       <i class="FAV fas fa-star"></i>
+   
+                       &nbsp<input type="file" name="image" >
                        <br>
                        <br>
-                       <input type="file" name="image" >
                        <button  id="BTN_EDITARPREG" type="submit">Editar</button>
-              
-                        </div>
+             
                </div>
                
              </div>
@@ -121,22 +114,9 @@
                  <p class="card-text">Fecha:  <%= respuestas.getFecha()%></p>
                   <p class="card-text"><img src="<%= respuestas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuestas.getUser().getUsername()%> </p>
                  
-                 <div class="puntuacion">
-                   <p>
-                   <b> Puntuación:</b>  
-                   <b> Útil:</b> 
-                   <b> No útil:</b>
-                   <b> Favorito:</b>  
-                   </p>
-                       <i class="Like fas fa-thumbs-up"></i>
-                       <i class="Unlike fas fa-thumbs-down"></i>
-                       <i class="FAV fas fa-star"></i>
-                       <br>
-                       <br>
-                       <input type="file" name="image" >
+                      &nbsp  <input type="file" name="image" >
                        <button  id="BTN_EDITARRESP" type="submit">Editar</button>
-                       
-                        </div>
+                   
                </div>
                
              </div>
@@ -155,10 +135,20 @@
 
 
 
+    <footer>
+        <h4> <b>Categorias: </b></h4>
+        <br>
+           <h4>
+        <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                          
+                           °      <%= categoria.getName()%> &nbsp
 
-<footer>
-    Categorias
-</footer>
+                            <% } %> 
+   </h4>
+    </footer>
   
 
 </body>
