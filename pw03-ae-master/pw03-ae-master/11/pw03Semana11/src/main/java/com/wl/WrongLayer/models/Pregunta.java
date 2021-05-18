@@ -24,6 +24,16 @@ public class Pregunta {
     public Pregunta() {
     }
 
+    public Pregunta(int id, Categoria category, String pregunta, String imagePath, User user, String description, String Fecha) {
+        this.id = id;
+        this.category = category;
+        this.pregunta = pregunta;
+        this.imagePath = imagePath;
+        this.user = user;
+        this.description = description;
+        this.Fecha = Fecha;
+    }
+
     public Pregunta(Categoria category, String pregunta, String imagePath, User user, String description) {
         this.category = category;
         this.pregunta = pregunta;

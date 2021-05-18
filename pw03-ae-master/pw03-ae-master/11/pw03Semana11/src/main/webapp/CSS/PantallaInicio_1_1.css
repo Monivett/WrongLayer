@@ -95,7 +95,7 @@ h1{
     color:#8b5380;
 }
 /*-----------------FORMS-------------------*/
-form{
+#form{
   margin-top: 100px;
     background:  #a4d7b8;
     padding: 40px 10px;
@@ -108,7 +108,7 @@ form{
     width: 100%;
     margin: auto;
 }
-form .grupo{
+#form .grupo{
     position: relative;
     margin: 45px;
 }
@@ -131,7 +131,8 @@ form .grupo{
    
 }
 
-form label{
+
+#form label{
     font-size:16px;
     color:silver; 
    position: absolute;
@@ -141,8 +142,8 @@ form label{
     transition: 0.5s ease-in-out;
     pointer-events: none;/*Evento del mouse*/
 }
-input:focus~label,
-input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
+#form input:focus~label,
+#form input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
     top:-30px;/*Letras se mueven afuera del textbox*/
     color:white;
 

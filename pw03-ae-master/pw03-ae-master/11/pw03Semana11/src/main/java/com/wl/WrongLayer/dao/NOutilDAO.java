@@ -310,4 +310,45 @@ public class NOutilDAO {
        
     
     }
+          
+            public static List<NOutil>  MostrarNoUtilUsuario(int ID) {
+        List<NOutil> NOutil = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+             
+           String sql = "call Proc_NOUtil(?,?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "P"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setBoolean(2, true); // El tercero por el bool  
+
+             statement.setInt(3, 0);//Respuesta
+            statement.setInt(4, ID);//Usuario
+             ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                int Preg = result.getInt(1); //Respuesta
+               
+                boolean isNOUtil = result.getBoolean(2);
+                 int idUser = result.getInt(3); //Usuario
+                User usuario = UserDAO.GetUser(idUser);
+         
+                 NOutil.add(new NOutil(isNOUtil, Preg,usuario));
+               
+            }
+          
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+              return NOutil;
+      
+    }
 }

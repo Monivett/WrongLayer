@@ -321,5 +321,47 @@ public class UtilDAO {
     
     }
         
+             public static List<Util>  MostrarUtilUsuario(int ID) {
+        List<Util> util = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+             
+              String sql = "call Proc_Util(?,?,?,?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "O"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, 1); //Contador
+            statement.setBoolean(3, true); // El tercero por el bool  
+            statement.setInt(4, 0);//Respuesta
+            statement.setInt(5, 0);//Pregunta
+            statement.setInt(6, ID);//Usuario
+                  ResultSet result = statement.executeQuery();
+            while(result.next()) {
+            
+               
+                int preg = result.getInt(1); //Pregunta
+                boolean isUtil = result.getBoolean(2);
+                 int idUser = result.getInt(3); //Usuario
+                User usuario = UserDAO.GetUser(idUser);
+           
+                 util.add(new Util(isUtil,preg,usuario));
+               
+            }
+          
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+              return util;
+      
+    }
         
 }

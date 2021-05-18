@@ -160,4 +160,44 @@ public class FavoritoDAO {
        
     
     }
+          
+            public static List<Favorito>  MostrarFavoritosUsuario(int ID) {
+        List<Favorito> fav = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+             
+             String sql = "call Proc_Favorito(?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+                
+            statement.setString(1, "Z"); // Remplazamos el primer parametro por la opción del procedure
+        
+            statement.setInt(2, 0);//Pregunta
+            statement.setInt(3, ID);//Usuario
+             ResultSet result = statement.executeQuery();
+            while(result.next()) {
+             
+                int Preg = result.getInt(1); //Pregunta
+                boolean isFAV = result.getBoolean(2);
+                 int idUser = result.getInt(3); //Usuario
+                User usuario = UserDAO.GetUser(idUser);
+              
+                 fav.add(new Favorito(isFAV, Preg,usuario));
+               
+            }
+          
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+              return fav;
+      
+    }
 }

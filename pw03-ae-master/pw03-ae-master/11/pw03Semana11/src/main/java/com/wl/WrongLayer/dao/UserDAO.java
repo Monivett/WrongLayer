@@ -195,6 +195,52 @@ public static int ModificarUser(User user){
        
     }
 
+   public static User VerPerfilAjeno (int ID){
+     Connection con = null;
+            try{
+             con = DbConnection.getConnection();
+             // Esta linea prepara la llamada a la base de datos para insertar
+             // Cada ? significa un valor a ser remplazado
+            String sql = "call Proc_Usuario(?,?,?,?,?,?,?,?,?,?)";
+            CallableStatement statement = con.prepareCall(sql);
+            
+                 
+            statement.setString(1, "A"); // Remplazamos el primer parametro por la opción del procedure
+            statement.setInt(2, ID); //ID
+             statement.setString(3, ""); // El tercero por la nombres  
+            statement.setString(4, ""); //Apellido
+            statement.setString(5, "1973-04-09"); //Fecha de nacimiento
+            statement.setString(6, "");//correo
+            statement.setString(7, ""); // El septimo por la url de la imagen
+            statement.setString(8, "");      //nombre de usuario    
+            statement.setString(9, "");// El noveno por la contraseña        
+            statement.setInt(10, 1); //Estado: Activo
+            ResultSet resultset = statement.executeQuery();
+            while(resultset.next()) { //Mientras el resultSet tenga algo
+                int id = resultset.getInt(1);
+                String username = resultset.getString(2);
+                String file = resultset.getString(3);
+                
+                return new User(id, username,file);
+                //return new User (id,username,file);
+            }
+        }
+             catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+                  finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            }
+        return null;
+            
+    }
+
 private static void executeQuery() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

@@ -29,9 +29,12 @@
         <div class="logo">
             <img src="IMG/Logo.png" alt="" height="100" width="100">
          </div>
-            <input type="text" name="" id="search" required><span class="barra"></span>
-            <label for="">Barra de Búsqueda</label>
-            </input>
+                <form action = "NavegacionController" method = "POST" id = Nav>
+                         <input type="text" name="navegacion" id="search" required><span class="barra"></span>
+                        <label for="">Barra de Búsqueda</label>
+                        </input>
+                        <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
+                    </form>
             <div class="botones">
             <button onclick="location.href='PantallaBusquedaAvanzada.html';" type="submit">Búsqueda Avanzada</button>
              <jsp:include page= "navbar.jsp"/>

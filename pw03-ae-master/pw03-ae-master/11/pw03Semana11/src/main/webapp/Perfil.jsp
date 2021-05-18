@@ -3,6 +3,10 @@
     Created on : 13/05/2021, 09:33:32 AM
     Author     : monic
 --%>
+<%@page import="com.wl.WrongLayer.models.NOutil"%>
+<%@page import="com.wl.WrongLayer.models.User"%>
+<%@page import="com.wl.WrongLayer.models.Favorito"%>
+<%@page import="com.wl.WrongLayer.models.Util"%>
 <%@page import="com.wl.WrongLayer.models.Respuestas"%>
 <%@page import="com.wl.WrongLayer.models.Pregunta"%>
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
@@ -13,7 +17,12 @@
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
      List<Pregunta> preguntas = (List<Pregunta>)request.getAttribute("preguntas");
      List<Respuestas> respuestas = (List<Respuestas>)request.getAttribute("respuestas");
+      List<Pregunta> preguntaT = (List<Pregunta>)request.getAttribute("preguntastodas");
      
+      List<Util> util = (List<Util>)request.getAttribute("util");
+       List<NOutil> NOutil = (List<NOutil>)request.getAttribute("NOutil");
+     List<Favorito> fav = (List<Favorito>)request.getAttribute("fav");//FAVORITO QUE MARCÓ EL USUARIO
+      User user =(User)request.getAttribute("usuario");
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -31,18 +40,15 @@
         <div class="logo">
             <img src="IMG/Logo.png" alt="" height="100" width="100">
         </div>
-        <input type="text" name="" id="search" required><span class="barra"></span>
-        <label for="">Barra de Búsqueda</label>
-        </input>
+            <form action = "NavegacionController" method = "POST" id = Nav>
+                         <input type="text" name="navegacion" id="search" required><span class="barra"></span>
+                        <label for="">Barra de Búsqueda</label>
+                        </input>
+                        <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
+                    </form>
         <div class="botones">
             <button onclick="location.href='PreguntasPrincipal';" type="submit">Pantalla Principal</button>
-            <select>
-                <option>Categoría 1</option>
-                <option>Categoría 2</option>
-                <option>Categoría 3</option>
-                <option>Categoría 4</option>
-                <option>Categoría 5</option>
-            </select>
+           <jsp:include page= "navbar.jsp"/>
             <button onclick="location.href='PantallaInicio.html';" type="submit">Búsqueda Avanzada</button>
        
         </div>
@@ -197,98 +203,104 @@
                  <%}%>
                 <%}%>
                 <br>
-             <div class=" PreguntasUtil card" style="width: 790px;">
+                          <%      
+                                if(util!=null)                      
+                                for(Util utilidad: util){                                 
+                 %>  
+            
+                    <%  for(Pregunta preguntat: preguntaT){
+                        if(utilidad.getPregunta() ==preguntat.getId()) {%>
+                         <div class=" PreguntasUtil card" style="width: 790px;">
+                     <div class="card-body">  
+                    <h1>Preguntas que marcó como Útiles</h1>
+                       <a name = "pregunta" href="VerPreguntaController?id=<%= preguntat.getId()%>">  
+                   <h5 class="card-title"><b>Pregunta: </b> <%=preguntat.getPregunta()%>
+               </a>
+                   
+                             <img src="<%= preguntat.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
+                             <p class="card-text"> <b>Descripción: </b><%= preguntat.getDescription()%> </p>
                
-               <div class="card-body">  
-                <h1>Preguntas Útiles</h1>
-                <h5 class="card-title"><b>Pregunta: </b> 
-                    <input type="text" name="Pregunta" id="Pregunta" onkeypress="return SoloLetras(event);"disabled >   
-                 <img src="" class="card-img-top" width="400" height="200"></h5>
-                 <p class="card-text"> Descripción:
-                    <input type="text" name="Descripcion" id="Descripcion" onkeypress="return SoloLetras(event);"disabled >   
-                  </p>
-              
-                 <p class="card-text">Fecha:  </p>
-                 <p class="card-text"><img src="..." class="fotouser" width="50" height="50"> Usuario: </p>
+                  <p class="card-text"><b>Fecha: </b>  <%= preguntat.getFecha()%></p>
+                     <a href="VerUsuarioAjeno?id=<%= preguntat.getUser().getId()%>">
+               <p class="card-text"><img src="<%= preguntat.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntat.getUser().getUsername()%> </p>
+          </a>
                
-                 <div class="puntuacion">
-                   <p>
-                    <b> Puntuación:</b>  
-                    <b> Útil:</b> 
-                    <b> No útil:</b>
-                    <b> Favorito:</b>  
-                    </p>
-                        <i class="Like fas fa-thumbs-up"></i>
-                        <i class="Unlike fas fa-thumbs-down"></i>
-                        <i class="FAV fas fa-star"></i>
-                       <br>
-                       <br>
-                       <button  id="BTN_EDITARUTIL">Editar</button>
-                        </div>
+                 <br>
                </div>
+         
+                       <%}%>
+                 <%}%>
+           
              </div>
              <br>
-             <div class=" PreguntasNOUtil card" style="width: 790px;">
+          
+              <%}%>
+             <br> 
+                                      <%      
+                                if(NOutil!=null)                      
+                                for(NOutil noutilidad: NOutil){                                 
+                 %>  
+            
+                    <%  for(Pregunta preguntat: preguntaT){
+                        if(noutilidad.getPregunta() ==preguntat.getId()) {%>
+                         <div class=" PreguntasNOUtil card" style="width: 790px;">
+                     <div class="card-body">  
+                    <h1>Preguntas que marcó como NO Útiles</h1>
+                       <a name = "pregunta" href="VerPreguntaController?id=<%= preguntat.getId()%>">  
+                   <h5 class="card-title"><b>Pregunta: </b> <%=preguntat.getPregunta()%>
+               </a>
+                   
+                             <img src="<%= preguntat.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
+                             <p class="card-text"> <b>Descripción: </b><%= preguntat.getDescription()%> </p>
                
-                <div class="card-body">  
-                 <h1>Preguntas No Útiles</h1>
-                 <h5 class="card-title"><b>Pregunta: </b> 
-                    <input type="text" name="Pregunta" id="Pregunta" onkeypress="return SoloLetras(event);"disabled >   
-                 <img src="" class="card-img-top" width="400" height="200"></h5>
-                 <p class="card-text"> Descripción:
-                    <input type="text" name="Descripcion" id="Descripcion" onkeypress="return SoloLetras(event);"disabled >   
-                  </p>
-               
-                  <p class="card-text">Fecha:  </p>
-                  <p class="card-text"><img src="..." class="fotouser" width="50" height="50"> Usuario: </p>
-                
-                  <div class="puntuacion">
-                    <p>
-                        <b> Puntuación:</b>  
-                        <b> Útil:</b> 
-                        <b> No útil:</b>
-                        <b> Favorito:</b>  
-                        </p>
-                            <i class="Like fas fa-thumbs-up"></i>
-                            <i class="Unlike fas fa-thumbs-down"></i>
-                            <i class="FAV fas fa-star"></i>
-                        <br>
-                        <br>
-                         </div>
-                         <button  id="BTN_EDITARINUTIL">Editar</button>
-                </div>
-              </div>
+                  <p class="card-text"><b>Fecha: </b>  <%= preguntat.getFecha()%></p>
+                       <a href="VerUsuarioAjeno?id=<%= preguntat.getUser().getId()%>">
+               <p class="card-text"><img src="<%= preguntat.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntat.getUser().getUsername()%> </p>
+          </a>
+                 <br>
+               </div>
+         
+                       <%}%>
+                 <%}%>
+           
+             </div>
+             <br>
+          
+              <%}%>
               <br>
+                     <%
+                                  
+                                if(fav!=null)                      
+                                for(Favorito favo: fav){                                 
+                 %>  
+                   <%  for(Pregunta preguntat: preguntaT){
+                        if(favo.getPregunta() ==preguntat.getId()) {%>
               <div class=" PreguntasFAV card" style="width: 790px;">
                
                 <div class="card-body">  
                  <h1>Preguntas Favoritas</h1>
-                 <h5 class="card-title"><b>Pregunta: </b> 
-                    <input type="text" name="Pregunta" id="Pregunta" onkeypress="return SoloLetras(event);"disabled >   
-                 <img src="" class="card-img-top" width="400" height="200"></h5>
-                 <p class="card-text"> Descripción:
-                    <input type="text" name="Descripcion" id="Descripcion" onkeypress="return SoloLetras(event);"disabled >   
-                  </p>
-               
-                  <p class="card-text">Fecha:  </p>
-                  <p class="card-text"><img src="..." class="fotouser" width="50" height="50"> Usuario: </p>
+                         <a name = "pregunta" href="VerPreguntaController?id=<%= preguntat.getId()%>">  
+                    <h5 class="card-title"><b>Pregunta: </b> <%=preguntat.getPregunta()%>
+               </a>
                 
-                  <div class="puntuacion">
-                    <p>
-                        <b> Puntuación:</b>  
-                        <b> Útil:</b> 
-                        <b> No útil:</b>
-                        <b> Favorito:</b>  
-                        </p>
-                            <i class="Like fas fa-thumbs-up"></i>
-                            <i class="Unlike fas fa-thumbs-down"></i>
-                            <i class="FAV fas fa-star"></i>
-                        <br>
-                        <br>
-                         </div>
-                         <button  id="BTN_EDITARFAV">Editar</button>
+                  
+                 <img src="<%=preguntat.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
+                 <p class="card-text"> <b>Descripción: </b><%=preguntat.getDescription()%></p>
+   
+                  <p class="card-text"><b>Fecha: </b><%=preguntat.getFecha()%>  </p>
+                       <a href="VerUsuarioAjeno?id=<%= preguntat.getUser().getId()%>">
+               <p class="card-text"><img src="<%= preguntat.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntat.getUser().getUsername()%> </p>
+          </a>
+                
+     
+                    <br>     
                 </div>
               </div>
+                 <%}%>
+               
+                    <%}%>
+                       <br>  
+                    <%}%>
               <br>
        </div>
      
@@ -322,10 +334,15 @@
         <p class="ErrorFecha" id="ErrorFecha">La fecha NO debe ser después de la actual </p>
     </p>
    </div>
+       <% Object estado = Integer.valueOf(1);
+          if( estado == session.getAttribute("Estado")){
+       %>
        
-       <p>Usuario:  <%=session.getAttribute("Estado") %>
-
-       </p>
+       <p>Usuario: Activo </p>
+<%} else{%>
+  <p>Usuario: Suspendido </p>
+<%}%>
+   
        <div id="Ocultar">
         <p>Contraseña:
            <input type="password" value="<%= session.getAttribute("Contraseña")%>" name="contra" id="Contraseña"required >

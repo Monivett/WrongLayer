@@ -28,7 +28,7 @@ nav {
   grid-area: head;
   display: flex;
 }
-nav input{
+nav  input{
   margin-top: 20px;
   position: absolute;
   background: white;
@@ -46,23 +46,13 @@ nav label{
   position: absolute;
   bottom:0;/*Letras adentro del TextBox*/
   left:280px;
-margin-bottom: 35px;
-  transition: 0.5s ease-in-out;
-  pointer-events: none;/*Evento del mouse*/
-}
-nav label{
-  font-family:century;
-  font-size:16px;
-  color:silver; 
-  position: absolute;
-  bottom:0;/*Letras adentro del TextBox*/
-  left:280px;
 margin-bottom: 40px;
   transition: 0.5s ease-in-out;
   pointer-events: none;/*Evento del mouse*/
 }
-input:focus~label,
-input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
+
+#Nav input:focus~label,
+#Nav input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
   top: 15px;/*Letras se mueven afuera del textbox*/
   color:white;
 
@@ -141,11 +131,8 @@ i:hover{
   color: #a4d7b8;
 }
 
-.Preguntas{
-  background-color: aqua;
- 
-}
-form{
+
+#form{
   background: #715760;
   width: 50%;
   margin-left: 300px;

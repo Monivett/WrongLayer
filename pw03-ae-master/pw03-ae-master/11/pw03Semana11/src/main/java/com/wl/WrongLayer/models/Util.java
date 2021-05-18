@@ -20,6 +20,7 @@ public class Util {
 
     public Util() {
     }
+    
 
     public Util(int Contador, int Pregunta) {
         this.Contador = Contador;

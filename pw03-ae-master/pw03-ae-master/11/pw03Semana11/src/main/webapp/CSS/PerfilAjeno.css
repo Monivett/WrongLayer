@@ -1,0 +1,191 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17/05/2021, 04:14:38 PM
+    Author     : monic
+*/
+
+
+html{
+    background: #dbdcbd;
+  
+  }
+  .logo{
+  
+    position:absolute;
+    
+  }
+  nav {
+    background:  #a4d7b8;
+    top: 0;
+    right: 0;
+    position: fixed;
+    width:100%;
+    height: 100px;
+    z-index: 100;
+    grid-area: head;
+    display: flex;
+  }
+  nav input{
+    margin-top: 20px;
+    position: absolute;
+    background: white;
+    font-size: 15px;
+   width: 40%;
+   height: 20px;
+   margin-left: 100px;
+  top:20px
+   
+  }
+  nav label{
+     
+    font-size:16px;
+    color:silver; 
+    position: absolute;
+    bottom:0;/*Letras adentro del TextBox*/
+    left:280px;
+  margin-bottom: 35px;
+    transition: 0.5s ease-in-out;
+    pointer-events: none;/*Evento del mouse*/
+  }
+  nav label{
+    font-family:century;
+    font-size:16px;
+    color:silver; 
+    position: absolute;
+    bottom:0;/*Letras adentro del TextBox*/
+    left:280px;
+   
+  margin-bottom: 40px;
+    transition: 0.5s ease-in-out;
+    pointer-events: none;/*Evento del mouse*/
+  }
+  input:focus~label,
+  input:valid~label{ /*Cuando ya este escrito algo en el textbox*/
+    top: 15px;/*Letras se mueven afuera del textbox*/
+    color:white;
+  
+  }
+  nav button{
+  
+  font-family:Century Gothic;
+  background: #fedcb9;
+  border: none;
+  font-family: century Gothic;
+  margin: 30px 20px;
+  height: 40px;
+  }
+  nav select{
+  font-family:Century Gothic;
+  background: #fedcb9;
+  border: none;
+  
+  margin: 10px 10px;
+  height: 40px;
+  }
+  
+  .botones{
+  
+  position: absolute;
+  margin-left: 650px;
+  }
+    /*-------USUARIO------------*/
+    .usuario{
+     
+      border: none;
+      position: absolute;
+    left: 90px;
+      top: 120px;
+      height: 300px;
+  
+      width: 300px;
+    }
+  #user{
+    margin-top: 20px;
+   
+    width: 100%;
+
+  text-align: center;
+  }
+  
+  
+  /* Cuadrito abajo de la foto del usuario*/
+  h1,h4{
+    font-family: Palatino Linotype;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+   
+    align-items: center;
+  }
+  .InfoUser p{
+    font-family:Century Gothic;
+   
+   margin-left: 30px;
+    color:white;
+  }
+.InfoUser img{
+    margin-left: 80px;
+}
+  .InfoUser{
+    align-self: center;
+    background: #715760;
+    top: 490px;
+    left: 40px;
+    width: 30%;
+    position: absolute;
+    padding-bottom: 20px;
+  }
+
+    /*PREGUNTAS Y RESPUESTAS................*/
+  .Cartas{
+    margin-top: 150px;
+    padding-left: 450px;
+    background: #dbdcbd;
+  
+  }
+  .Cartas input{
+  width: 90%;
+  
+  }
+  .Cartas button{
+    width: 10%;
+    margin-left: 10px;
+    }
+  .card-body{
+    background: #715760;
+    
+  }
+  .Cartas .card-img-top{
+    margin: 10px;
+  
+    margin-left: 280px;
+    position: relative;
+  }
+  
+  .Cartas p, .Cartas h5,.Cartas h1{
+    color: white;
+    margin-left: 10px;
+    font-family: century Gothic;
+    }
+    .Cartas i{
+      margin-left: 10px;
+    }
+    i:hover{
+      color: #a4d7b8;
+    }
+   
+    footer{
+      background-color: #ff959f;
+     text-align: center;
+     height: 50px;
+    }
+    
+   .Cartas a{
+  font-family: Century Gothic;
+
+  color: white;
+}

@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/PantallaInicio.css">
+    <link rel="stylesheet" href="CSS/PantallaInicio_1_1.css">
 </head>
 
 <body>
@@ -31,9 +31,12 @@
     <div class="logo">
         <img src="IMG/Logo.png" alt="" height="100" width="100">
     </div>
-    <input type="text" name="" id="search" required><span class="barra"></span>
-    <label for="">Barra de Búsqueda</label>
-    </input>
+    <form action = "NavegacionController" method = "POST" id = Nav>
+                         <input type="text" name="navegacion" id="search" required><span class="barra"></span>
+                        <label for="">Barra de Búsqueda</label>
+                        </input>
+                        <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
+                    </form>
     <div class="botones">
        <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
         <jsp:include page= "navbar.jsp"/>

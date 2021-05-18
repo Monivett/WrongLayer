@@ -33,16 +33,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Wrong Layer</title>
         <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-        <link rel="stylesheet" href="CSS/Publicar_1.css">
+        <link rel="stylesheet" href="CSS/Publicar.css">
         <body>
             <section id="page">
                 <nav>
                     <div class="logo">
                         <img src="IMG/Logo.png" alt="" height="100" width="100">
                      </div>
-                        <input type="text" name="" id="search" required><span class="barra"></span>
+                    <form action = "NavegacionController" method = "POST" id = Nav>
+                         <input type="text" name="navegacion" id="search" required><span class="barra"></span>
                         <label for="">Barra de Búsqueda</label>
                         </input>
+                        <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
+                    </form>
+                        <script>
+                        var input = document.getElementById("search");
+                        input.addEventListener("keyup", function(event) {
+                        if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById("nav").click();
+                            }
+                        });
+</script>
                         <div class="botones">
                         <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
                         <jsp:include page= "navbar.jsp"/>
@@ -59,7 +71,7 @@
    
 </div>
             
-                <form action="PreguntaController" method="POST" enctype="multipart/form-data" >
+                <form id="form"action="PreguntaController" method="POST" enctype="multipart/form-data" >
                   
                   <div class ="Quest">
                         <h1>¿Tienes una pregunta a la que no le encuentras respuesta? ¡Pregunta! </h1>

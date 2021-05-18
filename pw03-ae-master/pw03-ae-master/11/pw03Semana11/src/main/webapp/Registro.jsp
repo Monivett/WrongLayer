@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/Registro_1.css">
+    <link rel="stylesheet" href="CSS/Registro.css">
 
 </head>
 
@@ -32,15 +32,32 @@
         <div class="logo">
             <img src="IMG/Logo.png" alt="" height="100" width="100">
         </div>
-        <input type="text" name="" id="search" required><span class="barra"></span>
-        <label for="">Barra de Búsqueda</label>
-        </input>
+           <form action = "NavegacionController" method = "POST" id = Nav>
+                         <input type="text" name="navegacion" id="search" required><span class="barra"></span>
+                        <label for="">Barra de Búsqueda</label>
+                        </input>
+                        <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
+                    </form>
          <div class="botones">
            
-       <button onclick="location.href='PreguntasPrincipal';" class="BTN_PRINCIPAL"type="submit">PantallaPrincipal</button>
-             <jsp:include page= "navbar.jsp"/>  
+      
+                  <select  name ="Categorias" id="Categorias">
+                            
+                              <%
+                                  
+                                if(categorias!=null)
+                                for(Categoria categoria: categorias){%>  
+                                <option value ="<%=categoria.getId()%>">
+                                             
+                                  <%= categoria.getName()%>
+                                   
+                                </option>
+                            <% } %> 
+                   
+                        </select>
             <button onclick="location.href='PantallaBusquedaAvanzada.html';" class ="BTN_BUSQEUDA"type="submit">Búsqueda Avanzada</button>
-            <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
+            <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button> 
+            <button onclick="location.href='PreguntasPrincipal';" class="BTN_PRINCIPAL"type="submit">PantallaPrincipal</button>
         </div>
            
     

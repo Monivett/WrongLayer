@@ -53,16 +53,19 @@
     <title>Detalle de Pregunta</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="CSS/Pregunta_1_1.css">
+    <link rel="stylesheet" href="CSS/Pregunta_1_1_1.css">
 </head>
 <body>
     <nav>
         <div class="logo">
             <img src="IMG/Logo.png" alt="" height="100" width="100">
         </div>
-        <input type="text" name="" id="search" required><span class="barra"></span>
-        <label for="">Barra de Búsqueda</label>
-        </input>
+          <form action = "NavegacionController" method = "POST" id = Nav>
+                         <input type="text" name="navegacion" id="search" required><span class="barra"></span>
+                        <label for="">Barra de Búsqueda</label>
+                        </input>
+                        <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
+                    </form>
         <div class="botones">
              <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
                  <jsp:include page= "navbar.jsp"/>
@@ -79,7 +82,7 @@
         <%  if (session.getAttribute("username") != null) {%>
           <img src="<%= session.getAttribute("Foto")%>" width="200" height="200">
       <input type="text" id="user" name="user" value="<%= session.getAttribute("username")%>"  readonly><br><br>
-          <button id = "perfil" onclick="location.href='Perfil.jsp';" type="submit">Mi Perfil</button>
+           <button id = "perfil" onclick="location.href='VerUsuarioPreguntaController?id=<%= session.getAttribute("ID_Usuario")%>';" type="submit">Mi perfil</button>   
     <% }else{%>
       <img src="IMG/default.png" width="200" height="200">
  <input type="text" id="user" name="user" value="Invitado" readonly><br><br>
@@ -97,11 +100,24 @@
           <p class="card-text">Descripción: <%= preguntas.getDescription()%></p>
           <p class="card-text">Categoría: <%= preguntas.getCategory().getName()%> </p>
           <p class="card-text">Fecha:  <%= preguntas.getFecha()%></p>
+          <a href="VerUsuarioAjeno?id=<%= preguntas.getUser().getId()%>">
+               <p class="card-text"><img src="<%= preguntas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntas.getUser().getUsername()%> </p>
+          </a>
          
-          <p class="card-text"><img src="<%= preguntas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntas.getUser().getUsername()%> </p>
         
           <div class="puntuacion">
-        
+              <p> <b> Puntuación:</b>  </p>
+              <!-- Si el usuario esta logeado y es dueño de la pregunta y NO esta suspendido -->
+         <%    Object estado = Integer.valueOf(1);
+         
+                Object IP = Integer.valueOf(preguntas.getUser().getId());
+        if(IP.equals(session.getAttribute("ID_Usuario")) && session.getAttribute("username") !=null && estado == session.getAttribute("Estado")  ){%>
+                 
+                   <b>    <i class="Unlike fas fa-thumbs-down"></i> No útil:</b> <%= NOutilC.getContador()%>
+                 <br>
+                 <!-- Si el usuario esta logeado y NO es dueño de la pregunta y NO esta suspendido -->
+              <%  }else if(session.getAttribute("username") !=null && estado == session.getAttribute("Estado"))  { %>   
+                     
             <br>
             <% for(Util ut: Util){
            
@@ -118,8 +134,8 @@
             </form>
             <%}%>
                   <%}%>
-                  
-                   <% for(NOutil nout: NOuUtil){
+                                 
+                                  <% for(NOutil nout: NOuUtil){
            
                 Object User = Integer.valueOf(nout.getUser().getId());
                 if( User == (session.getAttribute("ID_Usuario")) &&  preguntas.getId() == nout.getPregunta() ){
@@ -135,13 +151,14 @@
             <%}%>
                   <%}%>
                   
+                       
                               <% for(Favorito FAV: fav){
            
                 Object User = Integer.valueOf(FAV.getUser().getId());
                 if( User == (session.getAttribute("ID_Usuario")) &&  preguntas.getId() == FAV.getPregunta() ){
                MarcadoFAV = true;
             %>
-              <p>Ya marcaste como NO útil</p>
+              <p>Ya marcaste como Favorito</p>
                    <form action = "DesmarcarFav" method="POST">
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                <button id="BTN_NOUTIL"onclick="location.href='DesmarcarFav';">
@@ -150,17 +167,9 @@
             </form>
             <%}%>
                   <%}%>
-             
-               
-                 <p> <b> Puntuación:</b>  </p>
-                 <b>   <i class="Like fas fa-thumbs-up"></i> Útil:</b> <%= utilC.getContador()%> 
-                 <br>
-                 <b>    <i class="Unlike fas fa-thumbs-down"></i> No útil:</b> <%= NOutilC.getContador()%>
-                 <br>
-                  <b>  <i class="FAV fas fa-star"></i> Favorito:</b>  <%= favC.getContador()%>
-            </p>
-              <%  if (session.getAttribute("username") != null) {%>
-            <% if (MarcadoUtil == false){%>
+                  
+                  
+                         <% if (MarcadoUtil == false){%>
             <form action = "UtilController" method="POST">
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                <button id="BTN_UTIL"onclick="location.href='UtilController';">
@@ -169,8 +178,8 @@
                 </button>  
             </form>
              <%}%>
-             
-              <% if (MarcadoNOUtil == false){%>
+                  
+                          <% if (MarcadoNOUtil == false){%>
              
                   <form action = "NOutilController" method="POST">
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
@@ -190,8 +199,19 @@
                 </button>  
             </form>
                 <%}%>
-             <%}%>
+            
+                     <%  }%> 
+                     <!-- Lo que pueden ver todos -->
          
+                 
+                 <b>   <i class="Like fas fa-thumbs-up"></i> Útil:</b> <%= utilC.getContador()%> 
+                 <br>
+               
+               
+           
+                  <b>  <i class="FAV fas fa-star"></i> Favorito:</b>  <%= favC.getContador()%>
+            </p>
+    
                 <br>
                 <br>
                      <% if(preguntas.isModificada()== true){%>
@@ -213,8 +233,11 @@
           <h5 class="card-title"><b>Respuesta Correcta: </b><%= resp.getRespuesta()%> <img src="<%= resp.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
        
           <p class="card-text">Fecha:   <%= resp.getFecha()%></p> 
+            <a href="VerUsuarioAjeno?id=<%= resp.getUser().getId()%>">
           <p class="card-text"><img src="<%= resp.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= resp.getUser().getUsername()%></p>
-        
+         
+          
+          </a>
     
         
      
@@ -239,16 +262,16 @@
           <h5 class="card-title"><b>Respuesta: </b><%= respuesta.getRespuesta()%> <img src="<%= respuesta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
          
           <p class="card-text">Fecha:  <%= respuesta.getFecha()%></p>
-          <p class="card-text"><img src="<%= respuesta.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuesta.getUser().getUsername()%></p>
+            <a href="VerUsuarioAjeno?id=<%= respuesta.getUser().getId()%>">
+               <p class="card-text"><img src="<%= respuesta.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuesta.getUser().getUsername()%></p>
+          </a>
+         
         
           <div class="puntuacion">
-        
-                <i class="Like fas fa-thumbs-up"></i>
-                <i class="Unlike fas fa-thumbs-down"></i>
+              <!<!-- Si el usuario es dueño de la pregunta y NO esta suspendido -->
            <%    
                 Object ID = Integer.valueOf(preguntas.getUser().getId());
-                  
-                 if(ID.equals(session.getAttribute("ID_Usuario"))){%>
+                 if(ID.equals(session.getAttribute("ID_Usuario"))&& estado == session.getAttribute("Estado")){%>
      
                  <form action="RespuestaCorrectaController" method="POST" " >
                         <input type="text" name="IDR" id="ID" value="<%= respuesta.getId()%>" style="display: none;" >   
@@ -261,7 +284,6 @@
                            
           <%}%>
      
-             
                 <br>
                 <br>
                 <% if(respuesta.isModificada()== true){%>
@@ -277,7 +299,7 @@
            i = Contador+i;
         }
                 Object User = Integer.valueOf(utR.getUser().getId());
-                if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == utR.getRespuesta()){
+                if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == utR.getRespuesta()&& estado == session.getAttribute("Estado")){
                MarcadoUtilR = true;
             %>
              <p>Ya marcaste como útil</p>
@@ -298,7 +320,8 @@
           
          
             </p>
-                 <%  if (session.getAttribute("username") != null) {%>
+            <!<!-- Si el usuario esta logeado y NO esta suspendido -->
+                 <%  if (session.getAttribute("username") != null && estado == session.getAttribute("Estado")) {%>
                  <% if (MarcadoUtilR == false){%> 
                  <form action = "UtilControllerRespuestas" method="POST">
                     <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
@@ -318,7 +341,7 @@
            u = Contador+u;
         }
                 Object User = Integer.valueOf(RNO.getUser().getId());
-                if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == RNO.getRespuesta()){
+                if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == RNO.getRespuesta() && estado == session.getAttribute("Estado")){
                MarcadonoUtilR = true;
             %>
              <p>Ya marcaste como NO útil</p>
@@ -331,12 +354,17 @@
             </form>
                    <%}%>
              <%}%>
+             <!<!-- Si el usuario es dueño de la respuesta y No esta suspendido -->
+                <%    
+                Object IDR = Integer.valueOf(respuesta.getUser().getId());
+                 if(IDR.equals(session.getAttribute("ID_Usuario")) &&session.getAttribute("username") != null && estado == session.getAttribute("Estado")){%>
+             
              <p>
                  <b> <i class="Unlike fas fa-thumbs-down"></i> No útil:</b> <%= u%> 
              </p>
-              
-              
-                    <%  if (session.getAttribute("username") != null) {%>
+                <%  }%>
+                <!<!-- Si el usuario esta logeado y esta ACTIVO -->
+                    <%  if (session.getAttribute("username") != null && estado == session.getAttribute("Estado")) {%>
                     <% if (MarcadonoUtilR == false){%> 
                        <form action = "NoUtilRespuestaController" method="POST">
                     <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
@@ -359,9 +387,9 @@
 </div>
                 <br>
       </div>
-      <%  if (session.getAttribute("username") != null) {%> 
+      <%  if (session.getAttribute("username") != null && estado == session.getAttribute("Estado")) {%> 
         
-          <form method="POST" action="RespuestasController" enctype="multipart/form-data">
+          <form id="form" method="POST" action="RespuestasController" enctype="multipart/form-data">
                 <div class="Comentario mb-3">
                     <input type="hidden" name="IdPregunta" value="<%=preguntas.getId()%>">
                        
@@ -371,10 +399,12 @@
                    <input type="submit" value="Responder">
       </div>
                 </form>  
-<% }else{%>
+<% }else if (session.getAttribute("username") == null){%>
       <h1> Inicia Sesión y responde la pregunta</h1>
        <button id = "publicar" onclick="location.href='CategoriaInicio';" type="submit">Inicia Sesión</button>
-     <%}%>
+     <%}else{%>
+      <h1> Tu cuenta está suspendida comunicate con los administradores de la página</h1>
+      <%}%>
 </body>
 <script src="Boostrap/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
