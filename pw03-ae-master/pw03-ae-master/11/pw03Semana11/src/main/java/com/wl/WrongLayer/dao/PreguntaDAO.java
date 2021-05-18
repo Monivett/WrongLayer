@@ -308,5 +308,51 @@ public class PreguntaDAO {
              return Preguntas;
       
     }
-
+ 
+           public static List<Pregunta>  MostrarPreguntaCategoria(int ID) {
+        List<Pregunta> Preguntas = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = DbConnection.getConnection();
+              String sql = "call Proc_Pregunta(?,?,?,?,?,?,?)";
+                  CallableStatement statement = con.prepareCall(sql);
+                  statement.setString(1, "B"); // Remplazamos el primer parametro por la opción del procedure
+                  statement.setInt(2, 0); // ID
+                  statement.setString(3, null); // Pregunta
+                  statement.setString(4, null); // Descripcion
+                  statement.setInt(5, ID); //Categoria
+                  statement.setString(6, null); // Foto
+                  statement.setInt(7, 0); // Usuario
+                  ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                int id = result.getInt(1); //ID
+                String title = result.getString(2); //PREGUNTA
+                String description = result.getString(3); //DESCRIPCIÓN
+                int idCategory = result.getInt(4); //CATEGORIA
+                Categoria category = CategoriaDAO.getCategoria(idCategory); 
+                String pathImage = result.getString(5); //FOTO
+                String Fecha = result.getString(6); //FECHA DE CREACIÓN
+          
+                int idUser = result.getInt(7); //USUARIO
+                   boolean Edito = result.getBoolean(8);
+                     boolean Eliminada = result.getBoolean(9);
+                User usuario = UserDAO.GetUser(idUser);
+                 Preguntas.add(new Pregunta(id, category, title,pathImage, usuario,description, Fecha,Edito,Eliminada));
+               
+            }
+          
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+              return Preguntas;
+      
+    }
 }
