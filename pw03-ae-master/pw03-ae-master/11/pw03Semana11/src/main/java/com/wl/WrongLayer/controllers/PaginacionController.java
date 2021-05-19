@@ -6,12 +6,12 @@
 package com.wl.WrongLayer.controllers;
 
 import com.wl.WrongLayer.dao.CategoriaDAO;
-
 import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.Pregunta;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.util.Collections.list;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,61 +20,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * CONTROLLER PARA LA BARRA DE NAVEGACION
+ *
  * @author monic
  */
-@WebServlet(name = "NavegacionController", urlPatterns = {"/NavegacionController"})
-public class NavegacionController extends HttpServlet {
-
-
+@WebServlet(name = "PaginacionController", urlPatterns = {"/PaginacionController"})
+public class PaginacionController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          
-   //Pregunta
-        String preguntaB = request.getParameter("navegacion");
-        
-      
-       List<Pregunta> preguntas = null;
-        preguntas =PreguntaDAO.BuscarPregunta(1, 10,preguntaB);
-         request.setAttribute("p", preguntas);
+        PrintWriter out=response.getWriter();
+        String spageid=request.getParameter("page");
+        int pageid=Integer.parseInt(spageid);
+       
+        int total = 10;
+        if(pageid==1){}
+        else{
+            pageid=pageid-1;
+            pageid=pageid*total+1;
+        }
+   
+        List<Pregunta> preguntas = null;
+        preguntas =PreguntaDAO.getRecords(pageid, total);
 
+         request.setAttribute("p", preguntas);
           List<Pregunta> TOTALpreguntas = null;
         TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
          request.setAttribute("TOTALpreguntas", TOTALpreguntas);
        
-         
          List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
- 
+  
         request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
-        
-
-     /*ORIGINAL
-
-
-           List<Pregunta> buscar = null;
-        buscar =PreguntaDAO.BuscarPregunta(pregunta);
-        
-        request.setAttribute("preguntas", buscar);
-           
-        List<Categoria> categories =null;
-        
-        categories = CategoriaDAO.getCategories();   
-        
-        request.setAttribute("Categories", categories);
-   
-        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
-*/
-
-
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+      
+    }
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

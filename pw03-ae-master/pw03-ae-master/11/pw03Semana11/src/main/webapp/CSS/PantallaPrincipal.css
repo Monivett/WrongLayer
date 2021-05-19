@@ -140,7 +140,7 @@ margin-left: 0px;
 background-color:#715760;
 margin-top: 500px;
 margin-left: 300px;
-height: 600px;
+height: 550px;
 width: 800px;
 position: absolute;
 }
@@ -165,8 +165,9 @@ margin-right: 15px;
 /*------------PAGINACIÓN-------------------*/
 .paginacion {
 	margin:20px 0;
-        margin-top: 1300px;
-        margin-left: 130px;
+       margin-top: 150px;
+       position: absolute;
+      
 }
 
 .paginacion ul {

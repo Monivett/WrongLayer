@@ -56,13 +56,17 @@ public class DesmarcarNoUtilRespuesta extends HttpServlet {
         NOutil util = new NOutil(contador,utilB,pregunta,respuestaID,user);
         
         NOutilDAO.DesmarcarNOUtilRespuesta(util);
-
-        List<Categoria> categories = CategoriaDAO.getCategories();  
+          List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
-        List<Pregunta> preguntas = PreguntaDAO.MostrarPreguntas();;  
-       request.setAttribute("preguntas", preguntas);
+        List<Pregunta> preguntas = PreguntaDAO.getRecords(1, 10);
+          request.setAttribute("p", preguntas);
+        List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
   
-        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+       request.getRequestDispatcher("/VerPreguntaController?id="+pregunta).forward(request, response);
+         
+  
     }
 
     @Override

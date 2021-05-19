@@ -47,12 +47,15 @@
         <div class="botones">
             <button onclick="location.href='PreguntasPrincipal';" type="submit">Pantalla Principal</button>
              <jsp:include page= "navbar.jsp"/>
+             
             <button onclick="location.href='PantallaInicio.html';" type="submit">Búsqueda Avanzada</button>
             <%  if (session.getAttribute("username") != null) {%>
          <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
                     <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
              </form>
-         <%  }%>
+         <%  }else{%>
+            <button onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+             <%  }%>
         </div>
     </nav>
     <!--PREGUNTAS Y RESPUESTAS-->

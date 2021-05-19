@@ -41,7 +41,7 @@
        <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
         <jsp:include page= "navbar.jsp"/>
         <button onclick="location.href='PantallaInicio.html';" type="submit">Búsqueda Avanzada</button>
-    <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
+   <button onclick="location.href='RegistroController';" type="submit">Registrarse</button>
     </div>
 </nav>
      <div class="logoFORMS">
@@ -66,7 +66,8 @@
     </div> 
   
 </form>
- 
+        <script> src="https://code.jquery.com/jquery-3.6.0.min.js"</script>
+         <script> src="JAVASCRIPT/Login.js"</script>
 </body>
     <footer>
         <h4> <b>Categorias: </b></h4>

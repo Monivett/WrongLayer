@@ -56,7 +56,7 @@
                    
                         </select>
             <button onclick="location.href='PantallaBusquedaAvanzada.html';" class ="BTN_BUSQEUDA"type="submit">Búsqueda Avanzada</button>
-            <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button> 
+             <button onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
             <button onclick="location.href='PreguntasPrincipal';" class="BTN_PRINCIPAL"type="submit">PantallaPrincipal</button>
         </div>
            

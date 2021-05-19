@@ -5,8 +5,6 @@
  */
 package com.wl.WrongLayer.controllers;
 
-import com.pw.pw03semana11.DAO.CategoryDAO;
-
 
 import com.pw.pw03semana11.models.Category;
 
@@ -37,21 +35,17 @@ import javax.servlet.http.Part;
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 25)
 public class PreguntaController extends HttpServlet {
 
- 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-        List<Category> categories =null;
-        List<Pregunta> preguntas = null;
         
-        categories = CategoryDAO.getCategories();
-      //  preguntas =PreguntaDAO.MostrarPreguntas();
-        
-        request.setAttribute("Categories", categories);
-        request.setAttribute("preguntas", preguntas);
-        
-        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+        List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+      
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+   
+        request.getRequestDispatcher("Publicar.jsp").forward(request, response);
     }
 
     @Override
@@ -78,9 +72,11 @@ public class PreguntaController extends HttpServlet {
 
         List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
-        List<Pregunta> preguntas = PreguntaDAO.MostrarPreguntas();;  
-       request.setAttribute("preguntas", preguntas);
-  
+        List<Pregunta> preguntas = PreguntaDAO.getRecords(1, 10);
+          request.setAttribute("p", preguntas);
+        List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
         request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
     }
 

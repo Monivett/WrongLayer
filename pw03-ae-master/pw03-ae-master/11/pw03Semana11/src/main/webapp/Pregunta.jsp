@@ -70,8 +70,8 @@
              <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
                  <jsp:include page= "navbar.jsp"/>
               <%  if (session.getAttribute("username") == null) {%>
-            <button onclick="location.href='CategoriaInicio';" type="submit">Iniciar Sesión</button>
-           <button onclick="location.href='CategoriaRegistro';" type="submit">Registrarse</button>
+           <button onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+          <button onclick="location.href='RegistroController';" type="submit">Registrarse</button>
              <% }else{%>
                <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
                     <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
@@ -170,12 +170,12 @@
             </form>
             <%}%>
                   <%}%>
-                  
-                  
+              
                          <% if (MarcadoUtil == false){%>
             <form action = "UtilController" method="POST">
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
-               <button id="BTN_UTIL"onclick="location.href='UtilController';">
+            
+                <button id="BTN_UTIL"onclick="location.href='UtilController';">
                 Marcar como útil
                 <i class="Like fas fa-thumbs-up"></i>
                 </button>  
@@ -406,7 +406,8 @@
                 </form>  
 <% }else if (session.getAttribute("username") == null){%>
       <h1> Inicia Sesión y responde la pregunta</h1>
-       <button id = "publicar" onclick="location.href='CategoriaInicio';" type="submit">Inicia Sesión</button>
+        <button id = "publicar" onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+      
      <%}else{%>
       <h1> Tu cuenta está suspendida comunicate con los administradores de la página</h1>
       <%}%>

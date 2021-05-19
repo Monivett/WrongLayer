@@ -5,8 +5,6 @@
  */
 package com.wl.WrongLayer.controllers;
 
-import com.pw.pw03semana11.DAO.CategoryDAO;
-import com.pw.pw03semana11.models.Category;
 import com.pw.pw03semana11.utils.FileUtils;
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;

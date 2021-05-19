@@ -6,7 +6,6 @@
 package com.wl.WrongLayer.controllers;
 
 import com.wl.WrongLayer.controllers.*;
-import com.pw.pw03semana11.DAO.CategoryDAO;
 
 
 import com.pw.pw03semana11.models.Category;
@@ -36,18 +35,22 @@ import javax.servlet.http.Part;
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 25)
 public class RegistroController extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Category> categories = CategoryDAO.getCategories();
-        request.setAttribute("Categories", categories);
-        request.getRequestDispatcher("Registro.jsp").forward(request, response);
+        
+        List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+      
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+   
+        request.getRequestDispatcher("Registro.jsp").forward(request, response); //Em que JSP está el comboBox
+       
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         //Nombre
+
+//Nombre
         String Nombre = request.getParameter("Nombres");
         //Apellido
         String Apellido = request.getParameter("Ap");

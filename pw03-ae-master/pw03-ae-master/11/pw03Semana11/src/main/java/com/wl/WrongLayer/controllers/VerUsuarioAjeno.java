@@ -36,7 +36,9 @@ public class VerUsuarioAjeno extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         int ID = Integer.parseInt(request.getParameter("id"), 10);
+        
          User usuario = UserDAO.VerPerfilAjeno(ID); 
         request.setAttribute("usuario", usuario);
         

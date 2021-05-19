@@ -37,24 +37,29 @@ public class UtilController extends HttpServlet {
              
     
 
-        List<Categoria> categories = CategoriaDAO.getCategories();  
+         List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
-        List<Pregunta> preguntas = PreguntaDAO.MostrarPreguntas();;  
-       request.setAttribute("preguntas", preguntas);
-  
+        List<Pregunta> preguntas = PreguntaDAO.getRecords(1, 10);
+          request.setAttribute("p", preguntas);
+        List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
         request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+  
+     
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+       
+          
         int contador=1;
         boolean utilB= true;
         String stringP = request.getParameter("PreguntaID");
         int pregunta = Integer.parseInt(stringP, 10);
-       
-       // String stringR = request.getParameter("PreguntaID");
-     //   int respuesta = Integer.parseInt(stringR, 10);
+
       int respuesta = 0;
         //USUARIO (sesion actual)
         HttpSession  session = request.getSession();
@@ -67,12 +72,20 @@ public class UtilController extends HttpServlet {
  NOutil NOutil = new NOutil(utilB,pregunta,user);
         
         NOutilDAO.DesmarcarNOUtil(NOutil);
-        List<Categoria> categories = CategoriaDAO.getCategories();  
+          List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
-        List<Pregunta> preguntas = PreguntaDAO.MostrarPreguntas();;  
-       request.setAttribute("preguntas", preguntas);
+        List<Pregunta> preguntas = PreguntaDAO.getRecords(1, 10);
+          request.setAttribute("p", preguntas);
+        List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
   
-        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+       request.getRequestDispatcher("/VerPreguntaController?id="+pregunta).forward(request, response);
+         
+  
+   
+  
+       
     }
 
     @Override

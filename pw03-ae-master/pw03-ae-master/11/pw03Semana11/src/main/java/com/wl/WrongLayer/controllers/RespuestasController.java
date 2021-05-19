@@ -58,7 +58,7 @@ public class RespuestasController extends HttpServlet {
            Respuestas respuesta = new Respuestas(Respuesta,user,IDPregunta,FileUtils.RUTE_USER_IMAGE + "/" + nameImage);
         
         RespuestaDAO.InsertarRespuesta(respuesta);
-       
+      
        request.getRequestDispatcher("/VerPreguntaController?id="+IDPregunta).forward(request, response);
     }
 

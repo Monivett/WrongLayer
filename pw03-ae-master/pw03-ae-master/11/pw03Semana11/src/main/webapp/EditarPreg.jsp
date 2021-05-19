@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
 </head>
 <body>
+    
     <nav>
         <div class="logo">
             <img src="IMG/Logo.png" alt="" height="100" width="100">
@@ -46,8 +47,10 @@
              </form>
         </div>
     </nav>
+            
     <!--PREGUNTAS -->
     <%  if(preguntas!=null){%>
+    
     <form action="EditarPreguntaController" method="POST"  enctype="multipart/form-data" id="Pregunta" >
        <div class="Cartas">
         <div class=" Pregunta card" style="width: 790px;">

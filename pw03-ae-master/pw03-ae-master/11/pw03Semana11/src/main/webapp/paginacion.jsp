@@ -25,7 +25,12 @@
                                          pregur = pregur+10;
   }
    }%>
+  
 
+
+
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +40,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wrong Layer</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/PantallaPrincipal.css">
+    <link rel="stylesheet" href="CSS/PantallaPrincipal_1_1.css">
 </head>
 
 <body>

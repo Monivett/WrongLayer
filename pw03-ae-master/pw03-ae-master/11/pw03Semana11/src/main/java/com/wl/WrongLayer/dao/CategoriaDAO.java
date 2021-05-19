@@ -5,7 +5,6 @@
  */
 package com.wl.WrongLayer.dao;
 
-import com.pw.pw03semana11.DAO.*;
 
 import com.pw.pw03semana11.utils.DbConnection;
 import com.wl.WrongLayer.models.Categoria;

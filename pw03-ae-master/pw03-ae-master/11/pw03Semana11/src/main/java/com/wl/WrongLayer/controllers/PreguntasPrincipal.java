@@ -12,6 +12,7 @@ import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,8 +31,24 @@ public class PreguntasPrincipal extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+            PrintWriter out=response.getWriter();
+   
+            
+        List<Pregunta> preguntas = null;
+        preguntas =PreguntaDAO.getRecords(1, 10);
+         request.setAttribute("p", preguntas);
+
+          List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
+       
+         
+         List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+ 
+        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
     
+      /*ORIGINAL
         List<Pregunta> preguntas = null;
         preguntas =PreguntaDAO.MostrarPreguntas();
          request.setAttribute("preguntas", preguntas);
@@ -39,7 +56,7 @@ public class PreguntasPrincipal extends HttpServlet {
          List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
  
-        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+        request.getRequestDispatcher("paginacion.jsp").forward(request, response);*/  
     }
        @Override
        
@@ -52,12 +69,18 @@ public class PreguntasPrincipal extends HttpServlet {
         User usuario = null;
         session.setAttribute("username", usuario);
       
-        List<Pregunta> preguntas = null;
-        preguntas =PreguntaDAO.MostrarPreguntas();
-         request.setAttribute("preguntas", preguntas);
+            List<Pregunta> preguntas = null;
+        preguntas =PreguntaDAO.getRecords(1, 10);
+         request.setAttribute("p", preguntas);
+
+          List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
+       
          
          List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+ 
  
         request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
     }
