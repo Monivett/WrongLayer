@@ -7,13 +7,19 @@ package com.wl.WrongLayer.controllers;
 
 import com.pw.pw03semana11.utils.FileUtils;
 import com.wl.WrongLayer.dao.CategoriaDAO;
+import com.wl.WrongLayer.dao.FavoritoDAO;
+import com.wl.WrongLayer.dao.NOutilDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.dao.UserDAO;
+import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
+import com.wl.WrongLayer.models.Favorito;
+import com.wl.WrongLayer.models.NOutil;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.Respuestas;
 import com.wl.WrongLayer.models.User;
+import com.wl.WrongLayer.models.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -39,11 +45,32 @@ public class EditarUsuarioController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                int ID = Integer.parseInt(request.getParameter("id"), 10);
+               
             List<Respuestas> respuesta =RespuestaDAO.MostrarRespuestasUsuario(ID);
      request.setAttribute("respuestas", respuesta);
+     
        List<Pregunta> pregunta =PreguntaDAO.MostrarPreguntaUsuario(ID);
         request.setAttribute("preguntas", pregunta);
-      
+        
+       List<Pregunta> preguntas =PreguntaDAO.MostrarPreguntas();
+            request.setAttribute("preguntastodas", preguntas);
+       
+             List<Util> util =UtilDAO.MostrarUtilUsuario(ID);
+            request.setAttribute("util", util);
+            
+                List<NOutil> Noutil =NOutilDAO.MostrarNoUtilUsuario(ID);
+            request.setAttribute("NOutil", Noutil);
+            
+            
+              List<Favorito> fav =FavoritoDAO.MostrarFavoritosUsuario(ID);
+            request.setAttribute("fav", fav);
+        
+        
+           List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+    
+        
+        
         request.getRequestDispatcher("Perfil.jsp").forward(request, response);
     }
 
@@ -102,11 +129,30 @@ public class EditarUsuarioController extends HttpServlet {
             session.setAttribute("usuarioID", result);  //Guardamos la información del usuario en usuarioID
         }
           
-       List<Categoria> categories = CategoriaDAO.getCategories();  
-       request.setAttribute("Categories", categories);
-      // List<Pregunta> Pregunta = PreguntaDAO.MostrarPreguntaUsuario(ID);
-      
-       // request.setAttribute("preguntas", Pregunta);
+                List<Respuestas> respuesta =RespuestaDAO.MostrarRespuestasUsuario(ID);
+     request.setAttribute("respuestas", respuesta);
+     
+       List<Pregunta> pregunta =PreguntaDAO.MostrarPreguntaUsuario(ID);
+        request.setAttribute("preguntas", pregunta);
+        
+       List<Pregunta> preguntas =PreguntaDAO.MostrarPreguntas();
+            request.setAttribute("preguntastodas", preguntas);
+       
+             List<Util> util =UtilDAO.MostrarUtilUsuario(ID);
+            request.setAttribute("util", util);
+            
+                List<NOutil> Noutil =NOutilDAO.MostrarNoUtilUsuario(ID);
+            request.setAttribute("NOutil", Noutil);
+            
+            
+              List<Favorito> fav =FavoritoDAO.MostrarFavoritosUsuario(ID);
+            request.setAttribute("fav", fav);
+        
+        
+           List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+    
+    
         
         request.getRequestDispatcher("Perfil.jsp").forward(request, response);
     }

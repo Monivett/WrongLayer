@@ -8,9 +8,11 @@ package com.wl.WrongLayer.controllers;
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.NOutilDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
+import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.NOutil;
 import com.wl.WrongLayer.models.Pregunta;
+import com.wl.WrongLayer.models.Respuestas;
 import com.wl.WrongLayer.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,7 +53,8 @@ public class DesmarcarNoUtilRespuesta extends HttpServlet {
         //USUARIO (sesion actual)
         HttpSession  session = request.getSession();
         User user = (User)session.getAttribute("usuarioID");
-      
+           List<Respuestas> TOTALR =RespuestaDAO.MostrarRespuestas(pregunta);
+         request.setAttribute("TOTALrespuestas", TOTALR);
     
         NOutil util = new NOutil(contador,utilB,pregunta,respuestaID,user);
         
@@ -64,7 +67,7 @@ public class DesmarcarNoUtilRespuesta extends HttpServlet {
         TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
          request.setAttribute("TOTALpreguntas", TOTALpreguntas);
   
-       request.getRequestDispatcher("/VerPreguntaController?id="+pregunta).forward(request, response);
+      request.getRequestDispatcher("/VerPreguntaController?ID="+pregunta).forward(request, response);
          
   
     }

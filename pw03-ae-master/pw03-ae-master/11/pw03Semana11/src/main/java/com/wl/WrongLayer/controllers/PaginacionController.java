@@ -29,7 +29,7 @@ public class PaginacionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out=response.getWriter();
+      
         String spageid=request.getParameter("page");
         int pageid=Integer.parseInt(spageid);
        

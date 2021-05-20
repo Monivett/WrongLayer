@@ -11,7 +11,7 @@ import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.Pregunta;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,20 +23,29 @@ import javax.servlet.http.HttpServletResponse;
  * CONTROLLER PARA LA BARRA DE NAVEGACION
  * @author monic
  */
-@WebServlet(name = "NavegacionController", urlPatterns = {"/NavegacionController"})
-public class NavegacionController extends HttpServlet {
+@WebServlet(name = "PaginacionNav", urlPatterns = {"/PaginacionNav"})
+public class PaginacionNav extends HttpServlet {
 
-
-    @Override
+  @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          
+                  
+       String spageid=request.getParameter("page");
+        int pageid=Integer.parseInt(spageid);
+       
+        int total = 10;
+        if(pageid==1){}
+        else{
+            pageid=pageid-1;
+            pageid=pageid*total+1;
+        }
+   
    //Pregunta
-        String preguntaB = request.getParameter("navegacion");
-          request.setAttribute("navegacion", preguntaB);
+    String buscar = request.getParameter("buscar");
+          request.setAttribute("navegacion", buscar);
       
        List<Pregunta> preguntas = null;
-        preguntas =PreguntaDAO.BuscarPregunta(1, 10,preguntaB);
+        preguntas =PreguntaDAO.BuscarPregunta(pageid, total,buscar);
          request.setAttribute("p", preguntas);
 
           List<Pregunta> TOTALpreguntas = null;
@@ -48,10 +57,10 @@ public class NavegacionController extends HttpServlet {
         request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
  
         request.getRequestDispatcher("Busqueda.jsp").forward(request, response);
-        
 
 
     }
+
 
 
     @Override

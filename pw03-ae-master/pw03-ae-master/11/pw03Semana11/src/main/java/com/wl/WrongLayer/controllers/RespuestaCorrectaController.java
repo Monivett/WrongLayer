@@ -5,8 +5,10 @@
  */
 package com.wl.WrongLayer.controllers;
 
+import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
+import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.Respuestas;
 import java.io.IOException;
@@ -43,12 +45,17 @@ public class RespuestaCorrectaController extends HttpServlet {
            Respuestas resp = new Respuestas(ID,Preg);
 
         RespuestaDAO.RespuestaCorrecta(resp);
-                 List<Respuestas> respuesta =RespuestaDAO.MostrarRespuestasUsuario(ID);
-     request.setAttribute("respuestas", respuesta);
-       List<Pregunta> preg =PreguntaDAO.MostrarPreguntaUsuario(ID);
-        request.setAttribute("preguntas", preg);
+          List<Respuestas> TOTALR =RespuestaDAO.MostrarRespuestas(ID);
+         request.setAttribute("TOTALrespuestas", TOTALR);
+                List<Categoria> categories = CategoriaDAO.getCategories();  
+       request.setAttribute("Categories", categories);
+         List<Pregunta> preguntasP = PreguntaDAO.getRecords(1, 10);
+          request.setAttribute("p", preguntasP);
+        List<Pregunta> TOTALpreguntas = null;
+       TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
         
-         response.sendRedirect("PreguntasPrincipal");
+           request.getRequestDispatcher("/VerPreguntaController?ID="+Preg).forward(request, response);
     }
 
     @Override

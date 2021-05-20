@@ -167,24 +167,24 @@ h1,h4{
   margin-left: 850px;
 }
 /*------------PAGINACIÓN-------------------*/
-.paginacion {
+paginacion {
 	margin:20px 0;
       
         margin-left: 130px;
 }
 
-.paginacion ul {
+#paginacion {
 	list-style:none;
 	text-align: center;
 }
 
-.paginacion ul li {
+#paginacion  {
 	display:inline-block;
 	margin-right:10px;
         
 }
 
-.paginacion ul li a {
+#paginacion  {
 	display:block;
 	padding:10px 20px;
 	color:#fff;
@@ -192,14 +192,10 @@ h1,h4{
 	text-decoration: none;
 }
 
-.paginacion ul li a:hover {
+#paginacion :hover {
 	background:#ffc1c7;
 }
 
-.paginacion ul li .active {
-	background:#ff959f;
-	font-weight:bold;
-}
 
 /*------------FOOTER-------------------*/
 footer{

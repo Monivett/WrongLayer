@@ -64,6 +64,7 @@
                     <input type="text" name="Descripcion" id="Descripcion" value="<%= preguntas.getDescription()%>" >   
                   </p>
                     <input type="hidden" name="ID" id="ID" value="<%= preguntas.getId()%>" >   
+                    <input type="hidden" name="user" id="ID" value="<%= session.getAttribute("ID_Usuario")%>" >   
                  <p class="card-text">Categoría:  
                                 <select name ="Categorias" id="Categorias" class="filtrocategoria">
                               
@@ -113,7 +114,7 @@
                  <img src="<%= respuestas.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
                
                     <input type="hidden" name="ID" id="ID" value="<%= respuestas.getId()%>" >   
-        
+         <input type="hidden" name="user" id="ID" value="<%= session.getAttribute("ID_Usuario")%>" >   
                  <p class="card-text">Fecha:  <%= respuestas.getFecha()%></p>
                   <p class="card-text"><img src="<%= respuestas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= respuestas.getUser().getUsername()%> </p>
                  

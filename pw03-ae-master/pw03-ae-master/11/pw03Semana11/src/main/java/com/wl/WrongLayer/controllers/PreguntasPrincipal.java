@@ -31,9 +31,8 @@ public class PreguntasPrincipal extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            PrintWriter out=response.getWriter();
-   
-            
+         
+    
         List<Pregunta> preguntas = null;
         preguntas =PreguntaDAO.getRecords(1, 10);
          request.setAttribute("p", preguntas);

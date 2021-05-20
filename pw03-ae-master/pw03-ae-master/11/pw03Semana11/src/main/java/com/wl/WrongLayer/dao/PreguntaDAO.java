@@ -306,20 +306,17 @@ public class PreguntaDAO {
       
     }
  
-           public static List<Pregunta>  MostrarPreguntaCategoria(int ID) {
+           public static List<Pregunta>  MostrarPreguntaCategoria(int start, int total,String ID) {
         List<Pregunta> Preguntas = new ArrayList<>();
         Connection con = null;
         try {
             con = DbConnection.getConnection();
-              String sql = "call Proc_Pregunta(?,?,?,?,?,?,?)";
+              String sql = "call Proc_Paginacion(?,?,?,?)";
                   CallableStatement statement = con.prepareCall(sql);
-                  statement.setString(1, "B"); // Remplazamos el primer parametro por la opción del procedure
-                  statement.setInt(2, 0); // ID
-                  statement.setString(3, null); // Pregunta
-                  statement.setString(4, null); // Descripcion
-                  statement.setInt(5, ID); //Categoria
-                  statement.setString(6, null); // Foto
-                  statement.setInt(7, 0); // Usuario
+                  statement.setString(1, "C"); // Pantalla Principal
+                  statement.setInt(2, start-1); // 
+                  statement.setInt(3, total); // 
+                  statement.setString(4, ID); // Categoria
                   ResultSet result = statement.executeQuery();
             while(result.next()) {
                 int id = result.getInt(1); //ID

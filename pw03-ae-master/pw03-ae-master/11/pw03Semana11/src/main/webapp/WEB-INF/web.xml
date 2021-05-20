@@ -9,8 +9,12 @@
             30 
         </session-timeout>
     </session-config>
-    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+  </error-page>
     <welcome-file-list>
         <welcome-file>PreguntasPrincipal</welcome-file>
     </welcome-file-list>
+
 </web-app>

@@ -30,21 +30,65 @@ public class VerPreguntaCategoria extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-      int ID = Integer.parseInt(request.getParameter("id"), 10);
+      String ID= request.getParameter("id");
+     String spageid=request.getParameter("page");
+            if(spageid==null){
+              int  pageid=1;
+            }
+            else{
+                int pageid=Integer.parseInt(spageid); 
+            }
+          request.setAttribute("navegacion", ID);
         List<Pregunta> preguntas = null;
-        preguntas =PreguntaDAO.MostrarPreguntaCategoria(ID);
-         request.setAttribute("preguntas", preguntas);
-         
-         List<Categoria> Categoria = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
-        request.setAttribute("Categories", Categoria); //Atributo del select, nombre de la lista
+        preguntas =PreguntaDAO.MostrarPreguntaCategoria(1, 10,ID);
+        request.setAttribute("PREG", preguntas);
+        
+        List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
+          
+         List<Categoria> Cate = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        request.setAttribute("Categories", Cate); //Atributo del select, nombre de la lista
  
-        request.getRequestDispatcher("PantallaPrincipal.jsp").forward(request, response);
+        request.getRequestDispatcher("Busqueda_Cat.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+            String spageid=request.getParameter("page");
+             int  pageid = 0;
+            if(spageid==null){
+                pageid=1;
+            }
+            else{
+                 pageid=Integer.parseInt(spageid); 
+            }
+       
+       
+        int total = 10;
+        if(pageid==1){}
+        else{
+            pageid=pageid-1;
+            pageid=pageid*total+1;
+        }
+   
+        
+        String ID= request.getParameter("IDC");
+              request.setAttribute("navegacion", ID);
+        List<Pregunta> preguntas = null;
+        preguntas =PreguntaDAO.MostrarPreguntaCategoria(pageid, total,ID);
+        request.setAttribute("PREG", preguntas);
+        
+        List<Pregunta> TOTALpreguntas = null;
+        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
+          
+         List<Categoria> Cate = CategoriaDAO.getCategories(); //Se crea el objeto de la lista
+        request.setAttribute("Categories", Cate); //Atributo del select, nombre de la lista
+ 
+        request.getRequestDispatcher("Busqueda_Cat.jsp").forward(request, response);
     }
 
     @Override

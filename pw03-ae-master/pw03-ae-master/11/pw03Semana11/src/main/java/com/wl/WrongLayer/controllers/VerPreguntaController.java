@@ -37,6 +37,7 @@ public class VerPreguntaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //--------------------------PREGUNTA---------------------
+     
         int ID = Integer.parseInt(request.getParameter("id"), 10);
        //MUESTRA LA PREGUNTA SELECCIONADA A DETALLE
         Pregunta pregunta = PreguntaDAO.MostrarPreguntaID(ID); 
@@ -62,8 +63,20 @@ public class VerPreguntaController extends HttpServlet {
          
          //---------------------RESPUESTAS---------------
          //MUESTRA LAS RESPUESTAS DE LA PREGUNTA SELECCIONADA
-         List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestas(ID); 
+          int pageid=0;
+     String spageid=request.getParameter("page");
+            if(spageid==null){
+               pageid=1;
+            }
+            else{
+                pageid=Integer.parseInt(spageid); 
+            }
+         List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestasPaginacion(pageid, 10,ID); 
         request.setAttribute("respuestas", respuestas);
+        
+          
+          List<Respuestas> TOTALR =RespuestaDAO.MostrarRespuestas(ID);
+         request.setAttribute("TOTALrespuestas", TOTALR);
          //MUESTRA UTILIDAD DE LA RESPUESTA
          
          List<Util> utilR =UtilDAO.MostrarUtilRespuesta(ID);
@@ -89,7 +102,7 @@ public class VerPreguntaController extends HttpServlet {
   @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    int ID = Integer.parseInt(request.getParameter("id"), 10);
+    int ID = Integer.parseInt(request.getParameter("ID"), 10);
        //MUESTRA LA PREGUNTA SELECCIONADA A DETALLE
         Pregunta pregunta = PreguntaDAO.MostrarPreguntaID(ID); 
         request.setAttribute("preguntas", pregunta);
@@ -114,8 +127,19 @@ public class VerPreguntaController extends HttpServlet {
          
          //---------------------RESPUESTAS---------------
          //MUESTRA LAS RESPUESTAS DE LA PREGUNTA SELECCIONADA
-         List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestas(ID); 
+                int pageid=0;
+     String spageid=request.getParameter("page");
+            if(spageid==null){
+               pageid=1;
+            }
+            else{
+                pageid=Integer.parseInt(spageid); 
+            }
+         List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestasPaginacion(pageid, 10,ID); 
         request.setAttribute("respuestas", respuestas);
+         
+          List<Respuestas> TOTALR =RespuestaDAO.MostrarRespuestas(ID);
+         request.setAttribute("TOTALrespuestas", TOTALR);
          //MUESTRA UTILIDAD DE LA RESPUESTA
          
          List<Util> utilR =UtilDAO.MostrarUtilRespuesta(ID);

@@ -104,6 +104,51 @@ public class RespuestaDAO {
      
     }
         
+           public static List<Respuestas> MostrarRespuestasPaginacion(int start, int total,int ID){
+              List<Respuestas> respuestas = new ArrayList<>();
+              Connection con = null;
+           try{
+             con = DbConnection.getConnection();
+             // Esta linea prepara la llamada a la base de datos para insertar
+             // Cada ? significa un valor a ser remplazado
+             String sql = "call Proc_Paginacion(?,?,?,?)";
+                  CallableStatement statement = con.prepareCall(sql);
+                  statement.setString(1, "R"); // Pantalla Principal
+                  statement.setInt(2, start-1); // 
+                  statement.setInt(3, total); // 
+                  statement.setInt(4, ID); // Pregunta
+                  ResultSet result = statement.executeQuery();
+            while(result.next()) {
+                int id = result.getInt(1);
+                String Respuesta = result.getString(2);
+                String Fecha = result.getString(3);
+                int idUsuario = result.getInt(4);
+                User user =UserDAO.GetUser(idUsuario);
+                boolean Borro = result.getBoolean(5);
+                String imagePath = result.getString(6);
+                int pregunta = result.getInt(7);
+                boolean Mod = result.getBoolean(8);
+                boolean Correct=result.getBoolean(9);
+         
+              respuestas.add(new Respuestas(id,Respuesta,user,pregunta,imagePath,Fecha,Mod,Borro,Correct));
+            }
+        
+        }
+        catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+                finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        return respuestas;
+     
+    }
         public static List<Respuestas> MostrarRespuestasUsuario(int ID){
                Connection con = null;
               List<Respuestas> respuestas = new ArrayList<>();

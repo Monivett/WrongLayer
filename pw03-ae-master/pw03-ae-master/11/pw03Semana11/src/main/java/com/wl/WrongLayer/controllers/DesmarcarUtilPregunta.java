@@ -7,9 +7,11 @@ package com.wl.WrongLayer.controllers;
 
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
+import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.Pregunta;
+import com.wl.WrongLayer.models.Respuestas;
 import com.wl.WrongLayer.models.User;
 import com.wl.WrongLayer.models.Util;
 import java.io.IOException;
@@ -61,8 +63,9 @@ public class DesmarcarUtilPregunta extends HttpServlet {
         List<Pregunta> TOTALpreguntas = null;
         TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
          request.setAttribute("TOTALpreguntas", TOTALpreguntas);
-  
-       request.getRequestDispatcher("/VerPreguntaController?id="+pregunta).forward(request, response);
+       List<Respuestas> TOTALR =RespuestaDAO.MostrarRespuestas(pregunta);
+         request.setAttribute("TOTALrespuestas", TOTALR);
+      request.getRequestDispatcher("/VerPreguntaController?ID="+pregunta).forward(request, response);
          
   
     }

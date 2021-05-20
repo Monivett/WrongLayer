@@ -8,10 +8,12 @@ package com.wl.WrongLayer.controllers;
 import com.wl.WrongLayer.dao.CategoriaDAO;
 import com.wl.WrongLayer.dao.NOutilDAO;
 import com.wl.WrongLayer.dao.PreguntaDAO;
+import com.wl.WrongLayer.dao.RespuestaDAO;
 import com.wl.WrongLayer.dao.UtilDAO;
 import com.wl.WrongLayer.models.Categoria;
 import com.wl.WrongLayer.models.NOutil;
 import com.wl.WrongLayer.models.Pregunta;
+import com.wl.WrongLayer.models.Respuestas;
 import com.wl.WrongLayer.models.User;
 import com.wl.WrongLayer.models.Util;
 import java.io.IOException;
@@ -72,15 +74,16 @@ public class UtilController extends HttpServlet {
  NOutil NOutil = new NOutil(utilB,pregunta,user);
         
         NOutilDAO.DesmarcarNOUtil(NOutil);
-          List<Categoria> categories = CategoriaDAO.getCategories();  
+       List<Respuestas> TOTALR =RespuestaDAO.MostrarRespuestas(pregunta);
+         request.setAttribute("TOTALrespuestas", TOTALR);
+                List<Categoria> categories = CategoriaDAO.getCategories();  
        request.setAttribute("Categories", categories);
-        List<Pregunta> preguntas = PreguntaDAO.getRecords(1, 10);
-          request.setAttribute("p", preguntas);
+         List<Pregunta> preguntasP = PreguntaDAO.getRecords(1, 10);
+          request.setAttribute("p", preguntasP);
         List<Pregunta> TOTALpreguntas = null;
-        TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+       TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
          request.setAttribute("TOTALpreguntas", TOTALpreguntas);
-  
-       request.getRequestDispatcher("/VerPreguntaController?id="+pregunta).forward(request, response);
+       request.getRequestDispatcher("/VerPreguntaController?ID="+pregunta).forward(request, response);
          
   
    

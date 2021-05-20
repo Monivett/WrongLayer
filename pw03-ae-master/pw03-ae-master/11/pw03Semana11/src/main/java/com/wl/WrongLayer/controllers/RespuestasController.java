@@ -6,11 +6,16 @@
 package com.wl.WrongLayer.controllers;
 
 import com.pw.pw03semana11.utils.FileUtils;
+import com.wl.WrongLayer.dao.CategoriaDAO;
+import com.wl.WrongLayer.dao.PreguntaDAO;
 import com.wl.WrongLayer.dao.RespuestaDAO;
+import com.wl.WrongLayer.models.Categoria;
+import com.wl.WrongLayer.models.Pregunta;
 import com.wl.WrongLayer.models.Respuestas;
 import com.wl.WrongLayer.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -58,8 +63,17 @@ public class RespuestasController extends HttpServlet {
            Respuestas respuesta = new Respuestas(Respuesta,user,IDPregunta,FileUtils.RUTE_USER_IMAGE + "/" + nameImage);
         
         RespuestaDAO.InsertarRespuesta(respuesta);
+             List<Respuestas> TOTALR =RespuestaDAO.MostrarRespuestas(IDPregunta);
+         request.setAttribute("TOTALrespuestas", TOTALR);
+                List<Categoria> categories = CategoriaDAO.getCategories();  
+       request.setAttribute("Categories", categories);
+         List<Pregunta> preguntasP = PreguntaDAO.getRecords(1, 10);
+          request.setAttribute("p", preguntasP);
+        List<Pregunta> TOTALpreguntas = null;
+       TOTALpreguntas =PreguntaDAO.MostrarPreguntas();
+         request.setAttribute("TOTALpreguntas", TOTALpreguntas);
       
-       request.getRequestDispatcher("/VerPreguntaController?id="+IDPregunta).forward(request, response);
+       request.getRequestDispatcher("/VerPreguntaController?ID="+IDPregunta).forward(request, response);
     }
 
     /**

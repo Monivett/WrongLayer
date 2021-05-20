@@ -116,6 +116,7 @@
                             } 	
                            };
                             </script>
+                              <input type="hidden" name="user" id="ID" value="<%= session.getAttribute("ID_Usuario")%>" >   
                             <button id="BTNBORRARPREG"onclick="alerta()" type="submit">Borrar</button>
                        </form> 
                             <br>
@@ -148,7 +149,8 @@
                          
                          <%= respuesta.getId()%>
                      </p>
-                    <p> <%= respuesta.getRespuesta()%>" </p>
+                     <p> <a name = "pregunta" href="VerPreguntaController?id=<%= respuesta.getPreguntas()%>"> <%= respuesta.getRespuesta()%> </p>
+                    
                  <img src="<%= respuesta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
               
                  <p class="card-text"><b>Fecha:</b>  <%= respuesta.getFecha()%> </p>
@@ -165,6 +167,7 @@
                          <input type="hidden" name="Respuesta" id="ID" value="<%= respuesta.getRespuesta()%>" >   
                         <button onclick="location.href='EditarRespuestaController?id=<%= respuesta.getId()%>';" type="submit">Editar</button>
                             <form action="EliminarRespuesta" method="POST" " >
+                                  <input type="hidden" name="user" id="ID" value="<%= session.getAttribute("ID_Usuario")%>" >   
                         <input type="text" name="IDR" id="ID" value="<%= respuesta.getId()%>" style="display: none;" >   
                             <script>
                                     

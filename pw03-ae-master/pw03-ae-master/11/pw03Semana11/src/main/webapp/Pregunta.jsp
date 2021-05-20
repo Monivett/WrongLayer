@@ -23,7 +23,7 @@
     Util utilC =(Util)request.getAttribute("utilc");
      NOutil NOutilC =(NOutil)request.getAttribute("NOutilC");
      Favorito favC =(Favorito)request.getAttribute("FAVC");
-      
+      List<Respuestas> TOTALrespuestas = (List<Respuestas>)request.getAttribute("TOTALrespuestas");
       List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
      List<Respuestas> respuestas = (List<Respuestas>)request.getAttribute("respuestas");
      
@@ -42,6 +42,17 @@
          NOutil NoUtilR =(NOutil)request.getAttribute("NoUtilR");
          boolean MarcadoUtilR = false;
          boolean MarcadonoUtilR = false;
+         
+                                  int cantidadpregutnas = 0;
+                                     int paginacion = 1;
+                                     int pregur = 10;
+   for(Respuestas P: TOTALrespuestas){ 
+      cantidadpregutnas++;
+       if(cantidadpregutnas >=pregur){
+                                         paginacion = paginacion+1; 
+                                         pregur = pregur+10;
+       }
+   }
   
 %>
 <!DOCTYPE html>
@@ -53,7 +64,7 @@
     <title>Detalle de Pregunta</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="CSS/Pregunta.css">
+    <link rel="stylesheet" href="CSS/Pregunta_1.css">
 </head>
 <body>
     <nav>
@@ -411,14 +422,22 @@
      <%}else{%>
       <h1> Tu cuenta está suspendida comunicate con los administradores de la página</h1>
       <%}%>
-                           <section class="paginacion">
-			<ul>
-				<li><a href="pagina1.html" class="active">1</a></li>
-				<li><a href="pagina2.html"><</a></li>
-				<li><a href="pagina3.html">></a></li>
-		
-			</ul>
-		</section>
+                       <section class="paginacion">
+                                  <ul>	                             
+			      <%  for (int limite=1;limite<=paginacion;limite++){%>  
+                              <form method="POST" action ="VerPreguntaController?page=<%= limite%>" >
+                                  <input type="text" value="<%= preguntas.getId()%>" name="ID" style="display: none;">
+                                  	
+                                 <button id="paginacion"onclick="location.href='VerPreguntaCategoria?page=<%= limite%>';" type="submit">
+                                       <%= limite%>   
+                                   </button>  
+                       
+                              </form>
+                  	            
+                                <% 
+                                    }%> 
+                               
+                                 </section>  
     <footer>
         <h4> <b>Categorias: </b></h4>
            <h4>
