@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/PantallaInicio_1_1_1.css">
+    <link rel="stylesheet" href="CSS/PantallaInicio.css">
 </head>
 
 <body>
@@ -47,7 +47,7 @@
      <div class="logoFORMS">
     <img src="IMG/LogoWrongLayer.png" alt="" height="150" width="150">
   </div>
-    <form action="LogInController" method="POST" id="form">  
+    <form action="Login" method="POST" id="form">  
  
     <div class="form">
       
@@ -66,8 +66,9 @@
     </div> 
   
 </form>
-        <script> src="https://code.jquery.com/jquery-3.6.0.min.js"</script>
-         <script> src="JAVASCRIPT/Login.js"</script>
+        
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         <script src="JAVASCRIPT/Login.js"></script>
 </body>
     <footer>
         <h4> <b>Categorias: </b></h4>
@@ -82,5 +83,8 @@
                             <% } %> 
    </h4>
     </footer>
-
+<h2 id = "ERROR">
+    La combinación de usuario y contraseña 
+    no es válida.
+</h2>
 </html>

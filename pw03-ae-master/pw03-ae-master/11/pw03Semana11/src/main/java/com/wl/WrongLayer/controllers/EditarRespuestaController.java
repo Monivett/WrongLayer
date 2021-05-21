@@ -62,6 +62,7 @@ public class EditarRespuestaController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         request.setCharacterEncoding("UTF-8");//Acentos
          String stringID = request.getParameter("ID");
         int ID = Integer.parseInt(stringID, 10);
         String title = request.getParameter("Respuesta");

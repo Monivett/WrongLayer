@@ -45,6 +45,9 @@ public class RespuestasController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+         request.setCharacterEncoding("UTF-8");//Acentos
+         
        String Respuesta = request.getParameter("Respuesta");
        String ID = request.getParameter("IdPregunta");
        int IDPregunta =Integer.parseInt(ID,10);

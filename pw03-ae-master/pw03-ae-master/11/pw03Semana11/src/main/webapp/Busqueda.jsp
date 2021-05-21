@@ -36,7 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wrong Layer</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="CSS/Busqueda.css">
+    <link rel="stylesheet" href="CSS/Busqueda_1.css">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
             <button onclick="location.href='PreguntasPrincipal';" type="submit">Pantalla Principal</button>
              <jsp:include page= "navbar.jsp"/>
               <%  if (session.getAttribute("username") == null) {%>
-            <button onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+            <button onclick="location.href='Login';" type="submit">Iniciar Sesión</button>
            <button onclick="location.href='RegistroController';" type="submit">Registrarse</button>
              <% }else{%>
              <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
@@ -95,6 +95,7 @@
                                   <ul>	                             
 			      <%  for (int limite=1;limite<=paginacion;limite++){%>  
                               <form method="POST" action ="PaginacionNav?page=<%= limite%>" >
+                                  
                                   <input type="text" value="<%= busqueda%>" name="buscar" style="display: none">
                                  <button id="paginacion"onclick="location.href='PaginacionNav?page=<%= limite%>';" type="submit">
                                        <%= limite%>   

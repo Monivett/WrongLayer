@@ -176,10 +176,10 @@ margin-right: 15px;
 }
 /*------------PAGINACIÓN-------------------*/
 .paginacion {
-	margin:20px 0;
-       margin-top: 150px;
-       position: absolute;
-      
+	margin:30px 20px;
+       position: relative;
+    right: 120px;
+    
 }
 
 #paginacion {
@@ -187,24 +187,24 @@ margin-right: 15px;
 	text-align: center;
 }
 
-#paginacion {
+.paginacion button  {
 	display:inline-block;
-	margin-right:10px;
+	margin-top: 10px;
         
 }
 
-.paginacion button {
+#paginacion  {
 	display:block;
+        border: none;
 	padding:10px 20px;
 	color:#fff;
 	background:#ff959f;
 	text-decoration: none;
 }
 
-#paginacion:hover {
+.paginacion button :hover {
 	background:#ffc1c7;
 }
-
 
 /*------------FOOTER-------------------*/
 footer{

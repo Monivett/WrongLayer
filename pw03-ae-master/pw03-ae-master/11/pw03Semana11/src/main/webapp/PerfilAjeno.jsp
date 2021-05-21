@@ -54,7 +54,7 @@
                     <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
              </form>
          <%  }else{%>
-            <button onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+            <button onclick="location.href='Login';" type="submit">Iniciar Sesión</button>
              <%  }%>
         </div>
     </nav>

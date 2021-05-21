@@ -10,6 +10,7 @@ import com.wl.WrongLayer.models.User;
 import com.wl.WrongLayer.models.ValidarLogIn;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -64,7 +65,7 @@ public static User LogInUser (User user){
      Connection con = null;
             try{
              con = DbConnection.getConnection();
-             // Esta linea prepara la llamada a la base de datos para insertar
+             // Esta linea prepara la llamada a la base de datos para hacer Log In
              // Cada ? significa un valor a ser remplazado
             String sql = "call Proc_Login(?,?)";
             CallableStatement statement = con.prepareCall(sql);
@@ -241,6 +242,92 @@ public static int ModificarUser(User user){
             
     }
 
+  
+    Connection con;
+    PreparedStatement ps;
+    CallableStatement cs;
+    ResultSet rs;
+    User usu = null;
+
+    public User identificar(User user) {
+         Connection con = null;
+       
+        try {
+             con = DbConnection.getConnection();
+              String sql = "call Proc_Login(?,?)";
+              CallableStatement statement = con.prepareCall(sql);
+            cs = con.prepareCall(sql);
+            cs.setString(1, user.getUsername());
+            cs.setString(2, user.getPassword());
+            rs = cs.executeQuery();
+            if (rs.next() == true) {
+                usu = new User();
+               
+                usu.setUsername(user.getUsername());
+                usu.setPassword(user.getPassword());
+                 int id = rs.getInt(1);
+                String username = rs.getString(2);
+                String file = rs.getString(3);
+                String nombre = rs.getString (4);
+                String apellido = rs.getString (5);
+                int Edad = rs.getInt (6);
+                String Correo = rs.getString (7);
+                String contraseña = rs.getString (8);
+                String FechaNac = rs.getString (9);
+                 int  Estado = rs.getInt (10);
+                return new User(id, nombre,apellido,FechaNac,Correo,username,contraseña,file,Edad,Estado);
+            }
+        }       catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+                  finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            }
+        return usu;
+    }
+
+    public User selectID(int id) {
+        User user = new User();
+        String sql = "{CALL selectID(?)}";
+        try {
+            con = DbConnection.getConnection();
+             CallableStatement statement = con.prepareCall(sql);
+            cs.setInt(1, id);
+               ResultSet resultset = statement.executeQuery();
+            while(resultset.next()) { //Mientras el resultSet tenga algo
+                 int ID = resultset.getInt(1);
+                String username = resultset.getString(2);
+                String file = resultset.getString(3);
+                String nombre = resultset.getString (4);
+                String apellido = resultset.getString (5);
+                int Edad = resultset.getInt (6);
+                String Correo = resultset.getString (7);
+                String contraseña = resultset.getString (8);
+                String FechaNac = resultset.getString (9);
+                 int  Estado = resultset.getInt (10);
+                return new User(ID, nombre,apellido,FechaNac,Correo,username,contraseña,file,Edad,Estado);
+            }
+        }      catch (SQLException ex) {
+         System.out.println(ex.getMessage());
+        }
+                  finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+            }
+
+        return usu;
+    }
 private static void executeQuery() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

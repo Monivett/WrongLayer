@@ -12,7 +12,7 @@
 <%@page import="com.wl.WrongLayer.models.User"%>
 <%@page import="com.wl.WrongLayer.models.Respuestas"%>
 <%@page import="java.util.List"%>
-
+<%@page pageEncoding="UTF-8"%>
 
 <% 
     //MUESTRA LA PREGUNTA SELECCIONADA
@@ -58,9 +58,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+      <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle de Pregunta</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
     <link rel="stylesheet" href="Boostrap/css/bootstrap.min.css">
@@ -73,7 +73,7 @@
         </div>
           <form action = "NavegacionController" method = "POST" id = Nav>
                          <input type="text" name="navegacion" id="search" required><span class="barra"></span>
-                        <label for="">Barra de Búsqueda</label>
+                        <label for="">Barra de BÃºsqueda</label>
                         </input>
                         <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
                     </form>
@@ -81,11 +81,11 @@
              <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
                  <jsp:include page= "navbar.jsp"/>
               <%  if (session.getAttribute("username") == null) {%>
-           <button onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+           <button onclick="location.href='Login';" type="submit">Iniciar SesiÃ³n</button>
           <button onclick="location.href='RegistroController';" type="submit">Registrarse</button>
              <% }else{%>
                <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
-                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
+                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar SesiÃ³n</button>
              </form>
            
              <%}%>
@@ -111,8 +111,8 @@
         
           <h5 class="card-title"><b>Pregunta: </b> <%= preguntas.getPregunta()%>
           <img src="<%= preguntas.getImagePath()%>" class="card-img-top" width="400" height="200">
-          <p class="card-text">Descripción: <%= preguntas.getDescription()%></p>
-          <p class="card-text">Categoría: <%= preguntas.getCategory().getName()%> </p>
+          <p class="card-text">DescripciÃ³n: <%= preguntas.getDescription()%></p>
+          <p class="card-text">CategorÃ­a: <%= preguntas.getCategory().getName()%> </p>
           <p class="card-text">Fecha:  <%= preguntas.getFecha()%></p>
           <a href="VerUsuarioAjeno?id=<%= preguntas.getUser().getId()%>">
                <p class="card-text"><img src="<%= preguntas.getUser().getUrlImage()%>" class="fotouser" width="50" height="50"> Usuario: <%= preguntas.getUser().getUsername()%> </p>
@@ -120,16 +120,16 @@
          
         
           <div class="puntuacion">
-              <p> <b> Puntuación:</b>  </p>
-              <!-- Si el usuario esta logeado y es dueño de la pregunta y NO esta suspendido -->
+              <p> <b> PuntuaciÃ³n:</b>  </p>
+              <!-- Si el usuario esta logeado y es dueÃ±o de la pregunta y NO esta suspendido -->
          <%    Object estado = Integer.valueOf(1);
          
                 Object IP = Integer.valueOf(preguntas.getUser().getId());
         if(IP.equals(session.getAttribute("ID_Usuario")) && session.getAttribute("username") !=null && estado == session.getAttribute("Estado")  ){%>
                  
-                   <b>    <i class="Unlike fas fa-thumbs-down"></i> No útil:</b> <%= NOutilC.getContador()%>
+                   <b>    <i class="Unlike fas fa-thumbs-down"></i> No Ãºtil:</b> <%= NOutilC.getContador()%>
                  <br>
-                 <!-- Si el usuario esta logeado y NO es dueño de la pregunta y NO esta suspendido -->
+                 <!-- Si el usuario esta logeado y NO es dueÃ±o de la pregunta y NO esta suspendido -->
               <%  }else if(session.getAttribute("username") !=null && estado == session.getAttribute("Estado"))  { %>   
                      
             <br>
@@ -139,11 +139,11 @@
                 if( User == (session.getAttribute("ID_Usuario")) &&  preguntas.getId() == ut.getPregunta() ){
                MarcadoUtil = true;
             %>
-                <p>Ya marcaste como útil</p>
+                <p>Ya marcaste como Ãºtil</p>
                  <form action = "DesmarcarUtilPregunta" method="POST">
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                <button id="BTN_UTIL"onclick="location.href='DesmarcarUtilPregunta';">
-                Desmarcar Útil
+                Desmarcar Ãštil
                 </button>  
             </form>
             <%}%>
@@ -155,11 +155,11 @@
                 if( User == (session.getAttribute("ID_Usuario")) &&  preguntas.getId() == nout.getPregunta() ){
                MarcadoNOUtil = true;
             %>
-              <p>Ya marcaste como NO útil</p>
+              <p>Ya marcaste como NO Ãºtil</p>
                    <form action = "DesmarcarNOUtilPregunta" method="POST">
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                <button id="BTN_DNOUTIL"onclick="location.href='DesmarcarNOUtilPregunta';">
-                Desmarcar NO Útil
+                Desmarcar NO Ãštil
                 </button>  
             </form>
             <%}%>
@@ -187,7 +187,7 @@
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
             
                 <button id="BTN_UTIL"onclick="location.href='UtilController';">
-                Marcar como útil
+                Marcar como Ãºtil
                 <i class="Like fas fa-thumbs-up"></i>
                 </button>  
             </form>
@@ -198,7 +198,7 @@
                   <form action = "NOutilController" method="POST">
                 <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                <button id="BTN_UTIL"onclick="location.href='NOutilController';">
-                   Marcar como NO Útil 
+                   Marcar como NO Ãštil 
                    <i class="Unlike fas fa-thumbs-down"></i>
                 </button>  
                 </form>
@@ -218,7 +218,7 @@
                      <!-- Lo que pueden ver todos -->
          
                  
-                 <b>   <i class="Like fas fa-thumbs-up"></i> Útil:</b> <%= utilC.getContador()%> 
+                 <b>   <i class="Like fas fa-thumbs-up"></i> Ãštil:</b> <%= utilC.getContador()%> 
                  <br>
                
                
@@ -283,7 +283,7 @@
          
         
           <div class="puntuacion">
-              <!<!-- Si el usuario es dueño de la pregunta y NO esta suspendido -->
+              <!<!-- Si el usuario es dueÃ±o de la pregunta y NO esta suspendido -->
            <%    
                 Object ID = Integer.valueOf(preguntas.getUser().getId());
                  if(ID.equals(session.getAttribute("ID_Usuario"))&& estado == session.getAttribute("Estado")){%>
@@ -317,7 +317,7 @@
                 if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == utR.getRespuesta()&& estado == session.getAttribute("Estado")){
                MarcadoUtilR = true;
             %>
-             <p>Ya marcaste como útil</p>
+             <p>Ya marcaste como Ãºtil</p>
                    <form action = "DesmarcarUtilRespuesta" method="POST">
                             <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                 <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
@@ -328,9 +328,9 @@
                    <%}%>
              <%}%>
                  <p>
-            <b> Puntuación:</b>  
+            <b> PuntuaciÃ³n:</b>  
               <br>
-             <b>   <i class="Like fas fa-thumbs-up"></i> Útil:</b> <%= i%> 
+             <b>   <i class="Like fas fa-thumbs-up"></i> Ãštil:</b> <%= i%> 
                <br>
           
          
@@ -342,7 +342,7 @@
                     <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                 <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
                <button id="BTN_UTILR"onclick="location.href='UtilControllerRespuestas';">
-                Marcar como útil
+                Marcar como Ãºtil
                 <i class="Like fas fa-thumbs-up"></i>
                 </button>  
                 </form>
@@ -359,7 +359,7 @@
                 if( User == (session.getAttribute("ID_Usuario")) &&  respuesta.getId() == RNO.getRespuesta() && estado == session.getAttribute("Estado")){
                MarcadonoUtilR = true;
             %>
-             <p>Ya marcaste como NO útil</p>
+             <p>Ya marcaste como NO Ãºtil</p>
                    <form action = "DesmarcarNoUtilRespuesta" method="POST">
                             <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                 <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
@@ -369,13 +369,13 @@
             </form>
                    <%}%>
              <%}%>
-             <!<!-- Si el usuario es dueño de la respuesta y No esta suspendido -->
+             <!<!-- Si el usuario es dueÃ±o de la respuesta y No esta suspendido -->
                 <%    
                 Object IDR = Integer.valueOf(respuesta.getUser().getId());
                  if(IDR.equals(session.getAttribute("ID_Usuario")) &&session.getAttribute("username") != null && estado == session.getAttribute("Estado")){%>
              
              <p>
-                 <b> <i class="Unlike fas fa-thumbs-down"></i> No útil:</b> <%= u%> 
+                 <b> <i class="Unlike fas fa-thumbs-down"></i> No Ãºtil:</b> <%= u%> 
              </p>
                 <%  }%>
                 <!<!-- Si el usuario esta logeado y esta ACTIVO -->
@@ -385,7 +385,7 @@
                     <input name = "PreguntaID" value="<%= preguntas.getId()%>" style="display: none;">
                 <input name = "RespuestaID" value="<%= respuesta.getId()%>" style="display: none;">
                <button id="BTN_UTILR"onclick="location.href='UtilControllerRespuestas';">
-                Marcar como NO útil
+                Marcar como NO Ãºtil
                 <i class="Like fas fa-thumbs-up"></i>
                 </button>  
             </form>
@@ -416,11 +416,11 @@
       </div>
                 </form>  
 <% }else if (session.getAttribute("username") == null){%>
-      <h1> Inicia Sesión y responde la pregunta</h1>
-        <button id = "publicar" onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+      <h1> Inicia SesiÃ³n y responde la pregunta</h1>
+        <button id = "publicar" onclick="location.href='LogInController';" type="submit">Iniciar SesiÃ³n</button>
       
      <%}else{%>
-      <h1> Tu cuenta está suspendida comunicate con los administradores de la página</h1>
+      <h1> Tu cuenta estÃ¡ suspendida comunicate con los administradores de la pÃ¡gina</h1>
       <%}%>
                        <section class="paginacion">
                                   <ul>	                             
@@ -428,7 +428,7 @@
                               <form method="POST" action ="VerPreguntaController?page=<%= limite%>" >
                                   <input type="text" value="<%= preguntas.getId()%>" name="ID" style="display: none;">
                                   	
-                                 <button id="paginacion"onclick="location.href='VerPreguntaCategoria?page=<%= limite%>';" type="submit">
+                                 <button id="paginacion" type="submit">
                                        <%= limite%>   
                                    </button>  
                        
@@ -446,7 +446,7 @@
                                 if(categorias!=null)
                                 for(Categoria categoria: categorias){%>  
                           
-                           °      <%= categoria.getName()%> &nbsp
+                           Â°      <%= categoria.getName()%> &nbsp
 
                             <% } %> 
    </h4>

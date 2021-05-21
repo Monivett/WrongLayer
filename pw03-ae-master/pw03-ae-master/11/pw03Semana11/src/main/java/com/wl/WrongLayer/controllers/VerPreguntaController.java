@@ -134,6 +134,8 @@ public class VerPreguntaController extends HttpServlet {
             }
             else{
                 pageid=Integer.parseInt(spageid); 
+                pageid=pageid-1;
+            pageid=pageid*10+1;
             }
          List<Respuestas> respuestas =RespuestaDAO.MostrarRespuestasPaginacion(pageid, 10,ID); 
         request.setAttribute("respuestas", respuestas);

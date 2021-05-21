@@ -25,6 +25,7 @@ import java.util.logging.Logger;
  * @author monic
  */
 public class RespuestaDAO {
+    
     public static int InsertarRespuesta(Respuestas respuesta){
  Connection con = null;
         try {
@@ -149,6 +150,7 @@ public class RespuestaDAO {
         return respuestas;
      
     }
+           
         public static List<Respuestas> MostrarRespuestasUsuario(int ID){
                Connection con = null;
               List<Respuestas> respuestas = new ArrayList<>();

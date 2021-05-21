@@ -50,6 +50,8 @@ public class PreguntaController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
+         request.setCharacterEncoding("UTF-8");//Acentos
         String title = request.getParameter("pregunta");
         String description = request.getParameter("descripcion");
         String stringCategory = request.getParameter("Categorias");

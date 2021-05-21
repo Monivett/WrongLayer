@@ -12,7 +12,7 @@
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
 <%@page import="java.util.List"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
      List<Pregunta> preguntas = (List<Pregunta>)request.getAttribute("preguntas");
@@ -28,7 +28,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
@@ -149,7 +149,7 @@
                          
                          <%= respuesta.getId()%>
                      </p>
-                     <p> <a name = "pregunta" href="VerPreguntaController?id=<%= respuesta.getPreguntas()%>"> <%= respuesta.getRespuesta()%> </p>
+                     <p> <a name = "pregunta" href="VerPreguntaController?id=<%= respuesta.getPreguntas()%>"> <%= respuesta.getRespuesta()%></a> </p>
                     
                  <img src="<%= respuesta.getImagePath()%>" class="card-img-top" width="400" height="200"></h5>
               
@@ -216,6 +216,7 @@
                   
            
              </div>
+          <br>
      <%}%>
                  <%}%>
               <%}%>

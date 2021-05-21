@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page import="com.wl.WrongLayer.models.Categoria"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
      List<Categoria> categorias = (List<Categoria>)request.getAttribute("Categories");
     List<Pregunta> preguntas = (List<Pregunta>)request.getAttribute("preguntas");
@@ -15,9 +16,9 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta charset="UTF-8">
+  <meta http-equiv=â€Content-Typeâ€ content=â€text/html; charset=UTF-8â€³>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Wrong Layer</title>
         <link rel="shortcut icon" href="IMG/Logo.png" type="image/x-icon">
         <link rel="stylesheet" href="CSS/Publicar_1.css">
@@ -29,7 +30,7 @@
                      </div>
                     <form action = "NavegacionController" method = "POST" id = Nav>
                          <input type="text" name="navegacion" id="search" required><span class="barra"></span>
-                        <label for="">Barra de Búsqueda</label>
+                        <label for="">Barra de BÃºsqueda</label>
                         </input>
                         <button onclick="location.href='NavegacionController';" id="nav"type="submit" style="display: none;"></button>
                     </form>
@@ -45,9 +46,9 @@
                         <div class="botones">
                         <button onclick="location.href='PreguntasPrincipal';" type="submit">PantallaPrincipal</button>
                         <jsp:include page= "navbar.jsp"/>
-            <button onclick="location.href='';" type="submit">Búsqueda Avanzada</button>
+            <button onclick="location.href='';" type="submit">BÃºsqueda Avanzada</button>
              <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
-                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar Sesión</button>
+                    <button onclick="location.href='PreguntasPrincipal';" type="submit">Cerrar SesiÃ³n</button>
              </form>
            
            
@@ -65,10 +66,10 @@
                 <form id="form"action="PreguntaController" method="POST" enctype="multipart/form-data" >
                   
                   <div class ="Quest">
-                        <h1>¿Tienes una pregunta a la que no le encuentras respuesta? ¡Pregunta! </h1>
+                        <h1>Â¿Tienes una pregunta a la que no le encuentras respuesta? Â¡Pregunta! </h1>
                         <p>Pregunta: </p>
                         <p>Descripcion: </p> 
-                        <p>Categoría
+                        <p>CategorÃ­a
                            
                             <select name ="Categorias" id="Categorias" class="filtrocategoria">
                             <%
@@ -102,7 +103,7 @@
                                 if(categorias!=null)
                                 for(Categoria categoria: categorias){%>  
                           
-                           °      <%= categoria.getName()%> &nbsp
+                           Â°      <%= categoria.getName()%> &nbsp
 
                             <% } %> 
    </h4>

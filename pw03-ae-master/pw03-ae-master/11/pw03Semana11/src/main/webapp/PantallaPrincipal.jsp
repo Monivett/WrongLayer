@@ -53,7 +53,7 @@
             <button onclick="location.href='PantallaBusquedaAvanzada.html';" type="submit">Búsqueda Avanzada</button>
              <jsp:include page= "navbar.jsp"/>
               <%  if (session.getAttribute("username") == null) {%>
-            <button onclick="location.href='LogInController';" type="submit">Iniciar Sesión</button>
+            <button onclick="location.href='Login';" type="submit">Iniciar Sesión</button>
            <button onclick="location.href='RegistroController';" type="submit">Registrarse</button>
              <% }else{%>
              <form id="BTN_CerrarSession" action ="PreguntasPrincipal" method="POST">
@@ -105,10 +105,9 @@
     <button id = "publicar" onclick="location.href='PreguntaController';" type="submit">Publicar Pregunta</button>
      <% }else{%>
       <h1>¿Tienes una duda? Inicia Sesión y publica tu pregunta</h1>
-       <button id = "publicar" onclick="location.href='LogInController';" type="submit">Inicia Sesión</button>
+       <button id = "publicar" onclick="location.href='Login';" type="submit">Inicia Sesión</button>
      <%}%>
    
- 
 </div>
   
     <footer>

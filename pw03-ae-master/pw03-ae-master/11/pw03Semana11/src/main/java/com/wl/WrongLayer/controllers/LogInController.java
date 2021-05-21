@@ -44,7 +44,7 @@ public class LogInController extends HttpServlet {
       @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        request.setCharacterEncoding("UTF-8");//Acentos
         //Username
         String username = request.getParameter("usuario");
         //Password
@@ -75,7 +75,15 @@ public class LogInController extends HttpServlet {
     
         }
         else{
-            response.sendRedirect("PantallaInicio.jsp");
+            //response.sendRedirect("PantallaInicio.jsp");
+              PrintWriter out = response.getWriter();
+         
+            out.println("location='PantallaInicio.jsp';");
+   out.println("alert('User or password incorrect');");
+   
+     // out.println("document.getElementById(Fecha).style.display = block";");
+   out.println("location='PantallaInicio.jsp';");
+   out.println("</script>");
         }
         
     }

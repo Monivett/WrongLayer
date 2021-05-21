@@ -174,4 +174,11 @@ margin-left: 110px;
 
 
 }
+#ERROR{
+  display: none;
+    position: absolute;
+    left: 390px;
+    margin-top: 550px;
+    color: red;
+}
 
